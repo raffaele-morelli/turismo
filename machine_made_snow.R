@@ -1,9 +1,9 @@
 # https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-tourism-snow-indicators?tab=doc
 
 # init 
+setwd("~/R/turismo")
 source('common.R')
 
-setwd("~/R/turismo")
 
 # attributi ####
 {

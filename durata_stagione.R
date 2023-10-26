@@ -1,8 +1,8 @@
 # https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-tourism-snow-indicators?tab=doc
 
-source('common.R')
-
+# init 
 setwd("~/R/turismo")
+source('common.R')
 
 # TODO ####
 # - mappe della differenza sui decennio rispetto al 2014

@@ -6,11 +6,14 @@ output:
   html_document:
     toc: true
     toc_depth: 2
+  md_document:
+    variant: gfm
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 source('durata_stagione.R')
+# rmarkdown::render("durata_stagione.Rmd", output_dir = "report_out", output_format = "all")
 ```
 
 ### Start of the longest period with natural snow	day	

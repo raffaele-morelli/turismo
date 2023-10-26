@@ -6,11 +6,15 @@ output:
   html_document:
     toc: true
     toc_depth: 2
+  md_document:
+    variant: gfm    
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 source('machine_made_snow.R')
+# rmarkdown::render("machine_made.Rmd", output_file = "report_out/machine_made.html", output_format = "all")
+
 ```
 
 Annual amount of machine made snow produced	kg/m-2	The total amount of machine made snow for the period August 1st of year N-1 to July 31st of year N, where N is the selected year.

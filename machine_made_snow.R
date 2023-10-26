@@ -82,9 +82,9 @@ do.call(rbind, mm_list) %>%
 
 rownames(df_machine_made) <- NULL
 
-write_excel_csv(df_machine_made, "df_machine_made.csv")
-write_ods(df_machine_made, "df_machine_made.ods")
-write.xlsx(df_machine_made, "df_machine_made.xlsx")
+# write_excel_csv(df_machine_made, "df_machine_made.csv")
+# write_ods(df_machine_made, "df_machine_made.ods")
+# write.xlsx(df_machine_made, "df_machine_made.xlsx")
 
 select(df_machine_made, c(anno, nuts, zs, mm_prod)) %>% 
   set_names(c("Anno", "NUT", "Quota", "Machine made")) %>% 

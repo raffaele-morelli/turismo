@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.path = "machine_made/")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 source('~/R/turismo/machine_made_snow.R')
 # rmarkdown::render("machine_made.Rmd")
 

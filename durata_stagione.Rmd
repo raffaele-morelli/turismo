@@ -1,0 +1,32 @@
+---
+title: "Durata della stagione"
+author: "Dr. Raffaele Morelli"
+date: "`r format(Sys.time(), '%d %B, %Y - %H:%M')`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+source('durata_stagione.R')
+```
+
+### Start of the longest period with natural snow	day	
+
+Identified longest continuous period from August 1st of year N-1 to July 31st of year N where the snow depth is continuously above 30 cm using a natural snow simulation. The first date, within this continuous period, meeting the condition "Snow depth >= 30 cm" is the beginning of the season. The last date within this continuous period, meeting this condition, is the end of the season. In case only one date meets the condition, then beginning of season and end of season are attributed this value. In case no date meets the condition (i.e., Snow depth is lower than 30 cm for the entire year), no date is attributed (value of 0). The value assigned is interpreted as the number of days after August 1st of year N-1.
+
+
+### End of the longest period with natural snow	day	
+
+Identified longest continuous period from August 1st of year N-1 to July 31st of year N where the snow depth is continuously above 30 cm using a natural snow simulation. The first date, within this continuous period, meeting the condition "Snow depth >= 30 cm" is the beginning of the season. The last date within this continuous period, meeting this condition, is the end of the season. In case only one date meets the condition, then beginning of season and end of season are attributed this value. In case no date meets the condition (i.e., Snow depth is lower than 30 cm for the entire year), no date is attributed (value of 0). The value assigned is interpreted as the number of days after August 1st of year N-1.
+
+```{r, echo=FALSE, fig.width=10, fig.height=10, results='asis'}
+
+map(prov_int$nuts_id, function(x) {
+  graf_durata(x)
+})
+
+```
+

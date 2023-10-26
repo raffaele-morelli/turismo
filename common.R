@@ -23,6 +23,7 @@ if(!exists("confini")) {
 
 if(!exists("prov_int")) {
   prov_int <- read_ods("province_interesse.ods")
+  write_csv(prov_int, "province_interesse.csv")
 }
 
 nome_provincia <- function(nut) {

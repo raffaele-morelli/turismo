@@ -53,31 +53,48 @@ graf_durata <- function(nut) {
 }
 ```
 
+# Grafici
 
-```{r analisi, results='asis', message=FALSE}
+```{r analisi, message=FALSE, results='asis'}
+for (x in prov_int$nuts_id ) {
+  cat("\n\n")
+  cat(paste("## ", x, nome_provincia(x), sep = " " ))
+  cat("\n\n")
 
+  graf_durata(x)
+  cat("\n\n")
+}
+
+```
+
+
+# Modello lineare 
+
+
+```{r lm, results='asis'}
 for (x in prov_int$nuts_id ) {
   cat("\n\n")
   cat(paste("## ", x, nome_provincia(x), sep = " " ))
   cat("\n\n")
   
-  graf_durata(x)
-
   df_durata %>% filter(nut == x) -> df
   df$quota <- factor(df$zs)
   
   if(levels(df$quota) %>% length() > 1) {
-    # fit <- lm(durata ~ quota + anno, data = df)
-    # summ(fit, pvals = FALSE, model.coefs = FALSE, model.info = FALSE)
+    fit <- lm(durata ~ quota + anno, data = df)
     # summary(fit) %>% print()
-    # stargazer::stargazer(fit, title = "Results", align = TRUE, type = "text")
-    # pander(fit) %>% print()
+    
+    # R²
+    cat("R² : ", summary(fit)$r.squared, "\n\n")
+    
+    # adjusted R²
+    cat("adjusted R² : ", summary(fit)$adj.r.squared, "\n\n" )
 
+ 
+    broom::tidy(fit) %>% kableExtra::kable() %>%  print()
   }
+  cat("\n\n")
+
 }
-
-
-
 ```
-
 

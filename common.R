@@ -17,6 +17,8 @@
   library(openxlsx)
   # library(jtools)
   library(mgcv)
+  library(pander)
+  
   # library(gtsummary)
   # library(sjPlot)
   # library(sjmisc)
@@ -24,11 +26,11 @@
 }
 
 if(!exists("confini")) {
-  confini <- st_read("shape/NUTS3_ID.shp")
+  confini <- st_read("~/R/turismo/shape/NUTS3_ID.shp")
 }
 
 if(!exists("prov_int")) {
-  prov_int <- read_ods("province_interesse.ods")
+  prov_int <- read_ods("~/R/turismo/province_interesse.ods")
   write_csv(prov_int, "province_interesse.csv")
 }
 

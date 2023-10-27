@@ -1,23 +1,103 @@
 Durata della stagione
 ================
 Dr. Raffaele Morelli
-27 ottobre, 2023 - 11:48
+27 ottobre, 2023 - 12:11
 
-    ## 
-    ## 
-    ## ##  ITC43 Lecco
-    ## 
-    ## [1] "\n----------------------------------------------------------------\n     &nbsp;        Estimate   Std. Error   t value    Pr(>|t|)  \n----------------- ---------- ------------ ---------- -----------\n **(Intercept)**     1885       157.6       11.96     4.319e-30 \n\n  **quota700**      0.4259      6.298      0.06763     0.9461   \n\n  **quota800**     0.03704      6.298      0.005881    0.9953   \n\n  **quota900**      -1.593      6.298      -0.2529     0.8004   \n\n  **quota1000**     14.43       6.298       2.291      0.02229  \n\n  **quota1100**     37.37       6.298       5.934     4.694e-09 \n\n  **quota1200**     32.22       6.298       5.116     4.047e-07 \n\n  **quota1300**     62.57       6.298       9.936     7.919e-22 \n\n  **quota1400**     59.37       6.298       9.427     6.317e-20 \n\n  **quota1500**     70.57       6.298       11.21     6.918e-27 \n\n  **quota1600**     70.57       6.298       11.21     6.918e-27 \n\n  **quota1700**     98.98       6.298       15.72     8.731e-48 \n\n  **quota1800**      96.2       6.298       15.28     1.414e-45 \n\n    **anno**       -0.9408     0.07925      -11.87    1.052e-29 \n----------------------------------------------------------------\n\n\n--------------------------------------------------------------\n Observations   Residual Std. Error   $R^2$    Adjusted $R^2$ \n-------------- --------------------- -------- ----------------\n     702               32.73          0.5867       0.5789     \n--------------------------------------------------------------\n\nTable: Fitting linear model: durata ~ quota + anno\n\n"
-    ## attr(,"class")
-    ## [1] "knit_asis"
-    ## attr(,"knit_cacheable")
-    ## [1] NA
-    ## 
-    ## 
-    ## ##  ITC41 Varese
-    ## 
-    ## [1] "\n---------------------------------------------------------------\n     &nbsp;        Estimate   Std. Error   t value   Pr(>|t|)  \n----------------- ---------- ------------ --------- -----------\n **(Intercept)**     1162       252.2       4.608    6.34e-06  \n\n  **quota700**      -1.222      6.254      -0.1954    0.8452   \n\n  **quota800**      8.796       6.254       1.407     0.1607   \n\n  **quota900**      25.74       6.254       4.116    5.157e-05 \n\n  **quota1000**     22.81       6.254       3.648    0.0003182 \n\n    **anno**       -0.5745      0.1269     -4.527    9.045e-06 \n---------------------------------------------------------------\n\n\n--------------------------------------------------------------\n Observations   Residual Std. Error   $R^2$    Adjusted $R^2$ \n-------------- --------------------- -------- ----------------\n     270               32.5           0.1667       0.1509     \n--------------------------------------------------------------\n\nTable: Fitting linear model: durata ~ quota + anno\n\n"
-    ## attr(,"class")
-    ## [1] "knit_asis"
-    ## attr(,"knit_cacheable")
-    ## [1] NA
+- [ITC43 Lecco](#itc43-lecco)
+- [ITC41 Varese](#itc41-varese)
+- [ITC4D Monza e della Brianza](#itc4d-monza-e-della-brianza)
+- [ITC42 Como](#itc42-como)
+- [ITC44 Sondrio](#itc44-sondrio)
+- [ITC46 Bergamo](#itc46-bergamo)
+- [ITC47 Brescia](#itc47-brescia)
+- [ITH33 Belluno](#ith33-belluno)
+- [ITC13 Biella](#itc13-biella)
+- [ITH41 Pordenone](#ith41-pordenone)
+- [ITH42 Udine](#ith42-udine)
+- [ITC4C Milano](#itc4c-milano)
+- [ITF11 L’Aquila](#itf11-laquila)
+- [ITC11 Torino](#itc11-torino)
+- [ITC15 Novara](#itc15-novara)
+- [ITC14 Verbano-Cusio-Ossola](#itc14-verbano-cusio-ossola)
+- [ITC12 Vercelli](#itc12-vercelli)
+- [ITC16 Cuneo](#itc16-cuneo)
+- [ITC20 Valle d’Aosta/VallÃ©e
+  d’Aoste](#itc20-valle-daostavallãe-daoste)
+- [ITH10 Bolzano-Bozen](#ith10-bolzano-bozen)
+- [ITH20 Trento](#ith20-trento)
+
+## ITC43 Lecco
+
+![](durata_stagione_files/figure-gfm/analisi-1.png)<!-- -->
+
+## ITC41 Varese
+
+## ITC4D Monza e della Brianza
+
+## ITC42 Como
+
+![](durata_stagione_files/figure-gfm/analisi-2.png)<!-- -->
+
+## ITC44 Sondrio
+
+![](durata_stagione_files/figure-gfm/analisi-3.png)<!-- -->
+
+## ITC46 Bergamo
+
+![](durata_stagione_files/figure-gfm/analisi-4.png)<!-- -->
+
+## ITC47 Brescia
+
+![](durata_stagione_files/figure-gfm/analisi-5.png)<!-- -->
+
+## ITH33 Belluno
+
+![](durata_stagione_files/figure-gfm/analisi-6.png)<!-- -->
+
+## ITC13 Biella
+
+![](durata_stagione_files/figure-gfm/analisi-7.png)<!-- -->
+
+## ITH41 Pordenone
+
+![](durata_stagione_files/figure-gfm/analisi-8.png)<!-- -->
+
+## ITH42 Udine
+
+![](durata_stagione_files/figure-gfm/analisi-9.png)<!-- -->
+
+## ITC4C Milano
+
+## ITF11 L’Aquila
+
+![](durata_stagione_files/figure-gfm/analisi-10.png)<!-- -->
+
+## ITC11 Torino
+
+![](durata_stagione_files/figure-gfm/analisi-11.png)<!-- -->
+
+## ITC15 Novara
+
+## ITC14 Verbano-Cusio-Ossola
+
+![](durata_stagione_files/figure-gfm/analisi-12.png)<!-- -->
+
+## ITC12 Vercelli
+
+![](durata_stagione_files/figure-gfm/analisi-13.png)<!-- -->
+
+## ITC16 Cuneo
+
+![](durata_stagione_files/figure-gfm/analisi-14.png)<!-- -->
+
+## ITC20 Valle d’Aosta/VallÃ©e d’Aoste
+
+![](durata_stagione_files/figure-gfm/analisi-15.png)<!-- -->
+
+## ITH10 Bolzano-Bozen
+
+![](durata_stagione_files/figure-gfm/analisi-16.png)<!-- -->
+
+## ITH20 Trento
+
+![](durata_stagione_files/figure-gfm/analisi-17.png)<!-- -->

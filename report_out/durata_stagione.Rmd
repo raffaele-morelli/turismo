@@ -1,0 +1,83 @@
+---
+title: "Durata della stagione"
+author: "Dr. Raffaele Morelli"
+date: "`r format(Sys.time(), '%d %B, %Y - %H:%M')`"
+output:
+  github_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+# source('~/R/turismo/durata_stagione.R')
+# rmarkdown::render("durata_stagione.Rmd")
+source('~/R/turismo/common.R')
+
+df_durata <- readRDS("~/R/turismo/df_durata.RDS")
+m_df_durata <- readRDS("~/R/turismo/m_df_durata.RDS")
+
+graf_durata <- function(nut) {
+
+  provincia <- nome_provincia(nut)
+  
+  df <- filter(m_df_durata, NUT == nut)
+  if(nrow(df) == 0) 
+    return("")
+
+  
+  df %>% 
+    ggplot(aes(Anno, value)) + 
+    geom_step() + 
+    geom_smooth(method = lm, se = FALSE) +
+    facet_wrap(~Quota) + ylab("gg") +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      legend.position = "none") +
+    ggtitle(paste(nut, provincia, sep = " - " )) -> g0
+  
+  
+  df %>%
+    group_by(Anno, NUT) %>%
+    summarise(mm = mean(value)) %>%
+    ggplot(aes(Anno, mm)) +
+    geom_step() + ylab("gg") +
+    # geom_smooth(method = "gam", formula = y ~ poly(x, 2) ) -> g1
+    geom_smooth(method = "lm") -> g1
+  
+  lay <- rbind(c(1,1),
+               c(1,1),
+               c(2,2))
+  
+  gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
+}
+```
+
+
+```{r analisi, results='asis', message=FALSE}
+
+for (x in prov_int$nuts_id ) {
+  cat("\n\n")
+  cat(paste("## ", x, nome_provincia(x), sep = " " ))
+  cat("\n\n")
+  
+  graf_durata(x)
+
+  df_durata %>% filter(nut == x) -> df
+  df$quota <- factor(df$zs)
+  
+  if(levels(df$quota) %>% length() > 1) {
+    # fit <- lm(durata ~ quota + anno, data = df)
+    # summ(fit, pvals = FALSE, model.coefs = FALSE, model.info = FALSE)
+    # summary(fit) %>% print()
+    # stargazer::stargazer(fit, title = "Results", align = TRUE, type = "text")
+    # pander(fit) %>% print()
+
+  }
+}
+
+
+
+```
+
+

@@ -1,7 +1,7 @@
 Durata della stagione
 ================
 Dr. Raffaele Morelli
-27 ottobre, 2023 - 12:11
+27 ottobre, 2023 - 12:14
 
 - [ITC43 Lecco](#itc43-lecco)
 - [ITC41 Varese](#itc41-varese)

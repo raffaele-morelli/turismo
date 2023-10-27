@@ -1,17 +1,17 @@
 # init 
 {
   library(ncdf4) # package for netcdf manipulation
-  library(raster) # package for raster manipulation
+  # library(raster) # package for raster manipulation
   library(rgdal) # package for geospatial analysis
   library(ggplot2) # package for plotting
   library(dplyr)
   library(chron)
-  library(lattice)
+  # library(lattice)
   library(RColorBrewer)
   library(sf)
   library(purrr)
   library(reshape2)
-  library(terra)
+  # library(terra)
   library(readODS)
   library(readr)
   library(openxlsx)
@@ -30,8 +30,8 @@ if(!exists("confini")) {
 }
 
 if(!exists("prov_int")) {
-  prov_int <- read_ods("~/R/turismo/province_interesse.ods")
-  write_csv(prov_int, "province_interesse.csv")
+  # prov_int <- read_ods("~/R/turismo/province_interesse.ods")
+  # write_csv(prov_int, "province_interesse.csv")
 }
 
 nome_provincia <- function(nut) {

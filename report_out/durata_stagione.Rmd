@@ -16,6 +16,7 @@ source('~/R/turismo/common.R')
 
 df_durata <- readRDS("~/R/turismo/df_durata.RDS")
 m_df_durata <- readRDS("~/R/turismo/m_df_durata.RDS")
+prov_int <- read_csv("~/R/turismo/province_interesse.csv")
 
 graf_durata <- function(nut) {
 

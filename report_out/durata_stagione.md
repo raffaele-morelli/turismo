@@ -1,12 +1,10 @@
 Durata della stagione
 ================
 Dr. Raffaele Morelli
-27 ottobre, 2023 - 13:54
+27 ottobre, 2023 - 14:25
 
 - [Grafici](#grafici)
   - [ITC43 Lecco](#itc43-lecco)
-  - [ITC41 Varese](#itc41-varese)
-  - [ITC4D Monza e della Brianza](#itc4d-monza-e-della-brianza)
   - [ITC42 Como](#itc42-como)
   - [ITC44 Sondrio](#itc44-sondrio)
   - [ITC46 Bergamo](#itc46-bergamo)
@@ -15,10 +13,8 @@ Dr. Raffaele Morelli
   - [ITC13 Biella](#itc13-biella)
   - [ITH41 Pordenone](#ith41-pordenone)
   - [ITH42 Udine](#ith42-udine)
-  - [ITC4C Milano](#itc4c-milano)
   - [ITF11 L’Aquila](#itf11-laquila)
   - [ITC11 Torino](#itc11-torino)
-  - [ITC15 Novara](#itc15-novara)
   - [ITC14 Verbano-Cusio-Ossola](#itc14-verbano-cusio-ossola)
   - [ITC12 Vercelli](#itc12-vercelli)
   - [ITC16 Cuneo](#itc16-cuneo)
@@ -28,8 +24,6 @@ Dr. Raffaele Morelli
   - [ITH20 Trento](#ith20-trento)
 - [Modello lineare](#modello-lineare)
   - [ITC43 Lecco](#itc43-lecco-1)
-  - [ITC41 Varese](#itc41-varese-1)
-  - [ITC4D Monza e della Brianza](#itc4d-monza-e-della-brianza-1)
   - [ITC42 Como](#itc42-como-1)
   - [ITC44 Sondrio](#itc44-sondrio-1)
   - [ITC46 Bergamo](#itc46-bergamo-1)
@@ -38,10 +32,8 @@ Dr. Raffaele Morelli
   - [ITC13 Biella](#itc13-biella-1)
   - [ITH41 Pordenone](#ith41-pordenone-1)
   - [ITH42 Udine](#ith42-udine-1)
-  - [ITC4C Milano](#itc4c-milano-1)
   - [ITF11 L’Aquila](#itf11-laquila-1)
   - [ITC11 Torino](#itc11-torino-1)
-  - [ITC15 Novara](#itc15-novara-1)
   - [ITC14 Verbano-Cusio-Ossola](#itc14-verbano-cusio-ossola-1)
   - [ITC12 Vercelli](#itc12-vercelli-1)
   - [ITC16 Cuneo](#itc16-cuneo-1)
@@ -55,10 +47,6 @@ Dr. Raffaele Morelli
 ## ITC43 Lecco
 
 ![](durata_stagione_files/figure-gfm/analisi-1.png)<!-- -->
-
-## ITC41 Varese
-
-## ITC4D Monza e della Brianza
 
 ## ITC42 Como
 
@@ -92,8 +80,6 @@ Dr. Raffaele Morelli
 
 ![](durata_stagione_files/figure-gfm/analisi-9.png)<!-- -->
 
-## ITC4C Milano
-
 ## ITF11 L’Aquila
 
 ![](durata_stagione_files/figure-gfm/analisi-10.png)<!-- -->
@@ -101,8 +87,6 @@ Dr. Raffaele Morelli
 ## ITC11 Torino
 
 ![](durata_stagione_files/figure-gfm/analisi-11.png)<!-- -->
-
-## ITC15 Novara
 
 ## ITC14 Verbano-Cusio-Ossola
 
@@ -397,140 +381,6 @@ anno
 </tr>
 </tbody>
 </table>
-
-## ITC41 Varese
-
-R² : 0.1666926
-
-adjusted R² : 0.1509102
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-1162.190236
-</td>
-<td style="text-align:right;">
-252.222639
-</td>
-<td style="text-align:right;">
-4.6077951
-</td>
-<td style="text-align:right;">
-0.0000063
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota700
-</td>
-<td style="text-align:right;">
--1.222222
-</td>
-<td style="text-align:right;">
-6.253726
-</td>
-<td style="text-align:right;">
--0.1954391
-</td>
-<td style="text-align:right;">
-0.8451996
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota800
-</td>
-<td style="text-align:right;">
-8.796296
-</td>
-<td style="text-align:right;">
-6.253726
-</td>
-<td style="text-align:right;">
-1.4065689
-</td>
-<td style="text-align:right;">
-0.1607313
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota900
-</td>
-<td style="text-align:right;">
-25.740741
-</td>
-<td style="text-align:right;">
-6.253726
-</td>
-<td style="text-align:right;">
-4.1160649
-</td>
-<td style="text-align:right;">
-0.0000516
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota1000
-</td>
-<td style="text-align:right;">
-22.814815
-</td>
-<td style="text-align:right;">
-6.253726
-</td>
-<td style="text-align:right;">
-3.6481956
-</td>
-<td style="text-align:right;">
-0.0003182
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-anno
-</td>
-<td style="text-align:right;">
--0.574454
-</td>
-<td style="text-align:right;">
-0.126885
-</td>
-<td style="text-align:right;">
--4.5273604
-</td>
-<td style="text-align:right;">
-0.0000090
-</td>
-</tr>
-</tbody>
-</table>
-
-## ITC4D Monza e della Brianza
 
 ## ITC42 Como
 
@@ -3237,8 +3087,6 @@ anno
 </tbody>
 </table>
 
-## ITC4C Milano
-
 ## ITF11 L’Aquila
 
 R² : 0.8405149
@@ -4005,138 +3853,6 @@ anno
 </td>
 <td style="text-align:right;">
 -20.5315671
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-</tr>
-</tbody>
-</table>
-
-## ITC15 Novara
-
-R² : 0.419006
-
-adjusted R² : 0.4080023
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-2293.821549
-</td>
-<td style="text-align:right;">
-221.1759861
-</td>
-<td style="text-align:right;">
-10.3710244
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota700
-</td>
-<td style="text-align:right;">
--2.814815
-</td>
-<td style="text-align:right;">
-5.4839405
-</td>
-<td style="text-align:right;">
--0.5132833
-</td>
-<td style="text-align:right;">
-0.6081825
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota800
-</td>
-<td style="text-align:right;">
-12.351852
-</td>
-<td style="text-align:right;">
-5.4839405
-</td>
-<td style="text-align:right;">
-2.2523680
-</td>
-<td style="text-align:right;">
-0.0251208
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota900
-</td>
-<td style="text-align:right;">
-12.351852
-</td>
-<td style="text-align:right;">
-5.4839405
-</td>
-<td style="text-align:right;">
-2.2523680
-</td>
-<td style="text-align:right;">
-0.0251208
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-quota1000
-</td>
-<td style="text-align:right;">
-42.296296
-</td>
-<td style="text-align:right;">
-5.4839405
-</td>
-<td style="text-align:right;">
-7.7127562
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-anno
-</td>
-<td style="text-align:right;">
--1.142291
-</td>
-<td style="text-align:right;">
-0.1112664
-</td>
-<td style="text-align:right;">
--10.2662684
 </td>
 <td style="text-align:right;">
 0.0000000

@@ -35,7 +35,10 @@ map2(beg_files, end_files, function(b, e) {
 # assegno gli anni ai nomei degli slot
 names(listone) <- seq(1961, 2014)
 
-do.call(rbind, listone) %>% arrange(bnuts, bzs) -> df_durata
+do.call(rbind, listone) %>% 
+  arrange(bnuts, bzs) %>% 
+  select(anno, bnuts, beos, eeos, ezs, durata) %>% 
+  setNames(c("anno", "nut", "beos", "eeos", "zs", "durata")) -> df_durata
 rownames(df_durata) <- NULL # ripulisco i nomi di riga
 
 # write_ods(df_durata, "df_durata.ods")
@@ -43,7 +46,7 @@ rownames(df_durata) <- NULL # ripulisco i nomi di riga
 # write.xlsx(df_durata, 'df_durata.xlsx')
 
 # faccio il melt per plottare in base alla quota
-select(df_durata, c(anno, bnuts, bzs, durata)) %>% 
+select(df_durata, c(anno, nut, zs, durata)) %>% 
   set_names(c("Anno", "NUT", "Quota", "Durata")) %>% 
   filter(Quota >= 1500) %>% 
   reshape2::melt(id.vars = c("Anno", "NUT", "Quota")) -> m_df_durata
@@ -56,10 +59,7 @@ graf_durata <- function(nut) {
   df <- filter(m_df_durata, NUT == nut)
   if(nrow(df) == 0) 
     return("")
-  
-  cat("\n\n")
-  cat(paste("## ", nut, provincia, sep = " " ))
-  cat("\n\n")
+
   
   df %>% 
     ggplot(aes(Anno, value)) + 
@@ -112,19 +112,44 @@ lst_durata <- vctrs::list_drop_empty(lst_durata) # rimuovo gli elementi vuoti
 
 do.call(rbind, lst_durata) -> df_durata_media # durata media nel lustro
 
-map(unique(df_durata_media$NUT) %>% head(n = 2), \(x) {
-  nome_provincia(x) -> provincia
+# map(unique(df_durata_media$NUT) %>% head(n = 2), \(x) {
+#   nome_provincia(x) -> provincia
+#   
+#   filter(df_durata_media, NUT == x) %>% 
+#     reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>% 
+#     ggplot(aes(Lustro, value)) + 
+#     geom_step() + 
+#     geom_smooth(method = "gam", se = FALSE) +
+#     facet_wrap(~Quota) + ylab("gg") +
+#     theme(
+#       axis.text.x = element_text(angle = 45, hjust = 1),
+#       legend.position = "none") +
+#     ggtitle(paste(x, provincia, sep = " - " ))
+# })
+
+# prova LM ####
+# prov_int$nuts_id %>% 
+#   head(1) %>% 
+#   map(function(x) {
+#     filter(df_durata, nut == x) -> df
+#     df$quota <- factor(df$zs)
+#     gam(durata ~ s(anno, by = quota), data = df)
+#   }) -> test
+
+# df_durata %>% filter(nut == "ITC11") -> tmpdf
+# tmpdf$quota <- factor(tmpdf$zs)
+# g <- lm(durata ~ quota + anno, data = tmpdf)
+# summary(g)
+
+summ_lm <- function(x) {
+  df_durata %>% 
+    filter(nut == x) -> df
   
-  filter(df_durata_media, NUT == x) %>% 
-    reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>% 
-    ggplot(aes(Lustro, value)) + 
-    geom_step() + 
-    geom_smooth(method = "gam", se = FALSE) +
-    facet_wrap(~Quota) + ylab("gg") +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      legend.position = "none") +
-    ggtitle(paste(x, provincia, sep = " - " ))
-})
-
-
+  df$quota <- factor(df$zs)
+  
+  if(levels(df$quota) %>% length() > 1) {
+    fit <- lm(durata ~ quota + anno, data = df)
+    summ(fit)
+    # cat("\n\n")
+  }
+}

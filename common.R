@@ -15,12 +15,12 @@
   library(readODS)
   library(readr)
   library(openxlsx)
-  library(jtools)
+  # library(jtools)
   library(mgcv)
-  library(gtsummary)
-  library(sjPlot)
-  library(sjmisc)
-  library(sjlabelled)
+  # library(gtsummary)
+  # library(sjPlot)
+  # library(sjmisc)
+  # library(sjlabelled)
 }
 
 if(!exists("confini")) {

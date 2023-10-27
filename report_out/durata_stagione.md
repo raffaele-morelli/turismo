@@ -1,7 +1,7 @@
 Durata della stagione
 ================
 Dr. Raffaele Morelli
-27 ottobre, 2023 - 14:25
+27 ottobre, 2023 - 14:39
 
 - [Grafici](#grafici)
   - [ITC43 Lecco](#itc43-lecco)
@@ -41,6 +41,25 @@ Dr. Raffaele Morelli
     d’Aoste](#itc20-valle-daostavallãe-daoste-1)
   - [ITH10 Bolzano-Bozen](#ith10-bolzano-bozen-1)
   - [ITH20 Trento](#ith20-trento-1)
+- [Modello GAM](#modello-gam)
+  - [ITC43 Lecco](#itc43-lecco-2)
+  - [ITC42 Como](#itc42-como-2)
+  - [ITC44 Sondrio](#itc44-sondrio-2)
+  - [ITC46 Bergamo](#itc46-bergamo-2)
+  - [ITC47 Brescia](#itc47-brescia-2)
+  - [ITH33 Belluno](#ith33-belluno-2)
+  - [ITC13 Biella](#itc13-biella-2)
+  - [ITH41 Pordenone](#ith41-pordenone-2)
+  - [ITH42 Udine](#ith42-udine-2)
+  - [ITF11 L’Aquila](#itf11-laquila-2)
+  - [ITC11 Torino](#itc11-torino-2)
+  - [ITC14 Verbano-Cusio-Ossola](#itc14-verbano-cusio-ossola-2)
+  - [ITC12 Vercelli](#itc12-vercelli-2)
+  - [ITC16 Cuneo](#itc16-cuneo-2)
+  - [ITC20 Valle d’Aosta/VallÃ©e
+    d’Aoste](#itc20-valle-daostavallãe-daoste-2)
+  - [ITH10 Bolzano-Bozen](#ith10-bolzano-bozen-2)
+  - [ITH20 Trento](#ith20-trento-2)
 
 # Grafici
 
@@ -6743,3 +6762,527 @@ anno
 </tr>
 </tbody>
 </table>
+
+# Modello GAM
+
+## ITC43 Lecco
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 14.85185 4.28812 3.463 0.000567 *** quota700 0.42593 6.06432
+0.070 0.944027  
+quota800 0.03704 6.06432 0.006 0.995129  
+quota900 -1.59259 6.06432 -0.263 0.792925  
+quota1000 14.42593 6.06432 2.379 0.017643 *  
+quota1100 37.37037 6.06432 6.162 1.23e-09 *** quota1200 32.22222 6.06432
+5.313 1.46e-07 *** quota1300 62.57407 6.06432 10.318 \< 2e-16 ***
+quota1400 59.37037 6.06432 9.790 \< 2e-16 *** quota1500 70.57407 6.06432
+11.638 \< 2e-16 *** quota1600 70.57407 6.06432 11.638 \< 2e-16 ***
+quota1700 98.98148 6.06432 16.322 \< 2e-16 *** quota1800 96.20370
+6.06432 15.864 \< 2e-16 *\*\* — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01
+’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.582 8.95 23.45 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.61 Deviance explained = 62.1% GCV = 1024.4 Scale est. =
+992.95 n = 702
+
+## ITC42 Como
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 14.8519 4.1757 3.557 0.000404 *** quota700 0.4074 5.9053
+0.069 0.945019  
+quota800 4.8889 5.9053 0.828 0.408052  
+quota900 47.2222 5.9053 7.997 6.18e-15 *** quota1000 10.7037 5.9053
+1.813 0.070377 .  
+quota1100 40.0370 5.9053 6.780 2.78e-11 *** quota1200 37.5000 5.9053
+6.350 4.13e-10 *** quota1300 78.9815 5.9053 13.375 \< 2e-16 ***
+quota1400 82.7778 5.9053 14.018 \< 2e-16 *** quota1500 89.6667 5.9053
+15.184 \< 2e-16 *** quota1600 102.6481 5.9053 17.382 \< 2e-16 ***
+quota1700 111.7407 5.9053 18.922 \< 2e-16 \*\*\* — Signif. codes: 0
+‘***’ 0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.635 8.962 27.12 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.669 Deviance explained = 67.9% GCV = 972.53 Scale est. =
+941.56 n = 648
+
+## ITC44 Sondrio
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 23.759 4.150 5.725 1.28e-08 *** quota700 -8.519 5.869 -1.451
+0.146884  
+quota800 20.815 5.869 3.547 0.000404 *** quota900 12.852 5.869 2.190
+0.028711 \*  
+quota1000 17.056 5.869 2.906 0.003721 \*\* quota1100 14.574 5.869 2.483
+0.013141 \*  
+quota1200 28.426 5.869 4.844 1.43e-06 *** quota1300 25.685 5.869 4.377
+1.30e-05 *** quota1400 57.944 5.869 9.873 \< 2e-16 *** quota1500 20.759
+5.869 3.537 0.000418 *** quota1600 93.778 5.869 15.979 \< 2e-16 ***
+quota1700 47.259 5.869 8.053 1.80e-15 *** quota1800 95.926 5.869 16.345
+\< 2e-16 *** quota1900 131.667 5.869 22.435 \< 2e-16 *** quota2000
+129.352 5.869 22.040 \< 2e-16 *** quota2100 155.852 5.869 26.556 \<
+2e-16 *** quota2200 110.074 5.869 18.756 \< 2e-16 *** quota2300 148.481
+5.869 25.300 \< 2e-16 *** quota2400 117.870 5.869 20.084 \< 2e-16 ***
+quota2500 175.778 5.869 29.951 \< 2e-16 *** quota2600 176.630 5.869
+30.096 \< 2e-16 *** quota2700 171.722 5.869 29.260 \< 2e-16 ***
+quota2800 200.185 5.869 34.110 \< 2e-16 *** quota2900 181.870 5.869
+30.989 \< 2e-16 *** quota3000 206.630 5.869 35.208 \< 2e-16 \*\*\* —
+Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.779 8.986 92.22 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.855 Deviance explained = 85.8% GCV = 953.84 Scale est. =
+929.97 n = 1350
+
+## ITC46 Bergamo
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 3.00000 3.81975 0.785 0.43243  
+quota700 0.03704 5.40194 0.007 0.99453  
+quota800 3.57407 5.40194 0.662 0.50838  
+quota900 10.25926 5.40194 1.899 0.05786 .  
+quota1000 17.57407 5.40194 3.253 0.00118 \*\* quota1100 45.53704 5.40194
+8.430 \< 2e-16 *** quota1200 17.51852 5.40194 3.243 0.00123 ** quota1300
+74.66667 5.40194 13.822 \< 2e-16 *** quota1400 62.40741 5.40194 11.553
+\< 2e-16 *** quota1500 93.62963 5.40194 17.333 \< 2e-16 *** quota1600
+92.92593 5.40194 17.202 \< 2e-16 *** quota1700 94.81481 5.40194 17.552
+\< 2e-16 *** quota1800 124.03704 5.40194 22.962 \< 2e-16 *** quota1900
+156.92593 5.40194 29.050 \< 2e-16 *** quota2000 150.09259 5.40194 27.785
+\< 2e-16 *** quota2100 176.61111 5.40194 32.694 \< 2e-16 *** quota2200
+161.42593 5.40194 29.883 \< 2e-16 **\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.632 8.961 32.59 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.831 Deviance explained = 83.5% GCV = 810.52 Scale est. =
+787.89 n = 918
+
+## ITC47 Brescia
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 2.500 4.227 0.591 0.55436  
+quota700 0.537 5.978 0.090 0.92844  
+quota800 5.389 5.978 0.901 0.36754  
+quota900 2.796 5.978 0.468 0.64005  
+quota1000 5.593 5.978 0.935 0.34971  
+quota1100 12.667 5.978 2.119 0.03430 \*  
+quota1200 18.056 5.978 3.020 0.00258 \*\* quota1300 27.759 5.978 4.643
+3.79e-06 *** quota1400 62.852 5.978 10.513 \< 2e-16 *** quota1500 72.556
+5.978 12.137 \< 2e-16 *** quota1600 81.870 5.978 13.695 \< 2e-16 ***
+quota1700 68.593 5.978 11.474 \< 2e-16 *** quota1800 117.278 5.978
+19.617 \< 2e-16 *** quota1900 103.741 5.978 17.353 \< 2e-16 ***
+quota2000 143.241 5.978 23.960 \< 2e-16 *** quota2100 145.685 5.978
+24.369 \< 2e-16 *** quota2200 149.241 5.978 24.964 \< 2e-16 ***
+quota2300 111.722 5.978 18.688 \< 2e-16 *** quota2400 174.778 5.978
+29.236 \< 2e-16 *** quota2500 172.518 5.978 28.858 \< 2e-16 ***
+quota2600 187.352 5.978 31.339 \< 2e-16 *** quota2700 188.370 5.978
+31.509 \< 2e-16 *** quota2800 208.315 5.978 34.845 \< 2e-16 ***
+quota2900 181.315 5.978 30.329 \< 2e-16 \*\*\* — Signif. codes: 0 ‘***’
+0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 7.697 8.568 61.6 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.848 Deviance explained = 85.2% GCV = 989.16 Scale est. =
+964.96 n = 1296
+
+## ITH33 Belluno
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 1.0926 3.6887 0.296 0.767142  
+quota700 0.9259 5.2166 0.177 0.859157  
+quota800 3.3148 5.2166 0.635 0.525298  
+quota900 11.8148 5.2166 2.265 0.023747 \*  
+quota1000 19.1481 5.2166 3.671 0.000255 *** quota1100 53.3704 5.2166
+10.231 \< 2e-16 *** quota1200 38.9259 5.2166 7.462 1.93e-13 ***
+quota1300 98.1481 5.2166 18.815 \< 2e-16 *** quota1400 85.2037 5.2166
+16.333 \< 2e-16 *** quota1500 136.3333 5.2166 26.135 \< 2e-16 ***
+quota1600 116.9815 5.2166 22.425 \< 2e-16 *** quota1700 129.2778 5.2166
+24.782 \< 2e-16 *** quota1800 117.5556 5.2166 22.535 \< 2e-16 ***
+quota1900 137.5000 5.2166 26.358 \< 2e-16 *** quota2000 142.0185 5.2166
+27.224 \< 2e-16 *** quota2100 153.6481 5.2166 29.454 \< 2e-16 ***
+quota2200 155.7593 5.2166 29.858 \< 2e-16 *** quota2300 168.7037 5.2166
+32.340 \< 2e-16 *** — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05
+‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 6.532 7.669 37.99 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.835 Deviance explained = 83.9% GCV = 753.77 Scale est. =
+734.75 n = 972
+
+## ITC13 Biella
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 22.000 4.225 5.208 2.38e-07 *** quota700 -1.296 5.975 -0.217
+0.82828  
+quota800 16.611 5.975 2.780 0.00554 ** quota900 24.815 5.975 4.153
+3.59e-05 *** quota1000 25.870 5.975 4.330 1.66e-05 *** quota1100 52.704
+5.975 8.821 \< 2e-16 *** quota1200 57.963 5.975 9.702 \< 2e-16 ***
+quota1300 82.370 5.975 13.787 \< 2e-16 *** quota1400 87.093 5.975 14.577
+\< 2e-16 *** quota1500 96.741 5.975 16.192 \< 2e-16 *** quota1600
+104.352 5.975 17.466 \< 2e-16 *** quota1700 97.500 5.975 16.319 \< 2e-16
+*** quota1800 129.444 5.975 21.666 \< 2e-16 *** quota1900 129.444 5.975
+21.666 \< 2e-16 *** quota2000 135.093 5.975 22.611 \< 2e-16 ***
+quota2100 135.093 5.975 22.611 \< 2e-16 *** quota2200 155.815 5.975
+26.080 \< 2e-16 **\* — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05
+‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.695 8.973 97.41 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.778 Deviance explained = 78.4% GCV = 991.52 Scale est. =
+963.76 n = 918
+
+## ITH41 Pordenone
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 0.9815 3.6419 0.269 0.788  
+quota700 6.8704 5.1505 1.334 0.183  
+quota800 21.2037 5.1505 4.117 4.40e-05 *** quota900 21.6852 5.1505 4.210
+2.96e-05 *** quota1000 49.2593 5.1505 9.564 \< 2e-16 *** quota1100
+53.7407 5.1505 10.434 \< 2e-16 *** quota1200 44.3519 5.1505 8.611 \<
+2e-16 *** quota1300 77.7407 5.1505 15.094 \< 2e-16 *** quota1400 85.2778
+5.1505 16.557 \< 2e-16 *** quota1500 125.7222 5.1505 24.410 \< 2e-16 ***
+quota1600 119.9259 5.1505 23.285 \< 2e-16 \*\*\* — Signif. codes: 0
+‘***’ 0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.719 8.977 33.25 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.738 Deviance explained = 74.7% GCV = 740.83 Scale est. =
+716.24 n = 594
+
+## ITH42 Udine
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 1.741 3.846 0.453 0.65099  
+quota700 15.944 5.439 2.931 0.00349 \*\* quota800 26.852 5.439 4.937
+1.00e-06 *** quota900 29.611 5.439 5.444 7.29e-08 *** quota1000 74.000
+5.439 13.604 \< 2e-16 *** quota1100 84.037 5.439 15.450 \< 2e-16 ***
+quota1200 86.519 5.439 15.906 \< 2e-16 *** quota1300 123.222 5.439
+22.654 \< 2e-16 *** quota1400 115.407 5.439 21.217 \< 2e-16 ***
+quota1500 135.796 5.439 24.965 \< 2e-16 *** quota1600 116.333 5.439
+21.387 \< 2e-16 *** quota1700 128.611 5.439 23.644 \< 2e-16 ***
+quota1800 150.907 5.439 27.743 \< 2e-16 \*\*\* — Signif. codes: 0 ‘***’
+0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.1 8.783 23.6 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.764 Deviance explained = 77.1% GCV = 823.61 Scale est. =
+798.86 n = 702
+
+## ITF11 L’Aquila
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 2.6111 2.8736 0.909 0.36381  
+quota700 -2.3704 4.0639 -0.583 0.55988  
+quota800 3.5000 4.0639 0.861 0.38937  
+quota900 -2.2593 4.0639 -0.556 0.57841  
+quota1000 -1.7222 4.0639 -0.424 0.67184  
+quota1100 -0.9815 4.0639 -0.242 0.80922  
+quota1200 23.1481 4.0639 5.696 1.73e-08 *** quota1300 1.0741 4.0639
+0.264 0.79162  
+quota1400 13.3333 4.0639 3.281 0.00108 ** quota1500 12.9074 4.0639 3.176
+0.00155 ** quota1600 33.7407 4.0639 8.303 4.42e-16 *** quota1700 62.4630
+4.0639 15.370 \< 2e-16 *** quota1800 133.6296 4.0639 32.882 \< 2e-16 ***
+quota1900 58.0556 4.0639 14.286 \< 2e-16 *** quota2000 154.8519 4.0639
+38.104 \< 2e-16 *** — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05
+‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 7.956 8.713 5.528 1.34e-06 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.841 Deviance explained = 84.6% GCV = 458.92 Scale est. =
+445.91 n = 810
+
+## ITC11 Torino
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 4.056 4.245 0.955 0.340  
+quota700 2.259 6.003 0.376 0.707  
+quota800 6.222 6.003 1.037 0.300  
+quota900 6.333 6.003 1.055 0.292  
+quota1000 24.093 6.003 4.013 6.32e-05 *** quota1100 35.407 6.003 5.898
+4.66e-09 *** quota1200 26.593 6.003 4.430 1.02e-05 *** quota1300 75.537
+6.003 12.583 \< 2e-16 *** quota1400 70.833 6.003 11.800 \< 2e-16 ***
+quota1500 91.593 6.003 15.258 \< 2e-16 *** quota1600 85.519 6.003 14.246
+\< 2e-16 *** quota1700 94.130 6.003 15.681 \< 2e-16 *** quota1800
+100.000 6.003 16.659 \< 2e-16 *** quota1900 106.815 6.003 17.794 \<
+2e-16 *** quota2000 95.704 6.003 15.943 \< 2e-16 *** quota2100 109.722
+6.003 18.278 \< 2e-16 *** quota2200 151.037 6.003 25.161 \< 2e-16 ***
+quota2300 129.093 6.003 21.505 \< 2e-16 *** quota2400 153.574 6.003
+25.583 \< 2e-16 *** quota2500 138.815 6.003 23.125 \< 2e-16 ***
+quota2600 165.370 6.003 27.548 \< 2e-16 *** quota2700 206.556 6.003
+34.409 \< 2e-16 *** quota2800 197.093 6.003 32.833 \< 2e-16 ***
+quota2900 156.444 6.003 26.061 \< 2e-16 *** quota3000 191.963 6.003
+31.978 \< 2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05
+‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.707 8.975 82.3 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.821 Deviance explained = 82.5% GCV = 997.86 Scale est. =
+972.95 n = 1350
+
+## ITC14 Verbano-Cusio-Ossola
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 23.241 4.025 5.774 9.40e-09 *** quota700 -2.537 5.692 -0.446
+0.65586  
+quota800 26.537 5.692 4.662 3.41e-06 *** quota900 16.926 5.692 2.974
+0.00299 \*\* quota1000 32.370 5.692 5.687 1.56e-08 *** quota1100 67.519
+5.692 11.862 \< 2e-16 *** quota1200 68.741 5.692 12.077 \< 2e-16 ***
+quota1300 85.500 5.692 15.021 \< 2e-16 *** quota1400 85.389 5.692 15.002
+\< 2e-16 *** quota1500 73.111 5.692 12.845 \< 2e-16 *** quota1600
+106.463 5.692 18.704 \< 2e-16 *** quota1700 118.870 5.692 20.884 \<
+2e-16 *** quota1800 128.074 5.692 22.501 \< 2e-16 *** quota1900 145.222
+5.692 25.514 \< 2e-16 *** quota2000 140.907 5.692 24.756 \< 2e-16 ***
+quota2100 148.796 5.692 26.142 \< 2e-16 *** quota2200 154.167 5.692
+27.085 \< 2e-16 *** quota2300 175.759 5.692 30.879 \< 2e-16 ***
+quota2400 193.852 5.692 34.057 \< 2e-16 *** quota2500 161.926 5.692
+28.448 \< 2e-16 *** quota2600 188.426 5.692 33.104 \< 2e-16 ***
+quota2700 203.463 5.692 35.746 \< 2e-16 *** quota2800 203.463 5.692
+35.746 \< 2e-16 *** quota2900 211.907 5.692 37.229 \< 2e-16 ***
+quota3000 224.315 5.692 39.409 \< 2e-16 *** quota3100 250.944 5.692
+44.088 \< 2e-16 *** quota3200 238.556 5.692 41.911 \< 2e-16 ***
+quota3300 256.667 5.692 45.093 \< 2e-16 *** — Signif. codes: 0 ‘***’
+0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 7.16 8.198 57.63 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.875 Deviance explained = 87.7% GCV = 895.58 Scale est. =
+874.75 n = 1512
+
+## ITC12 Vercelli
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 23.278 3.953 5.889 4.8e-09 *** quota700 -2.556 5.590 -0.457
+0.6476  
+quota800 15.352 5.590 2.746 0.0061 ** quota900 23.537 5.590 4.211
+2.7e-05 *** quota1000 47.074 5.590 8.421 \< 2e-16 *** quota1100 51.426
+5.590 9.200 \< 2e-16 *** quota1200 56.648 5.590 10.134 \< 2e-16 ***
+quota1300 89.333 5.590 15.981 \< 2e-16 *** quota1400 85.815 5.590 15.351
+\< 2e-16 *** quota1500 95.444 5.590 17.074 \< 2e-16 *** quota1600 94.556
+5.590 16.915 \< 2e-16 *** quota1700 118.778 5.590 21.248 \< 2e-16 ***
+quota1800 139.963 5.590 25.038 \< 2e-16 *** quota1900 140.333 5.590
+25.104 \< 2e-16 *** quota2000 154.630 5.590 27.662 \< 2e-16 ***
+quota2100 159.241 5.590 28.486 \< 2e-16 *** quota2200 165.019 5.590
+29.520 \< 2e-16 *** quota2300 154.352 5.590 27.612 \< 2e-16 ***
+quota2400 193.796 5.590 34.668 \< 2e-16 *** quota2500 198.722 5.590
+35.549 \< 2e-16 *** quota2600 184.815 5.590 33.061 \< 2e-16 ***
+quota2700 203.370 5.590 36.381 \< 2e-16 *** quota2800 203.370 5.590
+36.381 \< 2e-16 *** quota2900 250.870 5.590 44.878 \< 2e-16 ***
+quota3000 250.870 5.590 44.878 \< 2e-16 *** quota3100 250.870 5.590
+44.878 \< 2e-16 *** quota3200 238.537 5.590 42.672 \< 2e-16 ***
+quota3300 256.667 5.590 45.915 \< 2e-16 *\*\* — Signif. codes: 0 ‘***’
+0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.645 8.963 137.1 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.894 Deviance explained = 89.6% GCV = 864.67 Scale est. =
+843.71 n = 1512
+
+## ITC16 Cuneo
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 29.667 4.469 6.639 4.86e-11 *** quota700 -27.796 6.320
+-4.398 1.19e-05 *** quota800 3.019 6.320 0.478 0.6330  
+quota900 -12.870 6.320 -2.037 0.0419 \*  
+quota1000 27.833 6.320 4.404 1.16e-05 *** quota1100 42.444 6.320 6.716
+2.92e-11 *** quota1200 1.037 6.320 0.164 0.8697  
+quota1300 15.519 6.320 2.456 0.0142 \*  
+quota1400 61.259 6.320 9.693 \< 2e-16 *** quota1500 74.574 6.320 11.800
+\< 2e-16 *** quota1600 53.000 6.320 8.386 \< 2e-16 *** quota1700 85.111
+6.320 13.467 \< 2e-16 *** quota1800 79.963 6.320 12.653 \< 2e-16 ***
+quota1900 82.278 6.320 13.019 \< 2e-16 *** quota2000 133.000 6.320
+21.045 \< 2e-16 *** quota2100 100.278 6.320 15.867 \< 2e-16 ***
+quota2200 102.148 6.320 16.163 \< 2e-16 *** quota2300 105.593 6.320
+16.708 \< 2e-16 *** quota2400 127.870 6.320 20.233 \< 2e-16 ***
+quota2500 118.204 6.320 18.704 \< 2e-16 *** quota2600 139.833 6.320
+22.126 \< 2e-16 *** quota2700 141.778 6.320 22.434 \< 2e-16 *** —
+Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.912 8.998 42.01 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.737 Deviance explained = 74.4% GCV = 1107.2 Scale est. =
+1078.4 n = 1188
+
+## ITC20 Valle d’Aosta/VallÃ©e d’Aoste
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 40.019 3.951 10.128 \< 2e-16 *** quota1000 43.926 5.588
+7.861 7.88e-15 *** quota1100 55.389 5.588 9.912 \< 2e-16 *** quota1200
+60.944 5.588 10.907 \< 2e-16 *** quota1300 73.815 5.588 13.210 \< 2e-16
+*** quota1400 60.907 5.588 10.900 \< 2e-16 *** quota1500 55.778 5.588
+9.982 \< 2e-16 *** quota1600 86.241 5.588 15.434 \< 2e-16 *** quota1700
+83.481 5.588 14.940 \< 2e-16 *** quota1800 100.667 5.588 18.015 \< 2e-16
+*** quota1900 126.815 5.588 22.695 \< 2e-16 *** quota2000 130.611 5.588
+23.374 \< 2e-16 *** quota2100 111.333 5.588 19.924 \< 2e-16 ***
+quota2200 137.148 5.588 24.544 \< 2e-16 *** quota2300 150.889 5.588
+27.003 \< 2e-16 *** quota2400 178.741 5.588 31.987 \< 2e-16 ***
+quota2500 154.630 5.588 27.673 \< 2e-16 *** quota2600 163.185 5.588
+29.204 \< 2e-16 *** quota2700 157.778 5.588 28.236 \< 2e-16 ***
+quota2800 161.185 5.588 28.846 \< 2e-16 *** quota2900 195.130 5.588
+34.920 \< 2e-16 *** quota3000 222.963 5.588 39.901 \< 2e-16 ***
+quota3100 234.204 5.588 41.913 \< 2e-16 *** quota3200 221.778 5.588
+39.689 \< 2e-16 *** quota3300 239.852 5.588 42.924 \< 2e-16 \*\*\* —
+Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 8.618 8.958 114.4 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.85 Deviance explained = 85.4% GCV = 864.58 Scale est. =
+843.05 n = 1350
+
+## ITH10 Bolzano-Bozen
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 16.833 3.976 4.234 2.46e-05 *** quota700 4.500 5.623 0.800
+0.42369  
+quota800 -3.519 5.623 -0.626 0.53159  
+quota900 3.685 5.623 0.655 0.51234  
+quota1000 24.500 5.623 4.357 1.42e-05 *** quota1100 16.074 5.623 2.859
+0.00432 \*\* quota1200 37.426 5.623 6.656 4.12e-11 *** quota1300 45.611
+5.623 8.112 1.13e-15 *** quota1400 36.519 5.623 6.495 1.18e-10 ***
+quota1500 64.278 5.623 11.431 \< 2e-16 *** quota1600 79.407 5.623 14.122
+\< 2e-16 *** quota1700 61.370 5.623 10.914 \< 2e-16 *** quota1800 86.352
+5.623 15.357 \< 2e-16 *** quota1900 131.907 5.623 23.459 \< 2e-16 ***
+quota2000 132.185 5.623 23.508 \< 2e-16 *** quota2100 123.704 5.623
+22.000 \< 2e-16 *** quota2200 176.463 5.623 31.382 \< 2e-16 ***
+quota2300 120.870 5.623 21.496 \< 2e-16 *** quota2400 174.315 5.623
+31.000 \< 2e-16 *** quota2500 166.667 5.623 29.640 \< 2e-16 ***
+quota2600 205.352 5.623 36.520 \< 2e-16 *** quota2700 183.093 5.623
+32.562 \< 2e-16 *** quota2800 207.111 5.623 36.833 \< 2e-16 ***
+quota2900 219.833 5.623 39.096 \< 2e-16 *** quota3000 213.444 5.623
+37.959 \< 2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05
+‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 5.835 6.992 115.9 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.878 Deviance explained = 88.1% GCV = 873.64 Scale est. =
+853.68 n = 1350
+
+## ITH20 Trento
+
+Family: gaussian Link function: identity
+
+Formula: durata ~ quota + s(anno)
+
+Parametric coefficients: Estimate Std. Error t value Pr(\>\|t\|)  
+(Intercept) 1.648 4.049 0.407 0.68400  
+quota700 7.481 5.725 1.307 0.19154  
+quota800 14.741 5.725 2.575 0.01014 \*  
+quota900 1.889 5.725 0.330 0.74152  
+quota1000 16.037 5.725 2.801 0.00517 \*\* quota1100 11.667 5.725 2.038
+0.04178 \*  
+quota1200 38.315 5.725 6.692 3.25e-11 *** quota1300 42.093 5.725 7.352
+3.42e-13 *** quota1400 49.167 5.725 8.587 \< 2e-16 *** quota1500 59.093
+5.725 10.321 \< 2e-16 *** quota1600 98.111 5.725 17.136 \< 2e-16 ***
+quota1700 76.574 5.725 13.374 \< 2e-16 *** quota1800 114.556 5.725
+20.008 \< 2e-16 *** quota1900 106.907 5.725 18.672 \< 2e-16 ***
+quota2000 141.463 5.725 24.708 \< 2e-16 *** quota2100 153.130 5.725
+26.745 \< 2e-16 *** quota2200 150.333 5.725 26.257 \< 2e-16 ***
+quota2300 151.278 5.725 26.422 \< 2e-16 *** quota2400 175.667 5.725
+30.682 \< 2e-16 *** quota2500 171.741 5.725 29.996 \< 2e-16 ***
+quota2600 188.185 5.725 32.868 \< 2e-16 *** quota2700 189.278 5.725
+33.059 \< 2e-16 *** quota2800 222.222 5.725 38.813 \< 2e-16 ***
+quota2900 182.130 5.725 31.810 \< 2e-16 *** quota3000 228.667 5.725
+39.938 \< 2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001 ’**’ 0.01 ’*’ 0.05
+‘.’ 0.1 ’ ’ 1
+
+Approximate significance of smooth terms: edf Ref.df F p-value  
+s(anno) 7.794 8.625 84.32 \<2e-16 \*\*\* — Signif. codes: 0 ‘***’ 0.001
+’**’ 0.01 ’*’ 0.05 ‘.’ 0.1 ’ ’ 1
+
+R-sq.(adj) = 0.87 Deviance explained = 87.3% GCV = 907.12 Scale est. =
+885.09 n = 1350

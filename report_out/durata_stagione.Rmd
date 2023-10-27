@@ -97,5 +97,36 @@ for (x in prov_int$nuts_id ) {
   cat("\n\n")
 
 }
+
 ```
 
+
+# Modello GAM 
+
+
+```{r gam, results='asis'}
+for (x in prov_int$nuts_id ) {
+  cat("\n\n")
+  cat(paste("## ", x, nome_provincia(x), sep = " " ))
+  cat("\n\n")
+  
+  df_durata %>% filter(nut == x) -> df
+  df$quota <- factor(df$zs)
+  
+  if(levels(df$quota) %>% length() > 1) {
+    fit <- gam(durata ~ quota + s(anno), data = df)
+    summary(fit) %>% print()
+    
+    # R²
+    # cat("R² : ", summary(fit)$r.squared, "\n\n")
+    
+    # adjusted R²
+    # cat("adjusted R² : ", summary(fit)$adj.r.squared, "\n\n" )
+
+ 
+    # broom::tidy(fit) %>% kableExtra::kable() %>%  print()
+  }
+  cat("\n\n")
+
+}
+```

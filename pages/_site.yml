@@ -1,0 +1,14 @@
+name: "Indicatori turismo"
+title: "Indicatori turismo"
+description: |
+  Indicatori turismo
+output_dir: "../docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Distribuzioni"
+      href: distribuzioni.html
+output:
+  html_document:
+    theme: cosmo

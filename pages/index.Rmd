@@ -1,0 +1,72 @@
+---
+title: "Papero"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
+source("~/R/turismo/papero.R")
+
+```
+
+## Materials and methods 
+
+Le analisi sono state condotte sfruttando i dati messi a disposizione dal progetto Copernicus (cfr. European Union’s space programme), il cui dataset è costituito da 39 indicatori relativi a alle condizioni atmosferiche e di innevamento per tutte le regioni montuose sul territorio Europeo. 
+
+I dati sono aggregati rispetto alle NUTS-3 (Nomenclature of Territorial Units for Statistics) ed hanno una risoluzione verticale di 100m. 
+Gli indicatori di innevamento disponibili dal progetto sono stati calcolati attraverso il modello computazionale termodinamico CROCUS (in grado di simulare il bilancio energetico e di massa del manto nevoso) in congiunzione al modello SURFEX per la superficie terrestre.
+
+Per la stima dell’impatto causato dai cambiamenti climatici il modello è stato applicato a quattro diversi scenari in termini di emissioni prodotte:
+
+- il clima attuale
+- ottimale (le emissioni diminuiscono a partire dal 2020)
+- ottimistico (le emissioni diminuiscono a partire dal 2040)
+- pessimistico (le emissioni continuano a crescere per tutto il secolo)
+
+Quindi per ciascuna “provincia” i dati disponibili sono relativi a 
+
+- Inizio e fine della stagione sciistica
+- Quantità annuale di neve prodotta artificialmente
+- Precipitazioni (nevose?)
+- Profondità della neve
+- Equivalente in acqua
+- Temperatura 
+- Ore nevicate
+
+Il modello Crocus (https://www.umr-cnrm.fr/spip.php?article265&lang=en) consente di tenere conto sia della preparazione delle piste che della produzione di neve artificiale, aggiungendo ulteriore valore per l’utente finale fornendo indicazioni sui requisiti di gestione della neve nelle condizioni climatiche future. Tuttavia, non è progettato per sostituire i prodotti a risoluzione più elevata disponibili in alcune regioni europee che forniscono una visione più dettagliata delle condizioni sciistiche; ad esempio, tenendo conto della pendenza, dei fenomeni meteorologici locali e delle pratiche locali di gestione della neve. 
+
+Questo set di dati presenta invece un prodotto omogeneo a livello paneuropeo e quindi il suo obiettivo principale è quello di confrontare le principali caratteristiche delle condizioni nivologiche passate e future in tutta Europa o di confrontare destinazioni lontane; ad esempio, la Scandinavia e l'Europa orientale (per una determinata elevazione e orizzonte temporale).
+
+In aggiunta agli scenari è stato prodotto un dataset attraverso il modello di rianalisi UERRA (UERRA: Uncertainties in Ensembles of Regional Reanalyses; https://www.uerra.eu).
+
+## Metodi
+
+I dati resi disponibili in formato NetCDF sono stati analizzati per tutte le province di interesse sul territorio. Nello specifico sono stati utilizzati gli indicatori di durata della stagione e della produzione di neve artificiale.
+
+Per tutte le province di interesse sono stati applicati dei modelli lineari agli indicatori di durata della stagione e della quantità di neve prodotta.
+La relazione 
+
+durata ~ anno + quota
+
+```{r, riduzione}
+library(kableExtra)
+tab_durata_stagione[is.na(tab_durata_stagione)] <- 0
+colnames(tab_durata_stagione) <- seq(1800, 3300, by = 100)
+
+kable(tab_durata_stagione, digits = 0, caption = "Riduzione durata stagione 1961 vs 2014") %>% kable_styling()
+```
+
+
+```{r, fig.width=8, fig.height=7}
+df_durata %>% filter(nut == "ITC44", zs > 1800) -> df
+
+ggplot(df, aes(anno, durata)) + geom_point() +
+  geom_smooth(method = lm, se = TRUE) +
+  facet_wrap(~zs, scales = "free_y") + ggtitle(nome_provincia("ITC44"))
+```
+

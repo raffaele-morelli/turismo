@@ -82,12 +82,11 @@ graf_durata <- function(nut) {
   if(nrow(df) == 0) 
     return("")
   
-  
   df %>% 
     ggplot(aes(Anno, value)) + 
     geom_step() + 
     geom_smooth(method = lm, se = FALSE) +
-    facet_wrap(~Quota) + ylab("gg") +
+    facet_wrap(~Quota) + ylab("Durata stagione (gg)") +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),
       legend.position = "none") +
@@ -98,9 +97,9 @@ graf_durata <- function(nut) {
     group_by(Anno, NUT) %>%
     summarise(mm = mean(value)) %>%
     ggplot(aes(Anno, mm)) +
-    geom_step() + ylab("gg") +
+    geom_step() + ylab("Durata stagione (gg)") +
     # geom_smooth(method = "gam", formula = y ~ poly(x, 2) ) -> g1
-    geom_smooth(method = "lm") -> g1
+    geom_smooth(method = "lm", se = FALSE) -> g1
   
   lay <- rbind(c(1,1),
                c(1,1),

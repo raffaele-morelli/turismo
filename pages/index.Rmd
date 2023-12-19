@@ -53,20 +53,27 @@ La relazione
 
 durata ~ anno + quota
 
+**TODO** _La riduzione della durata della stagione in tabella va intesa rispetto al 1961 e ad ogni quota la riduzione della stagione è rappresentata dalla differenza con la quota precedente. Ricalcolare le celle._
+
+
+
 ```{r, riduzione}
 library(kableExtra)
 tab_durata_stagione[is.na(tab_durata_stagione)] <- 0
+
 colnames(tab_durata_stagione) <- seq(1800, 3300, by = 100)
 
 kable(tab_durata_stagione, digits = 0, caption = "Riduzione durata stagione 1961 vs 2014") %>% kable_styling()
 ```
 
+### Esempio per la provincia di Sondrio e L'Aquila
 
-```{r, fig.width=8, fig.height=7}
-df_durata %>% filter(nut == "ITC44", zs > 1800) -> df
+```{r, fig.width=7, fig.height=10, message=FALSE, warning=FALSE}
+graf_durata("ITC44")
+```
 
-ggplot(df, aes(anno, durata)) + geom_point() +
-  geom_smooth(method = lm, se = TRUE) +
-  facet_wrap(~zs, scales = "free_y") + ggtitle(nome_provincia("ITC44"))
+
+```{r, fig.width=7, fig.height=8, message=FALSE, warning=FALSE}
+graf_durata("ITF11")
 ```
 

@@ -29,15 +29,12 @@ if(!exists("confini")) {
   confini <- st_read("~/R/turismo/shape/NUTS3_ID.shp")
 }
 
-if(!exists("prov_int")) {
-  # prov_int <- read_ods("~/R/turismo/province_interesse.ods")
-  # write_csv(prov_int, "province_interesse.csv")
-}
+prov_int <- read_ods("~/R/turismo/province_interesse.ods")
 
 nome_provincia <- function(nut) {
   filter(confini, nuts_id == nut) %>% 
     st_drop_geometry() %>% 
-    select(nuts_name) %>% as.character() -> provincia
+    dplyr::select(nuts_name) %>% as.character() -> provincia
   
   return(provincia)
 }

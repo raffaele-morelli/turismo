@@ -85,11 +85,13 @@ rownames(df_machine_made) <- NULL
 # write_excel_csv(df_machine_made, "df_machine_made.csv")
 # write_ods(df_machine_made, "df_machine_made.ods")
 # write.xlsx(df_machine_made, "df_machine_made.xlsx")
+saveRDS(df_machine_made, file = "rds/df_machine_made.RDS")
 
-select(df_machine_made, c(anno, nuts, zs, mm_prod)) %>% 
+dplyr::select(df_machine_made, c(anno, nuts, zs, mm_prod)) %>% 
   set_names(c("Anno", "NUT", "Quota", "Machine made")) %>% 
   filter(Quota >= 1500) %>% 
   reshape2::melt(id.vars = c("Anno", "NUT", "Quota")) -> m_df_machine_made
+saveRDS(m_df_machine_made, file = "rds/m_df_machine_made.RDS")
 
 
 graf_mm <- function(nut) {
@@ -129,6 +131,33 @@ graf_mm <- function(nut) {
   
   gridExtra::grid.arrange(g0, g1, layout_matrix = lay)
 }
+
+
+media_innevamento <- function(nut) {
+  nome_provincia(nut) -> provincia
+  
+  df <- dplyr::filter(m_df_machine_made, NUT == nut)
+  if(nrow(df) == 0) {
+    return()
+  }
+  
+  df %>% 
+    dplyr::mutate(Lustro = Anno - Anno %% 5) %>% 
+    dplyr::group_by(NUT, Lustro, Quota) %>% 
+    dplyr::summarise(media = mean(value) )
+}
+
+# nut <- "ITF11"
+
+map(prov_int$nuts_id, function(x) {
+  media_innevamento(x)
+}) -> lst_machine_made
+
+
+lst_machine_made <- vctrs::list_drop_empty(lst_machine_made) # rimuovo gli elementi vuoti
+
+do.call(rbind, lst_machine_made) -> df_machine_made_lustro # machine_made media nel lustro
+saveRDS(df_machine_made_lustro, file = "~/R/turismo/rds/df_machine_made_lustro.RDS")
 
 # graf_mm("ITF11")
 

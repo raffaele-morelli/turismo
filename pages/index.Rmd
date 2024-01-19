@@ -18,7 +18,7 @@ source("~/R/turismo/papero.R")
 
 Le analisi sono state condotte sfruttando i dati messi a disposizione dal progetto Copernicus (cfr. European Union’s space programme), il cui dataset è costituito da 39 indicatori relativi a alle condizioni atmosferiche e di innevamento per tutte le regioni montuose sul territorio Europeo. 
 
-I dati sono aggregati rispetto alle NUTS-3 (Nomenclature of Territorial Units for Statistics) ed hanno una risoluzione verticale di 100m. 
+I dati sono aggregati rispetto alle NUTS-3 (Nomenclature of Territorial Units for Statistics) ed hanno una risoluzione verticale di 100m.
 Gli indicatori di innevamento disponibili dal progetto sono stati calcolati attraverso il modello computazionale termodinamico CROCUS (in grado di simulare il bilancio energetico e di massa del manto nevoso) in congiunzione al modello SURFEX per la superficie terrestre.
 
 Per la stima dell’impatto causato dai cambiamenti climatici il modello è stato applicato a quattro diversi scenari in termini di emissioni prodotte:
@@ -28,7 +28,7 @@ Per la stima dell’impatto causato dai cambiamenti climatici il modello è stat
 - ottimistico (le emissioni diminuiscono a partire dal 2040)
 - pessimistico (le emissioni continuano a crescere per tutto il secolo)
 
-Quindi per ciascuna “provincia” i dati disponibili sono relativi a 
+Quindi per ciascuna "provincia" i dati disponibili sono relativi a:
 
 - Inizio e fine della stagione sciistica
 - Quantità annuale di neve prodotta artificialmente
@@ -61,7 +61,7 @@ durata ~ anno + quota
 library(kableExtra)
 tab_durata_stagione[is.na(tab_durata_stagione)] <- 0
 
-colnames(tab_durata_stagione) <- seq(1800, 3300, by = 100)
+colnames(tab_durata_stagione) <- v_res[-c(1)]
 
 kable(tab_durata_stagione, digits = 0, caption = "Riduzione durata stagione 1961 vs 2014") %>% kable_styling()
 ```
@@ -77,3 +77,31 @@ graf_durata("ITC44")
 graf_durata("ITF11")
 ```
 
+
+```{r}
+
+dplyr::select(df_durata_lustro, c(Lustro, NUT, Quota, media)) %>% 
+  filter(Quota >= 1500, NUT %in% prov_int$nuts_id) %>% 
+  reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>% 
+  ggplot() + 
+  geom_col(aes(Lustro, value, fill = Quota), position = "dodge") + 
+  geom_smooth(aes(Lustro, value), method = "lm", se = FALSE) +
+  facet_wrap(~NUT) + ylab("Durata in giorni (gg)") + xlab("")
+```
+
+## Innevamento artificiale
+
+```{r, fig.width=7, fig.height=10, message=FALSE, warning=FALSE}
+graf_mm("ITF11")
+```
+
+```{r}
+
+dplyr::select(df_machine_made_lustro, c(Lustro, NUT, Quota, media)) %>% 
+  filter(Quota >= 1500, NUT %in% prov_int$nuts_id) %>% 
+  reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>% 
+  ggplot() + 
+  geom_col(aes(Lustro, value, fill = Quota), position = "dodge") + 
+  geom_smooth(aes(Lustro, value), method = "lm", se = FALSE) +
+  facet_wrap(~NUT) + ylab("Durata in giorni (gg)") + xlab("")
+```

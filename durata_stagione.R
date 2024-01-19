@@ -37,21 +37,21 @@ names(listone) <- seq(1961, 2014)
 
 do.call(rbind, listone) %>% 
   arrange(bnuts, bzs) %>% 
-  select(anno, bnuts, beos, eeos, ezs, durata) %>% 
+  dplyr::select(anno, bnuts, beos, eeos, ezs, durata) %>% 
   setNames(c("anno", "nut", "beos", "eeos", "zs", "durata")) -> df_durata
 rownames(df_durata) <- NULL # ripulisco i nomi di riga
-saveRDS(df_durata, "df_durata.RDS")
+saveRDS(df_durata, "rds/df_durata.RDS")
 
 # write_ods(df_durata, "df_durata.ods")
 # write_excel_csv(df_durata, "df_durata.csv")
 # write.xlsx(df_durata, 'df_durata.xlsx')
 
 # faccio il melt per plottare in base alla quota
-select(df_durata, c(anno, nut, zs, durata)) %>% 
+dplyr::select(df_durata, c(anno, nut, zs, durata)) %>% 
   set_names(c("Anno", "NUT", "Quota", "Durata")) %>% 
   filter(Quota >= 1500) %>% 
   reshape2::melt(id.vars = c("Anno", "NUT", "Quota")) -> m_df_durata
-saveRDS(m_df_durata, "m_df_durata.RDS")
+saveRDS(m_df_durata, "rds/m_df_durata.RDS")
 
 
 graf_durata <- function(nut) {
@@ -112,7 +112,8 @@ map(prov_int$nuts_id, function(x) {
 
 lst_durata <- vctrs::list_drop_empty(lst_durata) # rimuovo gli elementi vuoti
 
-do.call(rbind, lst_durata) -> df_durata_media # durata media nel lustro
+do.call(rbind, lst_durata) -> df_durata_media_lustro # durata media nel lustro
+saveRDS(df_durata_media_lustro, file = "~/R/turismo/rds/df_durata_lustro.RDS")
 
 # map(unique(df_durata_media$NUT) %>% head(n = 2), \(x) {
 #   nome_provincia(x) -> provincia

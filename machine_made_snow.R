@@ -159,6 +159,10 @@ lst_machine_made <- vctrs::list_drop_empty(lst_machine_made) # rimuovo gli eleme
 do.call(rbind, lst_machine_made) -> df_machine_made_lustro # machine_made media nel lustro
 saveRDS(df_machine_made_lustro, file = "~/R/turismo/rds/df_machine_made_lustro.RDS")
 
+
+
+
+
 # graf_mm("ITF11")
 
 # nut <- "ITF11"

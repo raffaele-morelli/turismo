@@ -40,7 +40,7 @@ do.call(rbind, listone) %>%
   dplyr::select(anno, bnuts, beos, eeos, ezs, durata) %>% 
   setNames(c("anno", "nut", "beos", "eeos", "zs", "durata")) -> df_durata
 rownames(df_durata) <- NULL # ripulisco i nomi di riga
-saveRDS(df_durata, "rds/df_durata.RDS")
+saveRDS(df_durata, "~/R/turismo/rds/df_durata.RDS")
 
 # write_ods(df_durata, "df_durata.ods")
 # write_excel_csv(df_durata, "df_durata.csv")
@@ -51,11 +51,10 @@ dplyr::select(df_durata, c(anno, nut, zs, durata)) %>%
   set_names(c("Anno", "NUT", "Quota", "Durata")) %>% 
   filter(Quota >= 1500) %>% 
   reshape2::melt(id.vars = c("Anno", "NUT", "Quota")) -> m_df_durata
-saveRDS(m_df_durata, "rds/m_df_durata.RDS")
+saveRDS(m_df_durata, "~/R/turismo/rds/m_df_durata.RDS")
 
 
 graf_durata <- function(nut) {
-
   provincia <- nome_provincia(nut)
   
   df <- filter(m_df_durata, NUT == nut)
@@ -66,7 +65,7 @@ graf_durata <- function(nut) {
   df %>% 
     ggplot(aes(Anno, value)) + 
     geom_step() + 
-    geom_smooth(method = lm, se = FALSE) +
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs"), se = FALSE) +
     facet_wrap(~Quota) + ylab("gg") +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),
@@ -79,8 +78,8 @@ graf_durata <- function(nut) {
     summarise(mm = mean(value)) %>%
     ggplot(aes(Anno, mm)) +
     geom_step() + ylab("gg") +
-    # geom_smooth(method = "gam", formula = y ~ poly(x, 2) ) -> g1
-    geom_smooth(method = "lm") -> g1
+    geom_smooth(method = "gam", formula = y ~ s(x, bs = "cs") ) -> g1
+    # geom_smooth(method = "lm") -> g1
   
   lay <- rbind(c(1,1),
                c(1,1),
@@ -91,6 +90,7 @@ graf_durata <- function(nut) {
 
 # graf_durata("ITF11")
 
+# media sul quinquennio ####
 media_durata <- function(nut) {
   nome_provincia(nut) -> provincia
   
@@ -114,6 +114,48 @@ lst_durata <- vctrs::list_drop_empty(lst_durata) # rimuovo gli elementi vuoti
 
 do.call(rbind, lst_durata) -> df_durata_media_lustro # durata media nel lustro
 saveRDS(df_durata_media_lustro, file = "~/R/turismo/rds/df_durata_lustro.RDS")
+
+
+df_durata_media_lustro %>% 
+  filter(Quota >= 1500) %>% 
+  reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) -> m_df_durata_lustro
+saveRDS(m_df_durata, "~/R/turismo/rds/m_df_durata_lustro.RDS")
+
+
+graf_durata_lustro <- function(nut) { 
+  # nut <- "ITF11"
+  provincia <- nome_provincia(nut)
+  
+  df <- filter(m_df_durata_lustro, NUT == nut)
+  if(nrow(df) == 0) {
+    return("")
+  }
+  
+  df %>% 
+    ggplot(aes(Lustro, value)) + 
+    geom_col() + 
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~Quota) + ylab("gg") +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      legend.position = "none") +
+    ggtitle(paste(nut, provincia, sep = " - " )) + theme_minimal() -> g0
+  
+  df %>%
+    group_by(Lustro, NUT) %>%
+    summarise(mm = mean(value)) %>%
+    ggplot(aes(Lustro, mm)) +
+    geom_col() + ylab("gg") +
+    geom_smooth(method = "lm", se = FALSE) + theme_minimal() -> g1
+   
+  lay <- rbind(c(1,1),
+               c(1,1),
+               c(2,2))
+
+  gridExtra::grid.arrange(g0, g1, layout_matrix = lay)
+}
+graf_durata_lustro("ITF11") 
+
 
 # map(unique(df_durata_media$NUT) %>% head(n = 2), \(x) {
 #   nome_provincia(x) -> provincia

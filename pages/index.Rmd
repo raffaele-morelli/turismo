@@ -1,20 +1,43 @@
 ---
 title: "Papero"
-output: 
+output:
   html_document:
     toc: true
     toc_depth: 2
     toc_float: true
+  pdf_document:
+    toc: true
+    toc_depth: '2'
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 
+# source("~/R/turismo/common.R")
 source("~/R/turismo/papero.R")
 
 ```
 
-## Materials and methods 
+
+# Abstract
+
+Purpose – I cambiamenti climatici, con l’aumento delle temperature, la riduzione della durata delle stagioni e la scarsità di neve mettono a dura prova il turismo invernale italiano.
+Il turismo invernale in generale e il turismo sciistico in particolare rappresentano un segmento turistico e industriale particolarmente sensibile alle condizioni atmosferiche. In questo articolo tramite l’utilizzo degli indicatori “Mountain Tourism Meteorological and Snow Indicators” (MTMSI) prodotti nell’ambito del Copernicus Climate Change Services si confrontano le durate delle stagioni turistiche e l’utilizzo di neve artificiale in tutte le località montane italiane nel periodo che va dal 1961 al 2014 mettendo in evidenza le relazioni con i cambiamenti climatici.
+
+In altre parole, anche con analisi territoriali si mostrano evidenze per l’Italia sia dell’impatto dei cambiamenti climatici sul turismo sia del turismo sull’ambiente. 
+
+The abstract should not exceed 200 words. (9 pt, Justify)
+
+Methodology/Design/Approach – 
+
+Findings – 
+
+Originality of the research –Similar studies have been conducted before, but not for the winter Italian Tourist destination and not finalized to highlight the usefulness of certain basic data for carrying out quantitative analyzes useful to political decision makers.
+Keywords environment, tourism, indicators, climate change, sustainability
+
+
+
+# Materials and methods 
 
 Le analisi sono state condotte sfruttando i dati messi a disposizione dal progetto Copernicus (cfr. European Union’s space programme), il cui dataset è costituito da 39 indicatori relativi a alle condizioni atmosferiche e di innevamento per tutte le regioni montuose sul territorio Europeo. 
 
@@ -38,7 +61,7 @@ Quindi per ciascuna "provincia" i dati disponibili sono relativi a:
 - Temperatura 
 - Ore nevicate
 
-Il modello Crocus (https://www.umr-cnrm.fr/spip.php?article265&lang=en) consente di tenere conto sia della preparazione delle piste che della produzione di neve artificiale, aggiungendo ulteriore valore per l’utente finale fornendo indicazioni sui requisiti di gestione della neve nelle condizioni climatiche future. Tuttavia, non è progettato per sostituire i prodotti a risoluzione più elevata disponibili in alcune regioni europee che forniscono una visione più dettagliata delle condizioni sciistiche; ad esempio, tenendo conto della pendenza, dei fenomeni meteorologici locali e delle pratiche locali di gestione della neve. 
+Il modello Crocus (https://www.umr-cnrm.fr/spip.php?article265&lang=en) consente di tenere conto sia della preparazione delle piste che della produzione di neve artificiale, aggiungendo ulteriore valore per l’utente finale fornendo indicazioni sui requisiti di gestione della neve nelle condizioni climatiche future. Tuttavia, non è progettato per sostituire i prodotti a risoluzione più elevata disponibili in alcune regioni europee che forniscono una visione più dettagliata delle condizioni sciistiche; ad esempio, tenendo conto della pendenza, dei fenomeni meteorologici locali e delle pratiche locali di gestione della neve.
 
 Questo set di dati presenta invece un prodotto omogeneo a livello paneuropeo e quindi il suo obiettivo principale è quello di confrontare le principali caratteristiche delle condizioni nivologiche passate e future in tutta Europa o di confrontare destinazioni lontane; ad esempio, la Scandinavia e l'Europa orientale (per una determinata elevazione e orizzonte temporale).
 
@@ -49,16 +72,16 @@ In aggiunta agli scenari è stato prodotto un dataset attraverso il modello di r
 I dati resi disponibili in formato NetCDF sono stati analizzati per tutte le province di interesse sul territorio. Nello specifico sono stati utilizzati gli indicatori di durata della stagione e della produzione di neve artificiale.
 
 Per tutte le province di interesse sono stati applicati dei modelli lineari agli indicatori di durata della stagione e della quantità di neve prodotta.
-La relazione 
 
-durata ~ anno + quota
+La relazione : durata ~ anno + quota
 
 **TODO** _La riduzione della durata della stagione in tabella va intesa rispetto al 1961 e ad ogni quota la riduzione della stagione è rappresentata dalla differenza con la quota precedente. Ricalcolare le celle._
 
-
+TODO 
+- rappresentazione generale su mappa 
+- 
 
 ```{r, riduzione}
-library(kableExtra)
 tab_durata_stagione[is.na(tab_durata_stagione)] <- 0
 
 colnames(tab_durata_stagione) <- v_res[-c(1)]
@@ -66,22 +89,24 @@ colnames(tab_durata_stagione) <- v_res[-c(1)]
 kable(tab_durata_stagione, digits = 0, caption = "Riduzione durata stagione 1961 vs 2014") %>% kable_styling()
 ```
 
+# RESULTS AND ANALYSIS
+
 ### Esempio per la provincia di Sondrio e L'Aquila
 
-```{r, fig.width=7, fig.height=10, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 graf_durata("ITC44")
 ```
 
 
-```{r, fig.width=7, fig.height=8, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 graf_durata("ITF11")
 ```
 
 
-```{r}
+```{r, fig.width=10, fig.height=10}
 
 dplyr::select(df_durata_lustro, c(Lustro, NUT, Quota, media)) %>% 
-  filter(Quota >= 1500, NUT %in% prov_int$nuts_id) %>% 
+  filter(Quota >= 1000, NUT %in% prov_int) %>% 
   reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>% 
   ggplot() + 
   geom_col(aes(Lustro, value, fill = Quota), position = "dodge") + 
@@ -89,19 +114,54 @@ dplyr::select(df_durata_lustro, c(Lustro, NUT, Quota, media)) %>%
   facet_wrap(~NUT) + ylab("Durata in giorni (gg)") + xlab("")
 ```
 
-## Innevamento artificiale
 
-```{r, fig.width=7, fig.height=10, message=FALSE, warning=FALSE}
-graf_mm("ITF11")
+# Analisi territoriali: durata stagione
+
+```{r, fig.width=14, fig.height=6}
+map_durata(prov_nord, seq(1000, 3800, by = 400))
 ```
+
 
 ```{r}
-
-dplyr::select(df_machine_made_lustro, c(Lustro, NUT, Quota, media)) %>% 
-  filter(Quota >= 1500, NUT %in% prov_int$nuts_id) %>% 
-  reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>% 
-  ggplot() + 
-  geom_col(aes(Lustro, value, fill = Quota), position = "dodge") + 
-  geom_smooth(aes(Lustro, value), method = "lm", se = FALSE) +
-  facet_wrap(~NUT) + ylab("Durata in giorni (gg)") + xlab("")
+map_durata(prov_centro, seq(1000, 3800, by = 400))
 ```
+
+
+```{r, fig.width=10}
+map_durata(prov_sud, seq(1000, 3800, by = 400))
+```
+
+# MANN-KENDALL
+
+```{r}
+filter(df_mk_durata, nuts_id %in% prov_nord$nuts_id) %>% 
+  filter(!if_all(2:13, is.na)) %>% 
+  kable(caption = "NORD")
+
+filter(df_mk_durata, nuts_id %in% prov_centro$nuts_id) %>% 
+  filter(!if_all(2:13, is.na)) %>% 
+  kable(caption = "CENTRO")
+
+filter(df_mk_durata, nuts_id %in% prov_sud$nuts_id) %>% 
+  filter(!if_all(2:13, is.na)) %>% 
+  kable(caption = "SUD")
+
+```
+
+# MANN-KENDALL (quinquennio)
+
+```{r}
+filter(df_mk_durata_lustro, nuts_id %in% prov_nord$nuts_id) %>% 
+  filter(!if_all(2:13, is.na)) %>% 
+  kable(caption = "NORD")
+
+filter(df_mk_durata_lustro, nuts_id %in% prov_centro$nuts_id) %>% 
+  filter(!if_all(2:13, is.na)) %>% 
+  kable(caption = "CENTRO")
+
+filter(df_mk_durata_lustro, nuts_id %in% prov_sud$nuts_id) %>% 
+  filter(!if_all(2:13, is.na)) %>% 
+  kable(caption = "SUD")
+
+```
+

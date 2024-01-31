@@ -7,8 +7,6 @@ navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "Distribuzioni"
-      href: distribuzioni.html
 output:
   html_document:
     theme: cosmo

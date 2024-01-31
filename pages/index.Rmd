@@ -5,53 +5,33 @@ output:
     toc: true
     toc_depth: 2
     toc_float: true
-  pdf_document:
-    toc: true
-    toc_depth: '2'
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 
-# source("~/R/turismo/common.R")
 source("~/R/turismo/papero.R")
 
 ```
 
 
-# Abstract
-
-Purpose – I cambiamenti climatici, con l’aumento delle temperature, la riduzione della durata delle stagioni e la scarsità di neve mettono a dura prova il turismo invernale italiano.
-Il turismo invernale in generale e il turismo sciistico in particolare rappresentano un segmento turistico e industriale particolarmente sensibile alle condizioni atmosferiche. In questo articolo tramite l’utilizzo degli indicatori “Mountain Tourism Meteorological and Snow Indicators” (MTMSI) prodotti nell’ambito del Copernicus Climate Change Services si confrontano le durate delle stagioni turistiche e l’utilizzo di neve artificiale in tutte le località montane italiane nel periodo che va dal 1961 al 2014 mettendo in evidenza le relazioni con i cambiamenti climatici.
-
-In altre parole, anche con analisi territoriali si mostrano evidenze per l’Italia sia dell’impatto dei cambiamenti climatici sul turismo sia del turismo sull’ambiente. 
-
-The abstract should not exceed 200 words. (9 pt, Justify)
-
-Methodology/Design/Approach – 
-
-Findings – 
-
-Originality of the research –Similar studies have been conducted before, but not for the winter Italian Tourist destination and not finalized to highlight the usefulness of certain basic data for carrying out quantitative analyzes useful to political decision makers.
-Keywords environment, tourism, indicators, climate change, sustainability
-
 
 
 # Materials and methods 
 
-Le analisi sono state condotte sfruttando i dati messi a disposizione dal progetto Copernicus (cfr. European Union’s space programme), il cui dataset è costituito da 39 indicatori relativi a alle condizioni atmosferiche e di innevamento per tutte le regioni montuose sul territorio Europeo. 
+Le analisi sono state condotte sfruttando i dati messi a disposizione dal progetto Copernicus (cfr. European Union’s space programme), il cui dataset è costituito da 39 indicatori relativi a alle condizioni atmosferiche e di innevamento per tutte le regioni montuose sul territorio Europeo calcolati in base a quattro scenari climatici del passato e futuri.
 
 I dati sono aggregati rispetto alle NUTS-3 (Nomenclature of Territorial Units for Statistics) ed hanno una risoluzione verticale di 100m.
 Gli indicatori di innevamento disponibili dal progetto sono stati calcolati attraverso il modello computazionale termodinamico CROCUS (in grado di simulare il bilancio energetico e di massa del manto nevoso) in congiunzione al modello SURFEX per la superficie terrestre.
 
-Per la stima dell’impatto causato dai cambiamenti climatici il modello è stato applicato a quattro diversi scenari in termini di emissioni prodotte:
+Per la stima dell'impatto causato dai cambiamenti climatici il modello è stato applicato a quattro diversi scenari in termini di emissioni prodotte:
 
 - il clima attuale
 - ottimale (le emissioni diminuiscono a partire dal 2020)
 - ottimistico (le emissioni diminuiscono a partire dal 2040)
 - pessimistico (le emissioni continuano a crescere per tutto il secolo)
 
-Quindi per ciascuna "provincia" i dati disponibili sono relativi a:
+Quindi per ciascuna "provincia" gli indicatori calcolati e messi a disposizione sono relativi a:
 
 - Inizio e fine della stagione sciistica
 - Quantità annuale di neve prodotta artificialmente
@@ -77,9 +57,6 @@ La relazione : durata ~ anno + quota
 
 **TODO** _La riduzione della durata della stagione in tabella va intesa rispetto al 1961 e ad ogni quota la riduzione della stagione è rappresentata dalla differenza con la quota precedente. Ricalcolare le celle._
 
-TODO 
-- rappresentazione generale su mappa 
-- 
 
 ```{r, riduzione}
 tab_durata_stagione[is.na(tab_durata_stagione)] <- 0

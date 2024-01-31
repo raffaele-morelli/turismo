@@ -16,6 +16,7 @@
   library(reshape2)
   library(rgdal) # package for geospatial analysis
   library(sf)
+  library(tibble)
   library(trend)
   
   confini <- st_read("~/R/turismo/shape/NUTS3_ID.shp")
@@ -179,6 +180,40 @@ graf_durata <- function(nut) {
   gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
 }
 
+graf_durata_lustro <- function(nut, lim_quota = 1000) {
+  
+  provincia <- nome_provincia(nut)
+  
+  df <- filter(m_df_durata_lustro, NUT == nut, Quota >= lim_quota)
+  if(nrow(df) == 0) 
+    return("")
+  
+  df %>% 
+    ggplot(aes(Lustro, value)) + 
+    geom_step() + 
+    geom_smooth(method = lm, se = FALSE) +
+    facet_wrap(~Quota) + ylab("Durata stagione (gg)") +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      legend.position = "none") +
+    ggtitle(nome_provincia(nut)) -> g0
+  
+  
+  df %>%
+    group_by(Lustro, NUT) %>%
+    summarise(mm = mean(value)) %>%
+    ggplot(aes(Lustro, mm)) +
+    geom_step() + ylab("Durata stagione (gg)") +
+    geom_smooth(method = "lm", se = FALSE) -> g1
+  
+  lay <- rbind(c(1,1),
+               c(1,1),
+               c(2,2))
+  
+  gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
+}
+# graf_durata_lustro("ITF11", 1700)
+
 summ_lm_durata <- function(x) {
   df_durata %>% 
     filter(nut == x, zs > 1800) -> df
@@ -194,7 +229,7 @@ summ_lm_durata <- function(x) {
 
 summ_gam_durata <- function(x) {
   df_durata %>% 
-    filter(nut == x, zs >= 1500) -> df
+    filter(nut == x, zs >= 1000) -> df
   
   df$quota <- factor(df$zs)
   if(nrow(df) > 0){
@@ -204,7 +239,14 @@ summ_gam_durata <- function(x) {
     }
   }
 }
-# summ_gam("ITC44")
+# summ_gam_durata("ITC44")
+
+df <- df_durata_media_lustro %>% filter(NUT == "ITC44", Quota >= 1000) 
+fit <- gam(media ~ s(Lustro, k = 3) + s(Quota, k = 4), data = df)
+# gratia::appraise(fit)
+gratia::draw(fit)
+summary(fit)
+
 
 # durata stimata ####
 map(prov_int, \(p) {
@@ -215,7 +257,7 @@ names(duratone) <- prov_int
 
 duratone <- duratone[lengths(duratone) != 0]
 
-v_res <- seq(1000, 3500, by = 100) # risoluzione verticale
+v_res <- seq(1000, 3500, by = 400) # risoluzione verticale
 
 app <- data.frame("quota" = v_res)
 app$quota <- paste0("quota", app$quota)
@@ -228,7 +270,8 @@ map(duratone, \(d) {
 }) -> tmp_durata
 
 do.call(rbind.data.frame, tmp_durata) %>%
-  set_names( paste0("mslm",  seq(1000, 3500, by = 100) ) ) %>% round(digits = 2) -> tab_durata_stagione
+  set_names( paste0("mslm",  seq(1000, 3500, by = 400) ) ) %>% round(digits = 2) -> tab_durata_stagione
+
 
 # media sul quinquennio per provincia ####
 if(!exists("df_durata_media_lustro")) {

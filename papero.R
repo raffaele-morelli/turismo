@@ -214,7 +214,7 @@ graf_durata_lustro <- function(nuts, quote = c()) {
   # 
   # gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
 }
-graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC15")) %>% ggsave(filename = "durata_province.jpg")
+graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44")) %>% ggsave(filename = "durata_province.jpg")
 
 graf_durata_lustro_quote <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -279,9 +279,9 @@ summ_gam_durata_lustro <- function(x) {
 }
 summ_gam_durata_lustro("ITC44")
 
-# df <- df_durata_media_lustro %>% filter(NUT == "ITC44", Quota >= 1000)
+# df <- df_durata_media_lustro %>% filter(NUT == "ITC13", Quota >= 1000)
 # # df$Quota <- factor(df$Quota)
-# fit <- gam(media ~ s(Lustro, k = 3) + s(Quota), data = df)
+# fit <- gam(media ~ s(Lustro, k = 3) + s(Quota, k = 3), data = df)
 # gratia::appraise(fit)
 # gratia::draw(fit)
 # summary(fit)
@@ -592,3 +592,10 @@ if(!exists("df_mk_durata_lustro")) {
     inner_join( rbind(prov_nord, prov_centro, prov_sud) ) -> df_mk_durata_lustro
   saveRDS(df_mk_durata_lustro, "rds/df_mk_durata_lustro.RDS")
 }
+
+df_mk_durata_lustro %>% 
+  filter(nuts_id %in% c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44")) %>% 
+  select(-nuts_id) -> df_mk_durata_lustro_tab
+
+names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 200), "mt")
+df_mk_durata_lustro_tab %>% select(c(nuts_name, 1:12)) -> df_mk_durata_lustro_tab

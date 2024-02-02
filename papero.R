@@ -182,14 +182,10 @@ graf_durata <- function(nut) {
 graf_durata("ITC44")
 
 graf_durata_lustro <- function(nuts, quote = c()) {
-  
   # provincia <- nome_provincia(nut)
-  
   df <- filter(df_durata_media_lustro, NUT %in% nuts)
   
   inner_join(df, prov_nord, join_by("NUT" == "nuts_id")) -> df
-
-  
   # , Quota %in% quote
   
   # reshape2::melt(df, id.vars = c("NUT", "Lustro", "Quota")) %>%  
@@ -201,7 +197,6 @@ graf_durata_lustro <- function(nuts, quote = c()) {
   #     axis.text.x = element_text(angle = 45, hjust = 1),
   #     legend.position = "none") + theme_turismo() +
   #   ggtitle(nome_provincia(nut)) -> g0
-  
   
   reshape2::melt(df, id.vars = c("NUT", "nuts_name", "Lustro", "Quota")) %>%
     group_by(Lustro, nuts_name) %>%
@@ -219,9 +214,29 @@ graf_durata_lustro <- function(nuts, quote = c()) {
   # 
   # gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
 }
-graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC15")) %>% ggsave(filename = "duraata_province.jpg")
+graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC15")) %>% ggsave(filename = "durata_province.jpg")
 
-
+graf_durata_lustro_quote <- function(nuts, quote = c()) {
+  # provincia <- nome_provincia(nut)
+  df <- filter(df_durata_media_lustro, NUT %in% nuts, Quota %in% quote)
+  
+  inner_join(df, prov_nord, join_by("NUT" == "nuts_id")) -> df
+  
+  df <- df %>% mutate(Quota = paste(Quota, "mt")) 
+  
+  reshape2::melt(df, id.vars = c("NUT", "nuts_name", "Lustro", "Quota")) %>%
+    ggplot(aes(Lustro, value)) +
+    geom_step() +
+    geom_smooth(method = lm, se = FALSE) +
+    facet_wrap(~Quota) + 
+    scale_y_continuous(breaks = seq(0, 200, by = 20)) +
+    ylab("Length of season (days)") + xlab("Five years period") +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      legend.position = "none") + theme_turismo() +
+    ggtitle(nome_provincia(nuts))
+}
+graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% ggsave(filename = "durata_quote_biella.jpg")
 
 summ_lm_durata <- function(x) {
   df_durata %>% 

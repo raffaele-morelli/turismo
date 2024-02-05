@@ -433,18 +433,140 @@ di smoothing non lineare e</p>
 \]</span></p>
 <p>Nel nostro studio la formulazione utilizzata è stata la seguente</p>
 <p><span class="math display">\[
-Durata = \beta_0 + f_1(Year)+ \beta(Altitude) + \epsilon
+Length\ of\ season = \beta_0 + f_1(Year)+ \beta(Altitude) + \epsilon
 \]</span></p>
 <p>dove <span class="math display">\[ \beta \]</span> rappresenta la
-componente lineare.</p>
+componente lineare, <span class="math display">\[ \beta_0 \]</span>
+l’intercetta ed <span class="math display">\[ f_1 \]</span> la
+componente non lineare del modello. I modelli che sono stati adattati
+per il quinquennio e per l’anno sono quindi rispettivamente</p>
 <p><span class="math display">\[
 Length\ of\ season = \beta_0 + f(Five\ year\ period)  + \beta*Altitude
 \]</span> <span class="math display">\[
-Durata = a + f(Year)  + \beta*Altitude
+Length\ of\ season = \beta_0 + f(Year)  + \beta*Altitude
 \]</span></p>
 <p>Graficamente nei facet sono rappresentate le spezzate di regressione
 che sono state adattate ad ogni quota e per la serie nel suo
 complesso.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">(1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">48.468 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(3.382)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1100</td>
+<td align="right">26.600 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1200</td>
+<td align="right">31.995 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1300</td>
+<td align="right">56.450 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1400</td>
+<td align="right">61.159 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1500</td>
+<td align="right">70.818 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1600</td>
+<td align="right">78.559 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1700</td>
+<td align="right">71.691 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1800</td>
+<td align="right">103.523 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota1900</td>
+<td align="right">103.523 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota2000</td>
+<td align="right">109.168 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota2100</td>
+<td align="right">109.168 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">quota2200</td>
+<td align="right">130.023 (&lt;0.001)***</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right">(4.783)</td>
+</tr>
+<tr class="odd">
+<td align="left">s(Lustro)</td>
+<td align="right">(&lt;0.001)***</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[R^2 =  0.951     \]</span></p>
 </div>
 <div id="mann-kendall" class="section level3">
 <h3>Mann-Kendall</h3>
@@ -454,8 +576,9 @@ trend monotono crescente o decrescente della variabile di interesse nel
 tempo.</p>
 <p>Un trend crescente (o decrescente) significa che la variabile aumenta
 (diminuisce) costantemente nel tempo, mentre la tendenza può o meno
-essere lineare. Il test MK può essere utilizzato al posto di un’analisi
-di regressione lineare parametrica, che può essere utilizzata per
+essere lineare.</p>
+<p>Il test MK può essere utilizzato al posto di un’analisi di
+regressione lineare parametrica, che può essere utilizzata per
 verificare se la pendenza della linea di regressione lineare stimata è
 diversa da zero. L’analisi di regressione richiede che i residui della
 retta di regressione adattata siano distribuiti normalmente; un

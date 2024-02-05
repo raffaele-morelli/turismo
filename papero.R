@@ -289,7 +289,7 @@ summ_gam_durata_lustro <- function(x, quote) {
     filter(NUT == x, Quota %in% quote) -> df
   
   tit <- nome_provincia(x)
-  print(tit)
+  # print(tit)
   df$quota <- factor(df$Quota)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
@@ -297,11 +297,18 @@ summ_gam_durata_lustro <- function(x, quote) {
       gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
       gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
       sink(file =  glue("testi/diagn_{tit}.txt") )
-      summary(fit) %>% print()
+      # summary(fit) %>% print()
+      # modelsummary::modelsummary(fit,
+      #                            statistic = "p.value",
+      #                            output = "markdown") %>% print()
+      modelsummary::modelsummary(fit,
+                                 estimate = c("{estimate} ({p.value}){stars}"),
+                                 output = "markdown") %>% print()      
       sink()
     }
   }
 }
+
 summ_gam_durata_lustro("ITC13", seq(1000, 3000, by = 100)) # biella
 summ_gam_durata_lustro("ITC12", seq(1000, 3000, by = 100)) # vercelli
 summ_gam_durata_lustro("ITC11", seq(1000, 3000, by = 100)) # torino

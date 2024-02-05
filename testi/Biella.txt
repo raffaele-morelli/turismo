@@ -1,0 +1,33 @@
+
+Family: gaussian 
+Link function: identity 
+
+Formula:
+media ~ quota + s(Lustro)
+
+Parametric coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   48.468      3.382  14.331  < 2e-16 ***
+quota1100     26.600      4.783   5.561 1.62e-07 ***
+quota1200     31.995      4.783   6.690 7.32e-10 ***
+quota1300     56.450      4.783  11.802  < 2e-16 ***
+quota1400     61.159      4.783  12.787  < 2e-16 ***
+quota1500     70.818      4.783  14.807  < 2e-16 ***
+quota1600     78.559      4.783  16.425  < 2e-16 ***
+quota1700     71.691      4.783  14.989  < 2e-16 ***
+quota1800    103.523      4.783  21.644  < 2e-16 ***
+quota1900    103.523      4.783  21.644  < 2e-16 ***
+quota2000    109.168      4.783  22.825  < 2e-16 ***
+quota2100    109.168      4.783  22.825  < 2e-16 ***
+quota2200    130.023      4.783  27.185  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Approximate significance of smooth terms:
+            edf Ref.df     F p-value    
+s(Lustro) 8.836  8.992 136.7  <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+R-sq.(adj) =  0.951   Deviance explained = 95.8%
+GCV = 148.49  Scale est. = 125.82    n = 143

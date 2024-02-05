@@ -24,6 +24,9 @@
   confini <- st_read("~/R/turismo/shape/NUTS3_ID.shp")
   
   confini <- filter(confini, cntr_code == "IT")
+  confini <- confini %>% 
+    mutate(nuts_name = ifelse(nuts_id=="ITC20", "Valle d'Aosta", nuts_name) )
+  
   prov_int <- confini$nuts_id
   
   # li leggo tutti e bonanotte
@@ -293,12 +296,18 @@ summ_gam_durata_lustro <- function(x, quote) {
       fit <- gam(media ~ quota + s(Lustro), data = df)
       gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
       gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
-      summary(fit)
+      sink(file =  glue("testi/diagn_{tit}.txt") )
+      summary(fit) %>% print()
+      sink()
     }
   }
 }
 summ_gam_durata_lustro("ITC13", seq(1000, 3000, by = 100)) # biella
+summ_gam_durata_lustro("ITC12", seq(1000, 3000, by = 100)) # vercelli
+summ_gam_durata_lustro("ITC11", seq(1000, 3000, by = 100)) # torino
+summ_gam_durata_lustro("ITC20", seq(1000, 3000, by = 100)) # vdaosta
 summ_gam_durata_lustro("ITH10", seq(1000, 3000, by = 100)) # bolzano
+summ_gam_durata_lustro("ITH20", seq(1000, 3000, by = 100)) # trento
 summ_gam_durata_lustro("ITC47", seq(1000, 3000, by = 100)) # brescia
 summ_gam_durata_lustro("ITC16", seq(1000, 3000, by = 100)) # cuneo
 summ_gam_durata_lustro("ITC44", seq(1000, 3000, by = 100)) # sondrio

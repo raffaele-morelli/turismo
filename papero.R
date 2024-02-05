@@ -5,8 +5,10 @@
   library(chron)
   library(dplyr)
   library(ggplot2) # package for plotting
+  library(glue)
   library(kableExtra)
   library(mgcv)
+  library(modifiedmk)
   library(ncdf4) # package for netcdf manipulation
   library(openxlsx)
   library(pander)
@@ -126,7 +128,7 @@ graf_mm <- function(nut) {
     facet_wrap(~Quota, scales = "free") +
     geom_smooth(method = lm, se = FALSE) +
     ylab("kg/m²") +
-    ggtitle(paste(nut, provincia, sep = " - " ))  + theme_turismo() +
+    ggtitle(paste(nut, provincia, sep = " - " ))  + #theme_turismo() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") -> g0
   
   
@@ -136,7 +138,7 @@ graf_mm <- function(nut) {
     ggplot(aes(Anno, mm)) + 
     geom_step() + ylab("kg/m²") + 
     geom_smooth(method = lm, se = FALSE) +
-    ggtitle("Totale") + theme_turismo() -> g1
+    ggtitle("Totale") -> g1 # theme_turismo() -> g1
   
   lay <- rbind(c(1,1),
                c(1,1),
@@ -146,21 +148,24 @@ graf_mm <- function(nut) {
 }
 # graf_mm("ITF11")
 
-graf_durata <- function(nut) {
+graf_durata <- function(nut, quote) {
   
   provincia <- nome_provincia(nut)
   
-  df <- filter(m_df_durata, NUT == nut)
+  df <- filter(m_df_durata, NUT == nut, Quota %in% quote)
   if(nrow(df) == 0) 
     return("")
   
   df %>% 
     ggplot(aes(Anno, value)) + 
     geom_step() + 
-    geom_smooth(method = lm, se = FALSE) +
-    facet_wrap(~Quota) + ylab("Durata stagione (gg)") +
+    geom_smooth(method = "gam", formula = y ~ s(x, k=3) ) +
+    facet_wrap(~Quota) + ylab("") +
     theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
+      axis.text.x = element_blank(), 
+      axis.text.y = element_blank(),
+      axis.text = element_blank(),
+      axis.title.x = element_blank(),
       legend.position = "none") +
     ggtitle(nome_provincia(nut)) -> g0
   
@@ -169,17 +174,23 @@ graf_durata <- function(nut) {
     group_by(Anno, NUT) %>%
     summarise(mm = mean(value)) %>%
     ggplot(aes(Anno, mm)) +
-    geom_step() + ylab("Durata stagione (gg)") +
-    # geom_smooth(method = "gam", formula = y ~ poly(x, 2) ) -> g1
-    geom_smooth(method = "lm", se = FALSE) -> g1
+    geom_step() + ylab("") + xlab("Year") +
+    theme(
+      # axis.text.x = element_blank(), 
+      axis.text.y = element_blank(),
+      legend.position = "none") +
+    geom_smooth(method = "gam", formula = y ~ s(x, k=3) ) -> g1
+    # geom_smooth(method = "lm", se = FALSE) -> g1
   
   lay <- rbind(c(1,1),
                c(1,1),
                c(2,2))
   
-  gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
+  gridExtra::grid.arrange(g0, g1, layout_matrix = lay, 
+                          left = "Length of season (days)" )
 }
-graf_durata("ITC44")
+graf_durata("ITC44", seq(1000, 3000, by = 400)) %>% 
+  ggsave(filename = "immagini/durata_quote_sondrio_gam.jpg", width = 18, height = 18, units = "cm", dpi = 600)
 
 graf_durata_lustro <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -205,16 +216,11 @@ graf_durata_lustro <- function(nuts, quote = c()) {
     geom_step() + 
     facet_wrap(~(nuts_name)) +
     ylab("Length of season (days)") + xlab("Five years period") +
-    theme_turismo() +
-    geom_smooth(method = "lm", se = FALSE) 
-  # 
-  # lay <- rbind(c(1,1),
-  #              c(1,1),
-  #              c(2,2))
-  # 
-  # gridExtra::grid.arrange(g0, g1, layout_matrix = lay) 
+    # theme_turismo() +
+    geom_smooth(method = "lm", formula = y ~ x, se = FALSE) 
 }
-graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44")) %>% ggsave(filename = "durata_province.jpg")
+graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC47")) %>% 
+  ggsave(filename = "immagini/durata_province.jpg", width = 18, height = 14, units = "cm", dpi = 600)
 
 graf_durata_lustro_quote <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -227,18 +233,19 @@ graf_durata_lustro_quote <- function(nuts, quote = c()) {
   reshape2::melt(df, id.vars = c("NUT", "nuts_name", "Lustro", "Quota")) %>%
     ggplot(aes(Lustro, value)) +
     geom_step() +
-    geom_smooth(method = lm, se = FALSE) +
+    geom_smooth(method = gam, formula = y ~ s(x, k = 3), se = FALSE) +
     facet_wrap(~Quota) + 
     scale_y_continuous(breaks = seq(0, 200, by = 20)) +
     ylab("Length of season (days)") + xlab("Five years period") +
     theme(
       axis.text.x = element_text(angle = 45, hjust = 1),
-      legend.position = "none") + theme_turismo() +
+      legend.position = "none") + #theme_classic() +
     ggtitle(nome_provincia(nuts))
 }
-graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% ggsave(filename = "durata_quote_biella.jpg")
+graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% 
+  ggsave(filename = "immagini/durata_quote_biella.jpg", width = 18, height = 14, units = "cm", dpi = 600)
 
-summ_lm_durata <- function(x) {
+summ_lm_durata <- function(x, quote) {
   df_durata %>% 
     filter(nut == x, zs > 1800) -> df
   
@@ -249,35 +256,52 @@ summ_lm_durata <- function(x) {
     summary(fit)
   }
 }
-# summ_lm_durata("ITC44")
+# summ_lm_durata("ITC47")
 
-summ_gam_durata <- function(x) {
+summ_gam_durata <- function(x, quote) {
   df_durata %>% 
-    filter(nut == x, zs >= 1000) -> df
+    filter(nut == x, zs %in% quote) -> df
+
+  tit <- nome_provincia(x)
+  print(tit)
   
   df$quota <- factor(df$zs)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(durata ~ s(anno, k = 3) + quota, data = df)
+      fit <- gam(durata ~ s(anno) + quota, data = df)
+      gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
+      gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
       summary(fit)
     }
   }
 }
-# summ_gam_durata("ITC44")
+# summ_gam_durata("ITC13", seq(1200, 1900, by = 200)) # biella
+# summ_gam_durata("ITH10", seq(1200, 3000, by = 200)) # bolzano
+# summ_gam_durata("ITC47", seq(1700, 2300, by = 200)) # brescia
+# summ_gam_durata("ITC16", seq(1000, 3600, by = 200)) # cuneo
+# summ_gam_durata("ITC44", seq(1200, 2800, by = 200)) # sondrio
 
-summ_gam_durata_lustro <- function(x) {
+summ_gam_durata_lustro <- function(x, quote) {
   df_durata_media_lustro %>% 
-    filter(NUT == x, Quota >= 1000) -> df
+    filter(NUT == x, Quota %in% quote) -> df
   
+  tit <- nome_provincia(x)
+  print(tit)
   df$quota <- factor(df$Quota)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
       fit <- gam(media ~ quota + s(Lustro), data = df)
+      gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
+      gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
       summary(fit)
     }
   }
 }
-summ_gam_durata_lustro("ITC44")
+summ_gam_durata_lustro("ITC13", seq(1000, 3000, by = 100)) # biella
+summ_gam_durata_lustro("ITH10", seq(1000, 3000, by = 100)) # bolzano
+summ_gam_durata_lustro("ITC47", seq(1000, 3000, by = 100)) # brescia
+summ_gam_durata_lustro("ITC16", seq(1000, 3000, by = 100)) # cuneo
+summ_gam_durata_lustro("ITC44", seq(1000, 3000, by = 100)) # sondrio
 
 # df <- df_durata_media_lustro %>% filter(NUT == "ITC13", Quota >= 1000)
 # # df$Quota <- factor(df$Quota)
@@ -366,15 +390,17 @@ map_durata <- function(prov_id, alts) {
     geom_sf(data = lustro_dur_map, aes(fill = Durata), na.rm = FALSE) +
     scale_fill_brewer(palette = "Greens", na.value = "white", name = "Days") +
     facet_grid(vars(Lustro), vars(Quota2)) + 
-    theme_turismo() +
+    theme_void() +
     theme(axis.text.x = element_blank(), axis.text.y = element_blank(), legend.position = "right") +
     ggtitle("Length of season") 
 }
 
-
-# map_durata(prov_nord, seq(1000, 3800, by = 400)) %>% ggsave(filename = "durata_nord.jpg")
-# map_durata(prov_centro, seq(1000, 3800, by = 400)) %>% ggsave(filename = "durata_centro.jpg")
-# map_durata(prov_sud, seq(1000, 3800, by = 400)) %>% ggsave(filename = "durata_sud.jpg")
+map_durata(prov_nord, seq(1000, 3800, by = 400)) %>% 
+  ggsave(filename = "immagini/durata_nord.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+map_durata(prov_centro, seq(1000, 3800, by = 400)) %>% 
+  ggsave(filename = "immagini/durata_centro.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+map_durata(prov_sud, seq(1000, 3800, by = 400)) %>% 
+  ggsave(filename = "immagini/durata_sud.jpg", width = 19, height = 6, units = "cm", dpi = 600)
 
 map_machinemade <- function(prov_id, alts) {
   inner_join(
@@ -599,3 +625,39 @@ df_mk_durata_lustro %>%
 
 names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 200), "mt")
 df_mk_durata_lustro_tab %>% select(c(nuts_name, 1:12)) -> df_mk_durata_lustro_tab
+
+# mann-kendall autocorr ####
+if(!exists("df_mmk_durata_lustro")) {
+  # map(c(prov_nord$nuts_id, prov_centro$nuts_id, prov_sud$nuts_id), \(id) {
+  map(c(prov_nord$nuts_id), \(id) {
+      
+    map(seq(1000, 3200, by = 200), \(z) {
+      df_durata_lustro %>% 
+        filter(NUT == id, Quota == z) %>% 
+        dplyr::select(c("media")) -> tmp
+      
+      if( nrow(tmp) > 0 ) {
+        # d <- ts(tmp$media, start = 1960, end = 2010, frequency = 1)
+        mmkh(tmp$media)[2]
+      }else{
+        NA
+      }
+    }) 
+  }) -> mmktest_durata_lustro
+  
+  names(mmktest_durata_lustro) <- c(prov_nord$nuts_id)
+
+  map(c(prov_nord$nuts_id), \(k) {
+    mmktest_durata_lustro[[k]] %>% set_names(seq(1000, 3200, by = 200))
+  }) -> ole_lustro
+
+  names(ole_lustro) <- c(prov_nord$nuts_id)
+
+  do.call(rbind.data.frame, mmktest_durata_lustro) %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column(var = "nuts_id") %>%
+    set_names(c("nuts_id", paste0("mslm", seq(1000, 3200, by = 200)) )) %>%
+    inner_join( rbind(prov_nord, prov_centro, prov_sud) ) -> df_mmk_durata_lustro
+  
+  saveRDS(df_mk_durata_lustro, "rds/df_mmk_durata_lustro.RDS")
+}

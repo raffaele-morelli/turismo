@@ -422,12 +422,28 @@ assunzioni di base del modello lineare semplice sono quindi:</p>
 <p>per la stima del trend di riduzione.</p>
 <p>Le analisi sono state condotte per le varie quote utilizzando un
 modello lineare generalizzato di tipo additivo (GAM) ad una e due
-variabili. La formulazione dei GAM è la seguente:</p>
+variabili.</p>
+<p>The GAMs are useful for identifying complex non-linear relationships
+in the data and do not require a priori knowledge of the shape of the
+response curves. GAM is a sum of smoothed functions of the predictor
+variables commonly defined as polynomials based on intervals, known as
+splines.</p>
+<p>In general, the structure of a GAM according to Wood could be
+estimated by Equation (1):</p>
 <p><span class="math display">\[
-y = \beta_0 + f_1(x_1 )+ f_2(x_2) +... + f_p(x_p) + \epsilon
+g(y_i) = \beta_{i0} + f_1(x_1 )+ f_2(x_2) + ... + f_j(x_{ji}) + \epsilon
 \]</span></p>
-<p>Dove <span class="math display">\[ f_j(x_j) \]</span> è una funzione
-di smoothing non lineare e</p>
+<p><span class="math inline">\(yi\)</span> is a response variable, <span
+class="math inline">\(EF(\mu_i, \phi)\)</span> denotes an exponential
+family distribution with mean <span class="math inline">\(\mu_i\)</span>
+and scale parameter, <span class="math inline">\(\phi\)</span>. Ai is a
+row of the model matrix for any strictly parametric model components,
+<span class="math inline">\(\theta\)</span> is the corresponding
+parameter vector, and the <span class="math inline">\(f_j\)</span> are
+smooth functions of the covariates, <span
+class="math inline">\(x_j\)</span> .</p>
+<p>Dove <span class="math inline">\(f_j(x_j)\)</span> è una funzione di
+smoothing non lineare e</p>
 <p><span class="math display">\[
 \epsilon \sim N(0,\sigma^2)
 \]</span></p>
@@ -435,11 +451,14 @@ di smoothing non lineare e</p>
 <p><span class="math display">\[
 Length\ of\ season = \beta_0 + f_1(Year)+ \beta(Altitude) + \epsilon
 \]</span></p>
-<p>dove <span class="math display">\[ \beta \]</span> rappresenta la
-componente lineare, <span class="math display">\[ \beta_0 \]</span>
-l’intercetta ed <span class="math display">\[ f_1 \]</span> la
-componente non lineare del modello. I modelli che sono stati adattati
-per il quinquennio e per l’anno sono quindi rispettivamente</p>
+<p>dove <span class="math inline">\(\beta\)</span> rappresenta la
+componente lineare, <span class="math inline">\(\beta_0\)</span>
+l’intercetta ed <span class="math inline">\(f_1\)</span> la componente
+non lineare del modello. Smooth covariates functions here are temporal
+trends, eg. “Year” or “Five year period”, while “Altitude” represents a
+factor for capturing trend changes other than overall.</p>
+<p>I modelli che sono stati adattati per il quinquennio e per l’anno
+sono quindi rispettivamente</p>
 <p><span class="math display">\[
 Length\ of\ season = \beta_0 + f(Five\ year\ period)  + \beta*Altitude
 \]</span> <span class="math display">\[
@@ -577,13 +596,45 @@ tempo.</p>
 <p>Un trend crescente (o decrescente) significa che la variabile aumenta
 (diminuisce) costantemente nel tempo, mentre la tendenza può o meno
 essere lineare.</p>
-<p>Il test MK può essere utilizzato al posto di un’analisi di
-regressione lineare parametrica, che può essere utilizzata per
-verificare se la pendenza della linea di regressione lineare stimata è
-diversa da zero. L’analisi di regressione richiede che i residui della
-retta di regressione adattata siano distribuiti normalmente; un
-presupposto non richiesto dal test MK, ovvero il test MK è un test non
-parametrico.</p>
+<p>The Mann-Kendall test is used to determine whether or not there is a
+linear monotonic trend in a given time series data.The null hypothesis,
+<span class="math inline">\(H_0\)</span>, states that there is no
+monotonic trend and this is tested against one of three possible
+alternative hypotheses, <span class="math inline">\(H_a\)</span>:</p>
+<ol style="list-style-type: lower-roman">
+<li>there is an upward monotonic trend</li>
+<li>there is a downward monotonic trend</li>
+<li>there is either an upward monotonic trend or a downward monotonic
+trend.</li>
+</ol>
+<p>It is a robust test for trend detection used widely in
+climatological, hydrological and environmental time series analysis (eg.
+air quality).</p>
+<p>The Mann-Kendall test does not assume the data to be distributed
+according to any particular rule (so it does not require that the data
+be normally distributed) and it is not effected by missing data
+(although it might effect the statistical significance adversely); it is
+not effected by irregular spacing of the time points of measurement and
+by the length of the time series.</p>
+<p>In this study we deal with non seasonal time series (TODO mostrare un
+esempio?) 55 years long which garantees effectiveness of Mann-Kendall
+test.</p>
+<span class="math display">\[\begin{split}sgn(x_i - x_j) &amp;=
+\begin{cases}
+1,  &amp; x_i - x_j &gt; 0\\
+0,  &amp; x_i - x_j = 0\\
+-1, &amp; x_i - x_j &lt; 0
+\end{cases},\end{split}\]</span>
+<p>E[S] = <em>{i=1}^{n-1} </em>{j=i+1}^{n} sgn(x_i - x_j),</p>
+<p>VAR(S) = ( n(n-1)(2n+5) - _{k=1}^p q_k(q_k-1)(2q_k+5) ),</p>
+<span class="math display">\[\begin{split}Z_{MK} &amp;=
+    \begin{cases}
+                    \frac{E[S] - 1} {\sqrt{VAR(S)}},  &amp; E[S] &gt;
+0\\
+                    0,  &amp; E[S] = 0\\
+                    \frac{E[S] + 1} {\sqrt{VAR(S)}},  &amp; E[S] &lt;
+0\\
+    \end{cases}.\end{split}\]</span>
 </div>
 </div>
 

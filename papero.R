@@ -271,7 +271,7 @@ summ_gam_durata <- function(x, quote) {
   df$quota <- factor(df$zs)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(durata ~ s(anno) + quota, data = df)
+      fit <- gam(durata ~ s(anno, k=3) + quota, data = df)
       gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
       gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
       summary(fit)
@@ -293,7 +293,7 @@ summ_gam_durata_lustro <- function(x, quote) {
   df$quota <- factor(df$Quota)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(media ~ quota + s(Lustro), data = df)
+      fit <- gam(media ~ quota + s(Lustro, k = 3), data = df)
       gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
       gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
       sink(file =  glue("testi/diagn_{tit}.txt") )

@@ -625,8 +625,12 @@ test.</p>
 0,  &amp; x_i - x_j = 0\\
 -1, &amp; x_i - x_j &lt; 0
 \end{cases},\end{split}\]</span>
-<p>E[S] = <em>{i=1}^{n-1} </em>{j=i+1}^{n} sgn(x_i - x_j),</p>
-<p>VAR(S) = ( n(n-1)(2n+5) - _{k=1}^p q_k(q_k-1)(2q_k+5) ),</p>
+<p><span class="math display">\[
+E[S] = \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} sgn(x_i - x_j),
+\]</span> <span class="math display">\[
+VAR(S) = \frac{1}{18} \Big( n(n-1)(2n+5) - \sum_{k=1}^p
+q_k(q_k-1)(2q_k+5) \Big),
+\]</span></p>
 <span class="math display">\[\begin{split}Z_{MK} &amp;=
     \begin{cases}
                     \frac{E[S] - 1} {\sqrt{VAR(S)}},  &amp; E[S] &gt;

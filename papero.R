@@ -296,6 +296,7 @@ summ_gam_durata("ITH20", seq(1000, 3000, by = 100)) # trento
 summ_gam_durata("ITC47", seq(1000, 3000, by = 100)) # brescia
 summ_gam_durata("ITC16", seq(1000, 3000, by = 100)) # cuneo
 summ_gam_durata("ITC44", seq(1000, 3000, by = 100)) # sondrio
+summ_gam_durata("ITH33", seq(1000, 3000, by = 100)) # belluno
 
 summ_gam_durata_lustro <- function(x, quote) {
   df_durata_media_lustro %>% 
@@ -331,6 +332,7 @@ summ_gam_durata_lustro("ITH20", seq(1000, 3000, by = 100)) # trento
 summ_gam_durata_lustro("ITC47", seq(1000, 3000, by = 100)) # brescia
 summ_gam_durata_lustro("ITC16", seq(1000, 3000, by = 100)) # cuneo
 summ_gam_durata_lustro("ITC44", seq(1000, 3000, by = 100)) # sondrio
+summ_gam_durata_lustro("ITH33", seq(1000, 3000, by = 100)) # belluno
 
 # df <- df_durata_media_lustro %>% filter(NUT == "ITC13", Quota >= 1000)
 # # df$Quota <- factor(df$Quota)

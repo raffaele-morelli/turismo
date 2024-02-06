@@ -275,14 +275,27 @@ summ_gam_durata <- function(x, quote) {
       gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
       gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
       summary(fit)
+      sink(file =  glue("testi/diagn_{tit}.txt") )
+      # summary(fit) %>% print()
+      # modelsummary::modelsummary(fit,
+      #                            statistic = "p.value",
+      #                            output = "markdown") %>% print()
+      modelsummary::modelsummary(fit,
+                                 estimate = c("{estimate} ({p.value}){stars}"),
+                                 output = "markdown") %>% print()      
+      sink()      
     }
   }
 }
-# summ_gam_durata("ITC13", seq(1200, 1900, by = 200)) # biella
-# summ_gam_durata("ITH10", seq(1200, 3000, by = 200)) # bolzano
-# summ_gam_durata("ITC47", seq(1700, 2300, by = 200)) # brescia
-# summ_gam_durata("ITC16", seq(1000, 3600, by = 200)) # cuneo
-# summ_gam_durata("ITC44", seq(1200, 2800, by = 200)) # sondrio
+summ_gam_durata("ITC13", seq(1000, 3000, by = 100)) # biella
+summ_gam_durata("ITC12", seq(1000, 3000, by = 100)) # vercelli
+summ_gam_durata("ITC11", seq(1000, 3000, by = 100)) # torino
+summ_gam_durata("ITC20", seq(1000, 3000, by = 100)) # vdaosta
+summ_gam_durata("ITH10", seq(1000, 3000, by = 100)) # bolzano
+summ_gam_durata("ITH20", seq(1000, 3000, by = 100)) # trento
+summ_gam_durata("ITC47", seq(1000, 3000, by = 100)) # brescia
+summ_gam_durata("ITC16", seq(1000, 3000, by = 100)) # cuneo
+summ_gam_durata("ITC44", seq(1000, 3000, by = 100)) # sondrio
 
 summ_gam_durata_lustro <- function(x, quote) {
   df_durata_media_lustro %>% 

@@ -673,11 +673,13 @@ if(!exists("df_mk_durata_lustro")) {
 }
 
 df_mk_durata_lustro %>% 
-  filter(nuts_id %in% c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44")) %>% 
+  filter(nuts_id %in% prov_papero) %>% 
   select(-nuts_id) -> df_mk_durata_lustro_tab
 
 names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 200), "mt")
 df_mk_durata_lustro_tab %>% select(c(nuts_name, 1:12)) -> df_mk_durata_lustro_tab
+
+saveRDS(df_mk_durata_lustro_tab, file = "rds/df_mk_durata_lustro_tab.RDS")
 
 # mann-kendall autocorr ####
 if(!exists("df_mmk_durata_lustro")) {

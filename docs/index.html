@@ -620,17 +620,42 @@ by the length of the time series.</p>
 esempio?) 55 years long which garantees effectiveness of Mann-Kendall
 test.</p>
 <span class="math display">\[\begin{split}sgn(x_i - x_j) &amp;=
-\begin{cases}
-1,  &amp; x_i - x_j &gt; 0\\
-0,  &amp; x_i - x_j = 0\\
--1, &amp; x_i - x_j &lt; 0
-\end{cases},\end{split}\]</span>
+    \begin{cases}
+                    1,  &amp; x_i - x_j &gt; 0\\
+                    0,  &amp; x_i - x_j = 0\\
+                    -1, &amp; x_i - x_j &lt; 0
+  \end{cases},
+\end{split}\]</span>
+<p>now we have and indicator which tell what happens about differences
+between time <em>i</em> and <em>j</em> ie. if positive, negative or
+zero.</p>
+<p>Next we should compute mean and variance of the above. The mean which
+is the Mann-Kendall test statistic is given by:</p>
 <p><span class="math display">\[
 E[S] = \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} sgn(x_i - x_j),
-\]</span> <span class="math display">\[
-VAR(S) = \frac{1}{18} \Big( n(n-1)(2n+5) - \sum_{k=1}^p
+\]</span> and the variance is given by:</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{1}{18} \Big( n(n-1)(2n+5) - \sum_{k=1}^p
 q_k(q_k-1)(2q_k+5) \Big),
-\]</span></p>
+\]</span> where <span class="math inline">\(p\)</span> is the total
+number of tie groups in the data, and <span
+class="math inline">\(q_k\)</span> is the number of data points
+contained in the <span class="math inline">\(k-th\)</span> tie
+group.</p>
+<p>For example, if the time series measurements were <span
+class="math inline">\({12, 56, 23, 12, 67, 45, 56, 56, 10}\)</span>, we
+would have two tie groups for the measurements 12 and 56, i.e. <span
+class="math inline">\(p=2\)</span>, and the number of data points in
+these tie groups would <span class="math inline">\(q_1=2\)</span> for
+the tie group with <span class="math inline">\({12}\)</span>, and <span
+class="math inline">\(q_2=3\)</span> for the tie group with <span
+class="math inline">\({56}\)</span>.</p>
+<p>Using the mean <span class="math inline">\(E[S]\)</span> and the
+variance <span class="math inline">\(VAR(S)\)</span> we compute the
+Mann-Kendall test statistic, using the following transformation, which
+ensures that for large sample sizes, the test statistic <span
+class="math inline">\(Z_{MK}\)</span> is approximately normally
+distributed:</p>
 <span class="math display">\[\begin{split}Z_{MK} &amp;=
     \begin{cases}
                     \frac{E[S] - 1} {\sqrt{VAR(S)}},  &amp; E[S] &gt;
@@ -638,7 +663,597 @@ q_k(q_k-1)(2q_k+5) \Big),
                     0,  &amp; E[S] = 0\\
                     \frac{E[S] + 1} {\sqrt{VAR(S)}},  &amp; E[S] &lt;
 0\\
-    \end{cases}.\end{split}\]</span>
+    \end{cases}
+\end{split}\]</span>
+</div>
+<div id="hypothesis-testing" class="section level3">
+<h3>Hypothesis testing</h3>
+<p>At a significance level <span class="math inline">\(\alpha\)</span>
+of the test, which is also the Type I error rate, we compute whether or
+not to accept the alternative hypothesis <span
+class="math inline">\(H_a\)</span> for each variant of <span
+class="math inline">\(H_a\)</span> separately:</p>
+<p><span class="math inline">\(H_a\)</span> : There exists an upward
+monotonic trend</p>
+<ul>
+<li>If <span class="math inline">\(Z_{MK} ≥ Z_{1−\alpha}\)</span> then
+accept <span class="math inline">\(H_a\)</span>, where the notation
+<span class="math inline">\(Z_{1−\alpha}\)</span> denotes the <span
+class="math inline">\(100(1−\alpha)\)</span>-th percentile of the
+standard normal distribution.</li>
+</ul>
+<p><span class="math inline">\(H_a\)</span> : There exists a downward
+monotonic trend</p>
+<ul>
+<li>If <span class="math inline">\(Z_{MK} ≤ -Z_{1−\alpha}\)</span> then
+accept <span class="math inline">\(H_a\)</span></li>
+</ul>
+<p><span class="math inline">\(H_a\)</span> : There exists either an
+upward or a downward monotonic trend</p>
+<ul>
+<li>If <span class="math inline">\(|Z_{MK}|≥Z_{1−\alpha/2}\)</span> then
+accept <span class="math inline">\(H_a\)</span>, where the notation
+<span class="math inline">\(|⋅|\)</span> is used to denote the absolute
+value function.</li>
+</ul>
+<p>For the province of Biella in a five year period the Mann-Kendall
+test is significant at all altitudes at a 5% level :</p>
+<table>
+<caption>Biella</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0018</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0155</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="test-su-provincie-di-interesse-nord" class="section level3">
+<h3>Test su provincie di interesse NORD</h3>
+<table>
+<caption>Biella</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0018</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0155</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Vercelli</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.1195</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0617</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0868</td>
+</tr>
+<tr class="odd">
+<td align="left">3000</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">3200</td>
+<td align="left">0.0081</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Torino</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0617</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.1611</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0293</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="odd">
+<td align="left">3000</td>
+<td align="left">0.0195</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Valle d’Aosta</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.0868</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.7555</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.0868</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.01</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="odd">
+<td align="left">3000</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="even">
+<td align="left">3200</td>
+<td align="left">0.01</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Bolzano-Bozen</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.0293</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.01</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.0018</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0011</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0031</td>
+</tr>
+<tr class="odd">
+<td align="left">3000</td>
+<td align="left">0.0031</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Trento</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0031</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0031</td>
+</tr>
+<tr class="odd">
+<td align="left">3000</td>
+<td align="left">0.0031</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Brescia</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0107</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.035</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.1611</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.1844</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0081</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0031</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0011</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Cuneo</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0617</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.035</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.1195</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.2758</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.1611</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.2129</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0293</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Sondrio</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0031</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.0293</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.0509</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="even">
+<td align="left">2400</td>
+<td align="left">0.043</td>
+</tr>
+<tr class="odd">
+<td align="left">2600</td>
+<td align="left">0.0051</td>
+</tr>
+<tr class="even">
+<td align="left">2800</td>
+<td align="left">0.0031</td>
+</tr>
+<tr class="odd">
+<td align="left">3000</td>
+<td align="left">0.0031</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Belluno</caption>
+<thead>
+<tr class="header">
+<th align="left">mt</th>
+<th align="left">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1000</td>
+<td align="left">0.0215</td>
+</tr>
+<tr class="even">
+<td align="left">1200</td>
+<td align="left">0.01</td>
+</tr>
+<tr class="odd">
+<td align="left">1400</td>
+<td align="left">0.31</td>
+</tr>
+<tr class="even">
+<td align="left">1600</td>
+<td align="left">0.0617</td>
+</tr>
+<tr class="odd">
+<td align="left">1800</td>
+<td align="left">0.0195</td>
+</tr>
+<tr class="even">
+<td align="left">2000</td>
+<td align="left">0.0127</td>
+</tr>
+<tr class="odd">
+<td align="left">2200</td>
+<td align="left">0.0509</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

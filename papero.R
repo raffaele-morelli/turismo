@@ -101,9 +101,27 @@
     filter(nuts_id %in% grep("ITF3|ITF4|ITF5|ITF6|ITG", confini$nuts_id, value = TRUE)) %>%
     select(nuts_id, nuts_name) %>% st_drop_geometry() -> prov_sud
   
+  saveRDS(prov_nord, file = "rds/prov_nord.RDS")
+  saveRDS(prov_centro, file = "rds/prov_centro.RDS")
+  saveRDS(prov_sud, file = "rds/prov_sud.RDS")
+  
   # confini %>% 
   #   filter(nuts_id %in% grep("ITF3|ITF4|ITF5|ITF6|ITG", confini$nuts_id, value = TRUE)) %>%
-  #   ggplot() + geom_sf() + geom_sf_label(aes(label = nuts_id))  
+  #   ggplot() + geom_sf() + geom_sf_label(aes(label = nuts_id))
+  
+  prov_papero <- c(
+    "ITC13", # biella
+    "ITC12", # vercelli
+    "ITC11", # torino
+    "ITC20", # vdaosta
+    "ITH10", # bolzano
+    "ITH20", # trento
+    "ITC47", # brescia
+    "ITC16", # cuneo
+    "ITC44", # sondrio
+    "ITH33" # belluno
+  )
+  saveRDS(prov_papero, file = "rds/prov_papero.RDS")
 }
 
 nome_provincia <- function(nut) {

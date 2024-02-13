@@ -170,7 +170,6 @@ graf_mm <- function(nut) {
 # graf_mm("ITF11")
 
 graf_durata <- function(nut, quote) {
-  
   provincia <- nome_provincia(nut)
   
   df <- filter(m_df_durata, NUT == nut, Quota %in% quote)
@@ -182,36 +181,44 @@ graf_durata <- function(nut, quote) {
     geom_step() + 
     geom_smooth(method = "gam", formula = y ~ s(x, k=3) ) +
     facet_wrap(~Quota) + ylab("") +
+    scale_y_continuous(breaks = seq(0, 250, by = 40)) +
     theme(
       axis.text.x = element_blank(), 
       axis.text.y = element_blank(),
       axis.text = element_blank(),
       axis.title.x = element_blank(),
       legend.position = "none") +
+    theme_turismo() +
     ggtitle(nome_provincia(nut)) -> g0
   
+  ggsave(g0, filename = glue("immagini/durata_{provincia}_quote_gam.jpg"), 
+         width = 18, height = 14, units = "cm", dpi = 600)
   
   df %>%
     group_by(Anno, NUT) %>%
     summarise(mm = mean(value)) %>%
     ggplot(aes(Anno, mm)) +
-    geom_step() + ylab("") + xlab("Year") +
+    geom_step() + 
+    ylab("Length of season (days)") + xlab("Year") +
+    scale_y_continuous(breaks = seq(0, 250, by = 20)) +
     theme(
       # axis.text.x = element_blank(), 
-      axis.text.y = element_blank(),
+      # axis.text.y = element_blank(),
       legend.position = "none") +
+    theme_turismo() +
     geom_smooth(method = "gam", formula = y ~ s(x, k=3) ) -> g1
-    # geom_smooth(method = "lm", se = FALSE) -> g1
+
+    ggsave(g1, filename = glue("immagini/durata_{provincia}_gam.jpg"), 
+         width = 16, height = 12, units = "cm", dpi = 600)  
+  # lay <- rbind(c(1,1),
+  #              c(1,1),
+  #              c(2,2))
   
-  lay <- rbind(c(1,1),
-               c(1,1),
-               c(2,2))
-  
-  gridExtra::grid.arrange(g0, g1, layout_matrix = lay, 
-                          left = "Length of season (days)" )
+  # gridExtra::grid.arrange(g0, g1, layout_matrix = lay, 
+  #                         left = "Length of season (days)" )
 }
-graf_durata("ITC44", seq(1000, 3000, by = 400)) %>% 
-  ggsave(filename = "immagini/durata_quote_sondrio_gam.jpg", width = 18, height = 18, units = "cm", dpi = 600)
+graf_durata("ITC44", seq(1000, 3000, by = 400))
+graf_durata("ITC13", seq(1000, 3000, by = 400))
 
 graf_durata_lustro <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -254,7 +261,7 @@ graf_durata_lustro_quote <- function(nuts, quote = c()) {
   reshape2::melt(df, id.vars = c("NUT", "nuts_name", "Lustro", "Quota")) %>%
     ggplot(aes(Lustro, value)) +
     geom_step() +
-    geom_smooth(method = gam, formula = y ~ s(x, k = 3), se = FALSE) +
+    geom_smooth(method = gam, formula = y ~ s(x, k = 3), se = TRUE) +
     facet_wrap(~Quota) + 
     scale_y_continuous(breaks = seq(0, 200, by = 20)) +
     ylab("Length of season (days)") + xlab("Five years period") +
@@ -304,6 +311,7 @@ summ_gam_durata <- function(x, quote) {
     }
   }
 }
+
 summ_gam_durata("ITC13", seq(1000, 3000, by = 100)) # biella
 summ_gam_durata("ITC12", seq(1000, 3000, by = 100)) # vercelli
 summ_gam_durata("ITC11", seq(1000, 3000, by = 100)) # torino

@@ -412,22 +412,29 @@ splines.</p>
 <p>In general, the structure of a GAM according to Wood could be
 estimated by Equation (1):</p>
 <p><span class="math display">\[
-g(y_i) = \beta_{i0} + f_1(x_1 )+ f_2(x_2) + ... + f_j(x_{ji}) + \epsilon
+y = \beta_0 + f(x_1) + f(x_2) + ... f(x_n) + \varepsilon  \quad  (1)
+\]</span> where <span class="math inline">\(\quad \varepsilon \sim N(0,
+\sigma^2)\)</span></p>
+<p><span class="math inline">\(y\)</span> is a response variable and
+<span class="math inline">\(f\)</span> is a smoothing function.</p>
+<p>In GAM it is possibile to have combinations of linear and smooth
+terms, eg. <span class="math display">\[
+y = \beta_0 + x_1\beta_1 + f(x_2) + \varepsilon \quad (2)
 \]</span></p>
-<p><span class="math inline">\(yi\)</span> is a response variable, <span
-class="math inline">\(EF(\mu_i, \phi)\)</span> denotes an exponential
-family distribution with mean <span class="math inline">\(\mu_i\)</span>
-and scale parameter, <span class="math inline">\(\phi\)</span>. Ai is a
-row of the model matrix for any strictly parametric model components,
-<span class="math inline">\(\theta\)</span> is the corresponding
-parameter vector, and the <span class="math inline">\(f_j\)</span> are
-smooth functions of the covariates, <span
-class="math inline">\(x_j\)</span> .</p>
-<p>Dove <span class="math inline">\(f_j(x_j)\)</span> è una funzione di
-smoothing non lineare e</p>
+</div>
+<div id="smooth-term" class="section level2">
+<h2>Smooth term</h2>
+<p>A smooth term is the sum of some number of functions, eg.</p>
 <p><span class="math display">\[
-\epsilon \sim N(0,\sigma^2)
-\]</span></p>
+f(x) = \sum_{j=1}^kF_j(x)\beta_j
+\]</span> Above, each <span class="math inline">\(F_j\)</span> is a
+basis function that is the transformed <span
+class="math inline">\(x\)</span> depending on the type of basis
+considered, and the <span class="math inline">\(\beta\)</span> are the
+corresponding regression coefficients.</p>
+<p>As an example, for the polynomial basis we would have: <span
+class="math display">\[f(x) = b_0 + b_1\cdot x^1 \ldots +b_d\cdot
+x^d\]</span></p>
 <p>In this study the basic formulation follows:</p>
 <p><span class="math display">\[
 Length\ of\ season = \beta_0 + f_1(Year)+ \beta(Altitude) + \epsilon

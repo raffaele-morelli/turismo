@@ -340,89 +340,70 @@ div.tocify {
 
 <div id="materials" class="section level2">
 <h2>Materials</h2>
-<p>Le analisi sono state condotte sfruttando i dati messi a disposizione
-dal progetto Copernicus (cfr. European Union’s space programme), il cui
-dataset è costituito da 39 indicatori relativi a alle condizioni
-atmosferiche e di innevamento per tutte le regioni montuose sul
-territorio Europeo calcolati in base a quattro scenari climatici del
-passato e futuri.</p>
-<p>I dati sono aggregati rispetto alle NUTS-3 (Nomenclature of
-Territorial Units for Statistics) ed hanno una risoluzione verticale di
-100m. Gli indicatori di innevamento disponibili dal progetto sono stati
-calcolati attraverso il modello computazionale termodinamico CROCUS (in
-grado di simulare il bilancio energetico e di massa del manto nevoso) in
-congiunzione al modello SURFEX per la superficie terrestre.</p>
-<p>Per la stima dell’impatto causato dai cambiamenti climatici il
-modello è stato applicato a quattro diversi scenari in termini di
-emissioni prodotte:</p>
+<p>Analyses were conducted using the data made available by the
+Copernicus project (see European Union’s space programme), whose dataset
+is made up of 39 indicators relating to atmospheric and snow conditions
+of NUTS-3 regions (Nomenclature of Territorial Units for Statistics) on
+European territory.</p>
+<p>The data have a vertical resolution of 100m and the snow cover
+indicators available from the project were calculated using the Crocus
+snowpack model, a multi-layer snowpack model embedded in the land
+surface model, SURFEX (Surface Externalisée).</p>
+<p>To estimate the impact caused by climate change, the model was
+applied to four different scenarios in terms of emissions produced:</p>
 <ul>
-<li>il clima attuale</li>
-<li>ottimale (le emissioni diminuiscono a partire dal 2020)</li>
-<li>ottimistico (le emissioni diminuiscono a partire dal 2040)</li>
-<li>pessimistico (le emissioni continuano a crescere per tutto il
-secolo)</li>
+<li>the current climate</li>
+<li>optimal (emissions decrease starting from 2020)</li>
+<li>optimistic (emissions will decrease starting from 2040)</li>
+<li>pessimistic (emissions continue to grow throughout the century)</li>
 </ul>
-<p>Quindi per ciascuna “provincia” gli indicatori calcolati e messi a
-disposizione sono relativi a:</p>
-<ul>
-<li>Inizio e fine della stagione sciistica</li>
-<li>Quantità annuale di neve prodotta artificialmente</li>
-<li>Precipitazioni (nevose?)</li>
-<li>Profondità della neve</li>
-<li>Equivalente in acqua</li>
-<li>Temperatura</li>
-<li>Ore nevicate</li>
-</ul>
-<p>Il modello Crocus (<a
+<p>The Crocus model (<a
 href="https://www.umr-cnrm.fr/spip.php?article265&amp;lang=en"
 class="uri">https://www.umr-cnrm.fr/spip.php?article265&amp;lang=en</a>)
-consente di tenere conto sia della preparazione delle piste che della
-produzione di neve artificiale, aggiungendo ulteriore valore per
-l’utente finale fornendo indicazioni sui requisiti di gestione della
-neve nelle condizioni climatiche future. Tuttavia, non è progettato per
-sostituire i prodotti a risoluzione più elevata disponibili in alcune
-regioni europee che forniscono una visione più dettagliata delle
-condizioni sciistiche; ad esempio, tenendo conto della pendenza, dei
-fenomeni meteorologici locali e delle pratiche locali di gestione della
-neve.</p>
-<p>Questo set di dati presenta invece un prodotto omogeneo a livello
-paneuropeo e quindi il suo obiettivo principale è quello di confrontare
-le principali caratteristiche delle condizioni nivologiche passate e
-future in tutta Europa o di confrontare destinazioni lontane; ad
-esempio, la Scandinavia e l’Europa orientale (per una determinata
-elevazione e orizzonte temporale).</p>
-<p>In aggiunta agli scenari è stato prodotto un dataset attraverso il
-modello di rianalisi UERRA (UERRA: Uncertainties in Ensembles of
-Regional Reanalyses; <a href="https://www.uerra.eu"
+allows both slope preparation and artificial snow production to be taken
+into account, adding further value for the end user by providing
+guidance on snow management requirements in future climate conditions.
+However, it is not designed to replace the higher resolution products
+available in some European regions that provide a more detailed view of
+ski conditions; for example, taking into account slope, local weather
+phenomena and local snow management practices.</p>
+<p>This dataset instead presents a homogeneous product at a pan-European
+level and therefore its main objective is to compare the main
+characteristics of past and future snow conditions across Europe or to
+compare distant destinations; for example, Scandinavia and Eastern
+Europe (for a given elevation and time horizon).</p>
+<p>In addition to the scenarios, a dataset was produced through the
+UERRA reanalysis model (UERRA: Uncertainties in Ensembles of Regional
+Reanalyses; <a href="https://www.uerra.eu"
 class="uri">https://www.uerra.eu</a>).</p>
 </div>
 <div id="methods" class="section level2">
 <h2>Methods</h2>
-<p>I dati sono disponibili per il download in formato NetCDF e sono
-stati analizzati per tutte le province di interesse sul territorio,
-nello specifico sono stati utilizzati gli indicatori elementari di
-inizio e fine della stagione da cui è stata dedotta la “durata della
-stagione” intesa come il periodo più lungo dove con continuità è stato
-stimato un manto nevoso sopra i 30cm; il valore va interpretato come il
-numero di giorni ed il lasso temporale va inteso a partire dal 1 agosto
-dell’anno precedente.</p>
-<p>Per gli anni in cui il modello non ha stimato una profondità del
-manto nevoso sopra i 30cm allora non viene attribuito nessuna data di
-inizo e fine stagione. In questo studio sono stati esplorati sia i trend
-annuali e che le aggregazioni su periodi di cinque anni per i quali è
-stata calcolata la durata media della stagione.</p>
+<p>Data are available in NetCDF-4 and the indicators taken into account
+for this paper are related to start and end of the ski season from which
+the duration of snow season was derived for all regions overall
+Italy.</p>
+<p>According to data description for the indicators involved the
+“duration of the season” in this study is then defined as the longest
+continuous period from August 1st of year N-1 to July 31st of year N
+where the snow depth is continuously above 30 cm using a natural snow
+simulation. The first date, within this continuous period, meeting the
+condition “Snow depth &gt;= 30 cm” is the beginning of the season. The
+last date within this continuous period, meeting this condition, is the
+end of the season. In case only one date meets the condition, then
+beginning of season and end of season are attributed this value. In case
+no date meets the condition (i.e., Snow depth is lower than 30 cm for
+the entire year), no date is attributed (value of 0). The value assigned
+is interpreted as the number of days after August 1st of year N-1.</p>
+<p>This study aims at investigating yearly and five period trends, for
+the latter the mean duration has been calculated.</p>
 <div id="approccio-con-i-modelli-additivi-generalizzati"
 class="section level4">
 <h4>Approccio con i modelli additivi generalizzati</h4>
-<p>Il trend lineare è stato analizzato utilizzando come variabile
-dipendente la durata annuale e durata media sul quinquennio. Le
-assunzioni di base del modello lineare semplice sono quindi:</p>
-<p>Dove nello studio: <span class="math display">\[ Y = Durata\ stagione
-\]</span> <span class="math display">\[X = Anno \]</span></p>
-<p>per la stima del trend di riduzione.</p>
-<p>Le analisi sono state condotte per le varie quote utilizzando un
-modello lineare generalizzato di tipo additivo (GAM) ad una e due
-variabili.</p>
+<p><em>Yearly</em> and <em>five period trends</em> analysis have been
+carried out by the mean of Generalized Additive Models (GAMs) for
+duration of season trend estimates for overall and at 100m altitude
+resolution.</p>
 <p>The GAMs are useful for identifying complex non-linear relationships
 in the data and do not require a priori knowledge of the shape of the
 response curves. GAM is a sum of smoothed functions of the predictor
@@ -447,22 +428,23 @@ smoothing non lineare e</p>
 <p><span class="math display">\[
 \epsilon \sim N(0,\sigma^2)
 \]</span></p>
-<p>Nel nostro studio la formulazione utilizzata è stata la seguente</p>
+<p>In this study the basic formulation follows:</p>
 <p><span class="math display">\[
 Length\ of\ season = \beta_0 + f_1(Year)+ \beta(Altitude) + \epsilon
-\]</span></p>
-<p>dove <span class="math inline">\(\beta\)</span> rappresenta la
-componente lineare, <span class="math inline">\(\beta_0\)</span>
-l’intercetta ed <span class="math inline">\(f_1\)</span> la componente
-non lineare del modello. Smooth covariates functions here are temporal
-trends, eg. “Year” or “Five year period”, while “Altitude” represents a
-factor for capturing trend changes other than overall.</p>
-<p>I modelli che sono stati adattati per il quinquennio e per l’anno
-sono quindi rispettivamente</p>
+\]</span> where <span class="math inline">\(\beta\)</span> represents
+the linear component, <span class="math inline">\(\beta_0\)</span>
+intercept and <span class="math inline">\(f_1\)</span> the smoothing
+component of the model.</p>
+<p>Smooth covariates functions here are temporal trends, eg.
+<em>“Year”</em> or <em>“Five year period”</em>, while
+<em>“Altitude”</em> represents a factor for capturing trend changes
+other than overall.</p>
+<p>Hence the models for <em>“Five year period”</em> and <em>“Year”</em>
+trends are respectively:</p>
 <p><span class="math display">\[
-Length\ of\ season = \beta_0 + f(Five\ year\ period)  + \beta*Altitude
+Length\ of\ season = \beta_0 + f(Five\ year\ period)  + \beta_1*Altitude
 \]</span> <span class="math display">\[
-Length\ of\ season = \beta_0 + f(Year)  + \beta*Altitude
+Length\ of\ season = \beta_0 + f(Year)  + \beta_1*Altitude
 \]</span></p>
 <p>Graficamente nei facet sono rappresentate le spezzate di regressione
 che sono state adattate ad ogni quota e per la serie nel suo
@@ -698,45 +680,6 @@ value function.</li>
 </ul>
 <p>For the province of Biella in a five year period the Mann-Kendall
 test is significant at all altitudes at a 5% level :</p>
-<table>
-<caption>Biella</caption>
-<thead>
-<tr class="header">
-<th align="left">mt</th>
-<th align="left">p-value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">1000</td>
-<td align="left">0.0018</td>
-</tr>
-<tr class="even">
-<td align="left">1200</td>
-<td align="left">0.0051</td>
-</tr>
-<tr class="odd">
-<td align="left">1400</td>
-<td align="left">0.0127</td>
-</tr>
-<tr class="even">
-<td align="left">1600</td>
-<td align="left">0.0081</td>
-</tr>
-<tr class="odd">
-<td align="left">1800</td>
-<td align="left">0.0127</td>
-</tr>
-<tr class="even">
-<td align="left">2000</td>
-<td align="left">0.043</td>
-</tr>
-<tr class="odd">
-<td align="left">2200</td>
-<td align="left">0.0155</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div id="test-su-provincie-di-interesse-nord" class="section level3">
 <h3>Test su provincie di interesse NORD</h3>

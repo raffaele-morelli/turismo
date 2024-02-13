@@ -36,7 +36,7 @@
     assign(paste0(dfname), readRDS(f))
   }
   
-  theme_turismo <- function (base_size = 11, base_family = "Arial", base_line_size = 0.25, ...)  {
+  theme_turismo <- function (base_size = 10, base_family = "Arial", base_line_size = 0.25, ...)  {
     half_line <- base_size/2
     small_rel <- 0.8
     small_size <- small_rel * base_size
@@ -66,7 +66,7 @@
       # panel.border = element_blank(), 
       # panel.grid.major = element_blank(), 
       panel.grid.major = element_line(colour = "white", linewidth = 0.2),
-      panel.grid.minor = element_blank(),
+      # panel.grid.minor = element_blank(),
       strip.text = element_text(size = base_size), 
       # strip.background = element_rect(fill = NA, colour = "black", linewidth = 0.125), 
       strip.text.x = element_text(face = "bold", hjust = 0.03, margin = ggplot2::margin(b = small_size/2, t = small_size/4)), 
@@ -237,7 +237,7 @@ graf_durata_lustro <- function(nuts, quote = c()) {
     geom_step() + 
     facet_wrap(~(nuts_name)) +
     ylab("Length of season (days)") + xlab("Five years period") +
-    # theme_turismo() +
+    theme_turismo() +
     geom_smooth(method = "lm", formula = y ~ x, se = FALSE) 
 }
 graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC47")) %>% 
@@ -258,9 +258,8 @@ graf_durata_lustro_quote <- function(nuts, quote = c()) {
     facet_wrap(~Quota) + 
     scale_y_continuous(breaks = seq(0, 200, by = 20)) +
     ylab("Length of season (days)") + xlab("Five years period") +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      legend.position = "none") + #theme_classic() +
+    # theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") + #theme_classic() +
+    theme_turismo() +
     ggtitle(nome_provincia(nuts))
 }
 graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% 
@@ -440,7 +439,12 @@ map_durata <- function(prov_id, alts) {
     scale_fill_brewer(palette = "Greens", na.value = "white", name = "Days") +
     facet_grid(vars(Lustro), vars(Quota2)) + 
     theme_void() +
-    theme(axis.text.x = element_blank(), axis.text.y = element_blank(), legend.position = "right") +
+    theme_bw(base_size = 11) +
+    theme(
+      panel.grid = element_blank(),
+      axis.ticks = element_blank(),
+      axis.text.x = element_blank(), axis.text.y = element_blank(), legend.position = "right"
+      ) +
     ggtitle("Length of season") 
 }
 

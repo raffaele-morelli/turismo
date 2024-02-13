@@ -16,7 +16,7 @@
   library(readODS)
   library(readr)
   library(reshape2)
-  library(rgdal) # package for geospatial analysis
+  # library(rgdal) # package for geospatial analysis
   library(sf)
   library(tibble)
   library(trend)
@@ -241,7 +241,7 @@ graf_durata_lustro <- function(nuts, quote = c()) {
     geom_smooth(method = "lm", formula = y ~ x, se = FALSE) 
 }
 graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC47")) %>% 
-  ggsave(filename = "immagini/durata_province.jpg", width = 18, height = 14, units = "cm", dpi = 600)
+  ggsave(filename = "immagini/durata_province.jpg", width = 15, height = 12, units = "cm", dpi = 600)
 
 graf_durata_lustro_quote <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -264,7 +264,7 @@ graf_durata_lustro_quote <- function(nuts, quote = c()) {
     ggtitle(nome_provincia(nuts))
 }
 graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% 
-  ggsave(filename = "immagini/durata_quote_biella.jpg", width = 18, height = 14, units = "cm", dpi = 600)
+  ggsave(filename = "immagini/durata_quote_biella.jpg", width = 15, height = 12, units = "cm", dpi = 600)
 
 summ_lm_durata <- function(x, quote) {
   df_durata %>% 
@@ -361,28 +361,28 @@ summ_gam_durata_lustro("ITH33", seq(1000, 3000, by = 100)) # belluno
 
 
 # durata stimata ####
-map(prov_int, \(p) {
-  summ_gam_durata(p)$p.coeff
-}) -> duratone
+# map(prov_int, \(p) {
+#   summ_gam_durata(p)$p.coeff
+# }) -> duratone
+# 
+# names(duratone) <- prov_int
+# 
+# duratone <- duratone[lengths(duratone) != 0]
+# 
+# v_res <- seq(1000, 3500, by = 400) # risoluzione verticale
+# 
+# app <- data.frame("quota" = v_res)
+# app$quota <- paste0("quota", app$quota)
+# 
+# map(duratone, \(d) {
+#   as.data.frame(d) %>%
+#     tibble::rownames_to_column(var = "quota") -> tmp
+# 
+#   left_join(app, tmp, by = "quota") %>% dplyr::select(d) %>% t()
+# }) -> tmp_durata
 
-names(duratone) <- prov_int
-
-duratone <- duratone[lengths(duratone) != 0]
-
-v_res <- seq(1000, 3500, by = 400) # risoluzione verticale
-
-app <- data.frame("quota" = v_res)
-app$quota <- paste0("quota", app$quota)
-
-map(duratone, \(d) {
-  as.data.frame(d) %>%
-    tibble::rownames_to_column(var = "quota") -> tmp
-
-  left_join(app, tmp, by = "quota") %>% dplyr::select(d) %>% t()
-}) -> tmp_durata
-
-do.call(rbind.data.frame, tmp_durata) %>%
-  set_names( paste0("mslm",  seq(1000, 3500, by = 400) ) ) %>% round(digits = 2) -> tab_durata_stagione
+# do.call(rbind.data.frame, tmp_durata) %>%
+#   set_names( paste0("mslm",  seq(1000, 3500, by = 400) ) ) %>% round(digits = 2) -> tab_durata_stagione
 
 
 # media sul quinquennio per provincia ####

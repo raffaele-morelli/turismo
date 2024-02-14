@@ -475,7 +475,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(6.233)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1100</td>
+<td align="left">mt 1100</td>
 <td align="right">26.600 [9.158, 44.042] (0.003)**</td>
 </tr>
 <tr class="even">
@@ -483,7 +483,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1200</td>
+<td align="left">mt 1200</td>
 <td align="right">31.995 [14.554, 49.437] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -491,7 +491,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1300</td>
+<td align="left">mt 1300</td>
 <td align="right">56.450 [39.008, 73.892] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -499,7 +499,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1400</td>
+<td align="left">mt 1400</td>
 <td align="right">61.159 [43.717, 78.601] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -507,7 +507,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1500</td>
+<td align="left">mt 1500</td>
 <td align="right">70.818 [53.376, 88.260] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -515,7 +515,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1600</td>
+<td align="left">mt 1600</td>
 <td align="right">78.559 [61.117, 96.001] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -523,7 +523,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1700</td>
+<td align="left">mt 1700</td>
 <td align="right">71.691 [54.249, 89.133] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -531,7 +531,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1800</td>
+<td align="left">mt 1800</td>
 <td align="right">103.523 [86.081, 120.965] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -539,7 +539,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota1900</td>
+<td align="left">mt 1900</td>
 <td align="right">103.523 [86.081, 120.965] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -547,7 +547,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota2000</td>
+<td align="left">mt 2000</td>
 <td align="right">109.168 [91.726, 126.610] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -555,7 +555,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota2100</td>
+<td align="left">mt 2100</td>
 <td align="right">109.168 [91.726, 126.610] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -563,7 +563,7 @@ provincia di Biella su periodi di 5 anni:</p>
 <td align="right">(8.815)</td>
 </tr>
 <tr class="odd">
-<td align="left">quota2200</td>
+<td align="left">mt 2200</td>
 <td align="right">130.023 [112.581, 147.465] (&lt;0.001)***</td>
 </tr>
 <tr class="even">
@@ -580,11 +580,26 @@ provincia di Biella su periodi di 5 anni:</p>
 </tr>
 </tbody>
 </table>
+<p>The <span class="math inline">\(p.table\)</span> provides information
+on the linear effects</p>
+<p>The <span class="math inline">\(s.table\)</span> provides information
+on the smooth (non-linear) effects the estimated trend for Biella
+region.</p>
+<p>Being <span class="math inline">\(Altitude\)</span> the linear
+component result are to be interpreted as the reduction</p>
+<p><img src="/home/rmorelli/R/turismo/immagini/Biella_gam_splines.jpg"
+alt="Smooth" /> Figure 1 - Smooth term</p>
+<div class="float">
+<img src="/home/rmorelli/R/turismo/immagini/Biella_gam_parametric.jpg"
+alt="Parametrico" />
+<div class="figcaption">Parametrico</div>
+</div>
+<p>Figure 2. Parametric term</p>
 <p>La riduzione della durata media della stagione presenta una riduzione
 significativa a tutte le quote (risoluzione verticale a 100mt) e per
 tutti i periodi di cinque anni. Apprezzabile la stima della riduzione a
 quota 2200mt (~20gg), 1300mt (~25gg) e 1800mt (32gg).</p>
-<p><span class="math display">\[R^2 =  0.95     \]</span></p>
+<p><span class="math display">\[R^2 =  0.832     \]</span></p>
 </div>
 <div id="mann-kendall" class="section level2">
 <h2>Mann-Kendall</h2>
@@ -886,6 +901,11 @@ test is significant at all altitudes at a 5% level :</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="biblio" class="section level2">
+<h2>biblio</h2>
+<p>Wood, S. N. 2006. Generalized Additive Models: An Introduction with
+R. Vol. 66. CRC Press.</p>
 </div>
 
 

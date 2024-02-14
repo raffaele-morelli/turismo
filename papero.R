@@ -67,7 +67,7 @@
       # panel.background = element_blank(),
       # panel.border = element_blank(), 
       # panel.grid.major = element_blank(), 
-      panel.grid.major = element_line(colour = "white", linewidth = 0.2),
+      # panel.grid.major = element_line(colour = "white", linewidth = 0.3),
       # panel.grid.minor = element_blank(),
       strip.text = element_text(size = base_size), 
       # strip.background = element_rect(fill = NA, colour = "black", linewidth = 0.125), 
@@ -299,13 +299,14 @@ summ_gam_durata <- function(x, quote) {
     if(levels(df$quota) %>% length() > 1) {
       fit <- gam(durata ~ s(anno, k = 6) + quota, data = df, method = "REML")
       
-      appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check.jpg"), width = 8, height = 8)
+      p <- appraise(fit) & theme_turismo()
+      ggsave(p, filename = glue("immagini/{tit}_gam_check.jpg"), width = 8, height = 8)
       
-      draw(fit) %>% 
-        ggsave(filename = glue("immagini/{tit}_gam_splines.jpg"), width = 8, height = 8)
+      p <- draw(fit) & theme_turismo()
+      ggsave(p, filename = glue("immagini/{tit}_gam_splines.jpg"), width = 8, height = 8)
       
-      draw( evaluate_parametric_term(fit, "quota") ) %>% 
-        ggsave(filename = glue("immagini/{tit}_gam_parametric.jpg"), width = 8, height = 8)
+      p <- draw( evaluate_parametric_term(fit, "quota") ) & theme_turismo()
+      ggsave(p, filename = glue("immagini/{tit}_gam_parametric.jpg"), width = 8, height = 8)
       
       sink(file =  glue("testi/{tit}_diagn.txt") )
       
@@ -350,13 +351,15 @@ summ_gam_durata_lustro <- function(x, quote) {
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
       fit <- gam(media ~ quota + s(Lustro, k = 6), data = df, method = "REML")
-      appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check_5.jpg"), width = 8, height = 8)
       
-      draw(fit) %>% 
-        ggsave(filename = glue("immagini/{tit}_gam_splines_5.jpg"), width = 8, height = 8)
+      p <- appraise(fit) & theme_turismo()
+      ggsave(p, filename = glue("immagini/{tit}_gam_check_5.jpg"), width = 8, height = 8)
       
-      draw( evaluate_parametric_term(fit, "quota") ) %>% 
-        ggsave(filename = glue("immagini/{tit}_gam_parametric_5.jpg"), width = 8, height = 8)
+      p <- draw(fit) & theme_turismo()
+      ggsave(p, filename = glue("immagini/{tit}_gam_splines_5.jpg"), width = 8, height = 8)
+      
+      p <- draw( evaluate_parametric_term(fit, "quota") ) & theme_turismo()
+      ggsave(p, filename = glue("immagini/{tit}_gam_parametric_5.jpg"), width = 8, height = 8)
       
       sink(file =  glue("testi/{tit}_diagn_5.txt") )
       

@@ -341,7 +341,7 @@ summ_gam_durata_lustro <- function(x, quote) {
       #                            statistic = "p.value",
       #                            output = "markdown") %>% print()
       modelsummary::modelsummary(fit,
-                                 estimate = c("{estimate} ({p.value}){stars}"),
+                                 estimate = c("{estimate} [{conf.low}, {conf.high}] ({p.value}){stars}"),
                                  output = "markdown") %>% print()      
       sink()
     }

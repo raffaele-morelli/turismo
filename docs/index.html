@@ -386,9 +386,10 @@ Italy.</p>
 <p>According to data description for the indicators involved the
 “duration of the season” in this study is then defined as the longest
 continuous period from August 1st of year N-1 to July 31st of year N
-where the snow depth is continuously above 30 cm using a natural snow
-simulation. The first date, within this continuous period, meeting the
-condition “Snow depth &gt;= 30 cm” is the beginning of the season. The
+where the snow depth is continuously <span class="math inline">\(\geq
+30cm\)</span> using a natural snow simulation.</p>
+<p>The first date, within this continuous period, meeting the condition
+<em>“Snow depth &gt;= 30cm”</em> is the beginning of the season. The
 last date within this continuous period, meeting this condition, is the
 end of the season. In case only one date meets the condition, then
 beginning of season and end of season are attributed this value. In case
@@ -400,16 +401,28 @@ the latter the mean duration has been calculated.</p>
 </div>
 <div id="generalized-additive-models-approach" class="section level2">
 <h2>Generalized Additive Models approach</h2>
-<p><em>Yearly</em> and <em>five period trends</em> analysis have been
-carried out by the mean of Generalized Additive Models (GAMs) for
-duration of season trend estimates for overall and at 100m altitude
-resolution.</p>
-<p>The GAMs are useful for identifying complex non-linear relationships
-in the data and do not require a priori knowledge of the shape of the
-response curves. GAM is a sum of smoothed functions of the predictor
-variables commonly defined as polynomials based on intervals, known as
-splines.</p>
-<p>In general, the structure of a GAM according to Wood could be
+<p>GAMs (Wood, 2017) have been implemented to assess how duration of the
+season with snow depth <span class="math inline">\(\geq 30cm\)</span>
+varied in relation to predictor variables, ie. <span
+class="math inline">\(Year\)</span> and <span
+class="math inline">\(Altitude\)</span>.</p>
+<p>The GAMs are useful for identifying linear and non-linear
+relationships in the data and do not require a priori knowledge of the
+shape of the response curves. GAM is a sum of smoothed functions of the
+predictor variables commonly defined as polynomials based on intervals,
+known as splines.</p>
+<p>As we see for Biella region duration, data at various altitudes show
+a non linear relationship which makes it difficult to estimate a clear
+trend for the overall period though it seems to be a decline in the
+lines.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
+<p>Fitting a simple GAM model for each altitude (group) makes this
+relationship evident graphically.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+</div>
+<div id="theory" class="section level2">
+<h2>Theory</h2>
+<p>So in general, the structure of a GAM according to Wood could be
 estimated by Equation (1):</p>
 <p><span class="math display">\[
 y = \beta_0 + f(x_1) + f(x_2) + ... f(x_n) + \varepsilon  \quad  (1)
@@ -434,7 +447,10 @@ considered, and the <span class="math inline">\(\beta\)</span> are the
 corresponding regression coefficients.</p>
 <p>As an example, for the polynomial basis we would have: <span
 class="math display">\[f(x) = b_0 + b_1\cdot x^1 \ldots +b_d\cdot
-x^d\]</span></p>
+x^d\]</span> Here <em>yearly</em> and <em>five period trends</em>
+analysis have been carried out by the mean of Generalized Additive
+Models (GAMs) for duration of season trend estimates for overall and at
+100m altitude resolution.</p>
 <p>In this study the basic formulation follows:</p>
 <p><span class="math display">\[
 Length\ of\ season = \beta_0 + f_1(Year)+ \beta(Altitude) + \epsilon
@@ -458,7 +474,8 @@ Length\ of\ season = \beta_0 + f(Year)  + \beta_1*Altitude
 altitude\)</span></p>
 <p><span class="math inline">\(duration \sim s(year, k = 6) +
 altitude\)</span></p>
-<p>In the smoothing term (spline) a <span class="math inline">\(k =
+<p>In the smoothing term (spline) for the <em>year</em> and
+<em>fiveyears</em> covariates a <span class="math inline">\(k =
 6\)</span> hase been choosen in order to reduce wiggliness and then
 simplify interpretation.</p>
 </div>

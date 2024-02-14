@@ -9,6 +9,7 @@
   library(kableExtra)
   library(mgcv)
   library(modifiedmk)
+  library(modelsummary)
   library(ncdf4) # package for netcdf manipulation
   library(openxlsx)
   library(pander)
@@ -296,7 +297,7 @@ summ_gam_durata <- function(x, quote) {
   df$quota <- factor(df$zs)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(durata ~ s(anno) + quota, data = df)
+      fit <- gam(durata ~ s(anno, k = 6) + quota, data = df, method = "REML")
       
       appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check.jpg"), width = 8, height = 8)
       
@@ -311,19 +312,23 @@ summ_gam_durata <- function(x, quote) {
       basic_summary <- summary(fit) 
       print(basic_summary$p.table)
       print(basic_summary$s.table)
+      
+      # modelsummary(fit, output = "markdown", statistic = c("t = {statistic}", "se = {std.error}", "conf.int")) %>% print()
+      cat("\n")
+      modelsummary(fit, output = "markdown",
+                   statistic = NULL,
+                   estimate = "{estimate} [{conf.low}, {conf.high}] ({p.value} {stars})") %>% print()
+      
+      # modelsummary::modelsummary(fit, output = "markdown") %>% print()
       # modelsummary::modelsummary(fit,
-      #                            statistic = "p.value",
+      #                            estimate = c("{estimate} [{conf.low}, {conf.high}] ({p.value}){stars}"),
       #                            output = "markdown") %>% print()
-      modelsummary::modelsummary(fit,
-                                 estimate = c("{estimate} [{conf.low}, {conf.high}] ({p.value}){stars}"),
-                                 output = "markdown") %>% print()
       
       
       sink()  
     }
   }
 }
-
 summ_gam_durata("ITC13", seq(1000, 3000, by = 100)) # biella
 summ_gam_durata("ITC12", seq(1000, 3000, by = 100)) # vercelli
 summ_gam_durata("ITC11", seq(1000, 3000, by = 100)) # torino
@@ -344,7 +349,7 @@ summ_gam_durata_lustro <- function(x, quote) {
   df$quota <- factor(df$Quota)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(media ~ quota + s(Lustro), data = df)
+      fit <- gam(media ~ quota + s(Lustro, k = 6), data = df, method = "REML")
       appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check_5.jpg"), width = 8, height = 8)
       
       draw(fit) %>% 
@@ -370,7 +375,6 @@ summ_gam_durata_lustro <- function(x, quote) {
     }
   }
 }
-
 summ_gam_durata_lustro("ITC13", seq(1000, 3000, by = 100)) # biella
 summ_gam_durata_lustro("ITC12", seq(1000, 3000, by = 100)) # vercelli
 summ_gam_durata_lustro("ITC11", seq(1000, 3000, by = 100)) # torino

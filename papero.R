@@ -296,19 +296,30 @@ summ_gam_durata <- function(x, quote) {
   df$quota <- factor(df$zs)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(durata ~ s(anno, k=3) + quota, data = df)
-      gratia::appraise(fit) %>% ggsave(filename = glue("immagini/gam_check_{tit}.jpg"), width = 8, height = 8)
-      gratia::draw(fit) %>% ggsave(filename = glue("immagini/gam_splines_{tit}.jpg"), width = 8, height = 8)
-      summary(fit)
-      sink(file =  glue("testi/diagn_{tit}.txt") )
-      # summary(fit) %>% print()
+      fit <- gam(durata ~ s(anno) + quota, data = df)
+      
+      appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check.jpg"), width = 8, height = 8)
+      
+      draw(fit) %>% 
+        ggsave(filename = glue("immagini/{tit}_gam_splines.jpg"), width = 8, height = 8)
+      
+      draw( evaluate_parametric_term(fit, "quota") ) %>% 
+        ggsave(filename = glue("immagini/{tit}_gam_parametric.jpg"), width = 8, height = 8)
+      
+      sink(file =  glue("testi/{tit}_diagn.txt") )
+      
+      basic_summary <- summary(fit) 
+      print(basic_summary$p.table)
+      print(basic_summary$s.table)
       # modelsummary::modelsummary(fit,
       #                            statistic = "p.value",
       #                            output = "markdown") %>% print()
       modelsummary::modelsummary(fit,
-                                 estimate = c("{estimate} ({p.value}){stars}"),
-                                 output = "markdown") %>% print()      
-      sink()      
+                                 estimate = c("{estimate} [{conf.low}, {conf.high}] ({p.value}){stars}"),
+                                 output = "markdown") %>% print()
+      
+      
+      sink()  
     }
   }
 }
@@ -329,20 +340,20 @@ summ_gam_durata_lustro <- function(x, quote) {
     filter(NUT == x, Quota %in% quote) -> df
   
   tit <- nome_provincia(x)
-  # print(tit)
+  print(tit)
   df$quota <- factor(df$Quota)
   if(nrow(df) > 0){
     if(levels(df$quota) %>% length() > 1) {
-      fit <- gam(media ~ quota + s(Lustro, k = 3), data = df)
-      appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check.jpg"), width = 8, height = 8)
+      fit <- gam(media ~ quota + s(Lustro), data = df)
+      appraise(fit) %>% ggsave(filename = glue("immagini/{tit}_gam_check_5.jpg"), width = 8, height = 8)
       
       draw(fit) %>% 
-        ggsave(filename = glue("immagini/{tit}_gam_splines.jpg"), width = 8, height = 8)
+        ggsave(filename = glue("immagini/{tit}_gam_splines_5.jpg"), width = 8, height = 8)
       
       draw( evaluate_parametric_term(fit, "quota") ) %>% 
-        ggsave(filename = glue("immagini/{tit}_gam_parametric.jpg"), width = 8, height = 8)
+        ggsave(filename = glue("immagini/{tit}_gam_parametric_5.jpg"), width = 8, height = 8)
       
-      sink(file =  glue("testi/{tit}_diagn.txt") )
+      sink(file =  glue("testi/{tit}_diagn_5.txt") )
       
       basic_summary <- summary(fit) 
       print(basic_summary$p.table)

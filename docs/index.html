@@ -35,6 +35,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -478,85 +480,193 @@ altitude\)</span></p>
 <em>fiveyears</em> covariates a <span class="math inline">\(k =
 6\)</span> hase been choosen in order to reduce wiggliness and then
 simplify interpretation.</p>
-</div>
-<div id="p.table" class="section level2">
-<h2>p.table</h2>
-<table>
-<caption>p.table</caption>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-3-2.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
+<caption>
+p.table
+</caption>
 <thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">(1)</th>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Estimate
+</th>
+<th style="text-align:right;">
+Std. Error
+</th>
+<th style="text-align:right;">
+t value
+</th>
+<th style="text-align:right;">
+Pr(&gt;&amp;#124;t&amp;#124;)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">(Intercept)</td>
-<td align="right">47.870 [39.451, 56.289] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+48.46818
+</td>
+<td style="text-align:right;">
+5.161527
+</td>
+<td style="text-align:right;">
+9.390280
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
 </tr>
-<tr class="even">
-<td align="left">quota1100</td>
-<td align="right">26.833 [14.927, 38.740] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+Quota1200
+</td>
+<td style="text-align:right;">
+31.99545
+</td>
+<td style="text-align:right;">
+7.299501
+</td>
+<td style="text-align:right;">
+4.383239
+</td>
+<td style="text-align:right;">
+4.34e-05
+</td>
 </tr>
-<tr class="odd">
-<td align="left">quota1200</td>
-<td align="right">32.093 [20.186, 43.999] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+Quota1400
+</td>
+<td style="text-align:right;">
+61.15909
+</td>
+<td style="text-align:right;">
+7.299501
+</td>
+<td style="text-align:right;">
+8.378530
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
 </tr>
-<tr class="even">
-<td align="left">quota1300</td>
-<td align="right">56.500 [44.594, 68.406] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+Quota1600
+</td>
+<td style="text-align:right;">
+78.55909
+</td>
+<td style="text-align:right;">
+7.299501
+</td>
+<td style="text-align:right;">
+10.762255
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
 </tr>
-<tr class="odd">
-<td align="left">quota1400</td>
-<td align="right">61.222 [49.316, 73.128] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+Quota1800
+</td>
+<td style="text-align:right;">
+103.52273
+</td>
+<td style="text-align:right;">
+7.299501
+</td>
+<td style="text-align:right;">
+14.182165
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
 </tr>
-<tr class="even">
-<td align="left">quota1500</td>
-<td align="right">70.870 [58.964, 82.777] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+Quota2000
+</td>
+<td style="text-align:right;">
+109.16818
+</td>
+<td style="text-align:right;">
+7.299501
+</td>
+<td style="text-align:right;">
+14.955568
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
 </tr>
-<tr class="odd">
-<td align="left">quota1600</td>
-<td align="right">78.481 [66.575, 90.388] (&lt;0.001 ***)</td>
-</tr>
-<tr class="even">
-<td align="left">quota1700</td>
-<td align="right">71.630 [59.723, 83.536] (&lt;0.001 ***)</td>
-</tr>
-<tr class="odd">
-<td align="left">quota1800</td>
-<td align="right">103.574 [91.668, 115.480] (&lt;0.001 ***)</td>
-</tr>
-<tr class="even">
-<td align="left">quota1900</td>
-<td align="right">103.574 [91.668, 115.480] (&lt;0.001 ***)</td>
-</tr>
-<tr class="odd">
-<td align="left">quota2000</td>
-<td align="right">109.222 [97.316, 121.128] (&lt;0.001 ***)</td>
-</tr>
-<tr class="even">
-<td align="left">quota2100</td>
-<td align="right">109.222 [97.316, 121.128] (&lt;0.001 ***)</td>
-</tr>
-<tr class="odd">
-<td align="left">quota2200</td>
-<td align="right">129.944 [118.038, 141.851] (&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+Quota2200
+</td>
+<td style="text-align:right;">
+130.02273
+</td>
+<td style="text-align:right;">
+7.299501
+</td>
+<td style="text-align:right;">
+17.812550
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div id="s.table" class="section level2">
-<h2>s.table</h2>
-<table>
-<caption>s.table</caption>
+<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
+<caption>
+s.table
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+edf
+</th>
+<th style="text-align:right;">
+Ref.df
+</th>
+<th style="text-align:right;">
+F
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+</tr>
+</thead>
 <tbody>
-<tr class="odd">
-<td align="left">s(anno)</td>
-<td align="right">(&lt;0.001 ***)</td>
+<tr>
+<td style="text-align:left;">
+s(Lustro)
+</td>
+<td style="text-align:right;">
+4.632676
+</td>
+<td style="text-align:right;">
+4.93362
+</td>
+<td style="text-align:right;">
+50.56872
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[R^2 =  0.66     \]</span></p>
 <p>The <span class="math inline">\(p.table\)</span> provides information
 on the linear effects while <span class="math inline">\(s.table\)</span>
 provides information on the smooth (non-linear) effects the estimated
@@ -706,19 +816,19 @@ test is significant at all altitudes at a 5% level :</p>
 <h2>Test su provincie di interesse NORD</h2>
 <table>
 <colgroup>
-<col width="23%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
+<col width="12%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -740,43 +850,43 @@ test is significant at all altitudes at a 5% level :</p>
 <tbody>
 <tr class="odd">
 <td align="left">Sondrio</td>
-<td align="right">0.0031</td>
-<td align="right">0.0051</td>
-<td align="right">0.0293</td>
-<td align="right">0.0051</td>
-<td align="right">0.0127</td>
-<td align="right">0.0509</td>
-<td align="right">0.0195</td>
-<td align="right">0.0430</td>
-<td align="right">0.0051</td>
-<td align="right">0.0031</td>
-<td align="right">0.0031</td>
+<td align="right">0.003</td>
+<td align="right">0.005</td>
+<td align="right">0.029</td>
+<td align="right">0.005</td>
+<td align="right">0.013</td>
+<td align="right">0.051</td>
+<td align="right">0.020</td>
+<td align="right">0.043</td>
+<td align="right">0.005</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Brescia</td>
-<td align="right">0.0107</td>
-<td align="right">0.0350</td>
-<td align="right">0.1611</td>
-<td align="right">0.1844</td>
-<td align="right">0.0127</td>
-<td align="right">0.0430</td>
-<td align="right">0.0081</td>
-<td align="right">0.0051</td>
-<td align="right">0.0031</td>
-<td align="right">0.0011</td>
+<td align="right">0.011</td>
+<td align="right">0.035</td>
+<td align="right">0.161</td>
+<td align="right">0.184</td>
+<td align="right">0.013</td>
+<td align="right">0.043</td>
+<td align="right">0.008</td>
+<td align="right">0.005</td>
+<td align="right">0.003</td>
+<td align="right">0.001</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Belluno</td>
-<td align="right">0.0215</td>
-<td align="right">0.0100</td>
-<td align="right">0.3100</td>
-<td align="right">0.0617</td>
-<td align="right">0.0195</td>
-<td align="right">0.0127</td>
-<td align="right">0.0509</td>
+<td align="right">0.022</td>
+<td align="right">0.010</td>
+<td align="right">0.310</td>
+<td align="right">0.062</td>
+<td align="right">0.020</td>
+<td align="right">0.013</td>
+<td align="right">0.051</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -785,13 +895,13 @@ test is significant at all altitudes at a 5% level :</p>
 </tr>
 <tr class="even">
 <td align="left">Biella</td>
-<td align="right">0.0018</td>
-<td align="right">0.0051</td>
-<td align="right">0.0127</td>
-<td align="right">0.0081</td>
-<td align="right">0.0127</td>
-<td align="right">0.0430</td>
-<td align="right">0.0155</td>
+<td align="right">0.002</td>
+<td align="right">0.005</td>
+<td align="right">0.013</td>
+<td align="right">0.008</td>
+<td align="right">0.013</td>
+<td align="right">0.043</td>
+<td align="right">0.015</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -800,92 +910,92 @@ test is significant at all altitudes at a 5% level :</p>
 </tr>
 <tr class="odd">
 <td align="left">Torino</td>
-<td align="right">0.0127</td>
-<td align="right">0.0430</td>
-<td align="right">0.0430</td>
-<td align="right">0.0195</td>
-<td align="right">0.0617</td>
-<td align="right">0.0430</td>
-<td align="right">0.1611</td>
-<td align="right">0.0195</td>
-<td align="right">0.0293</td>
-<td align="right">0.0127</td>
-<td align="right">0.0195</td>
+<td align="right">0.013</td>
+<td align="right">0.043</td>
+<td align="right">0.043</td>
+<td align="right">0.020</td>
+<td align="right">0.062</td>
+<td align="right">0.043</td>
+<td align="right">0.161</td>
+<td align="right">0.020</td>
+<td align="right">0.029</td>
+<td align="right">0.013</td>
+<td align="right">0.020</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Vercelli</td>
-<td align="right">0.0051</td>
-<td align="right">0.0051</td>
-<td align="right">0.0127</td>
-<td align="right">0.0127</td>
-<td align="right">0.0051</td>
-<td align="right">0.0081</td>
-<td align="right">0.0195</td>
-<td align="right">0.1195</td>
-<td align="right">0.0617</td>
-<td align="right">0.0868</td>
-<td align="right">0.0127</td>
-<td align="right">0.0081</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.013</td>
+<td align="right">0.013</td>
+<td align="right">0.005</td>
+<td align="right">0.008</td>
+<td align="right">0.020</td>
+<td align="right">0.119</td>
+<td align="right">0.062</td>
+<td align="right">0.087</td>
+<td align="right">0.013</td>
+<td align="right">0.008</td>
 </tr>
 <tr class="odd">
 <td align="left">Cuneo</td>
-<td align="right">0.0617</td>
-<td align="right">0.0350</td>
-<td align="right">0.1195</td>
-<td align="right">0.2758</td>
-<td align="right">0.0127</td>
-<td align="right">0.1611</td>
-<td align="right">0.2129</td>
-<td align="right">0.0195</td>
-<td align="right">0.0293</td>
+<td align="right">0.062</td>
+<td align="right">0.035</td>
+<td align="right">0.119</td>
+<td align="right">0.276</td>
+<td align="right">0.013</td>
+<td align="right">0.161</td>
+<td align="right">0.213</td>
+<td align="right">0.020</td>
+<td align="right">0.029</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="left">Valle d’Aosta/VallÃ©e d’Aoste</td>
-<td align="right">0.0081</td>
-<td align="right">0.0430</td>
-<td align="right">0.0081</td>
-<td align="right">0.0081</td>
-<td align="right">0.0127</td>
-<td align="right">0.0868</td>
-<td align="right">0.7555</td>
-<td align="right">0.0868</td>
-<td align="right">0.0100</td>
-<td align="right">0.0127</td>
-<td align="right">0.0430</td>
-<td align="right">0.0100</td>
+<td align="left">Valle d’Aosta</td>
+<td align="right">0.008</td>
+<td align="right">0.043</td>
+<td align="right">0.008</td>
+<td align="right">0.008</td>
+<td align="right">0.013</td>
+<td align="right">0.087</td>
+<td align="right">0.755</td>
+<td align="right">0.087</td>
+<td align="right">0.010</td>
+<td align="right">0.013</td>
+<td align="right">0.043</td>
+<td align="right">0.010</td>
 </tr>
 <tr class="odd">
 <td align="left">Bolzano-Bozen</td>
-<td align="right">0.0195</td>
-<td align="right">0.0293</td>
-<td align="right">0.0430</td>
-<td align="right">0.0430</td>
-<td align="right">0.0127</td>
-<td align="right">0.0100</td>
-<td align="right">0.0051</td>
-<td align="right">0.0018</td>
-<td align="right">0.0011</td>
-<td align="right">0.0031</td>
-<td align="right">0.0031</td>
+<td align="right">0.020</td>
+<td align="right">0.029</td>
+<td align="right">0.043</td>
+<td align="right">0.043</td>
+<td align="right">0.013</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.002</td>
+<td align="right">0.001</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Trento</td>
-<td align="right">0.0195</td>
-<td align="right">0.0081</td>
-<td align="right">0.0430</td>
-<td align="right">0.0127</td>
-<td align="right">0.0051</td>
-<td align="right">0.0127</td>
-<td align="right">0.0081</td>
-<td align="right">0.0051</td>
-<td align="right">0.0031</td>
-<td align="right">0.0031</td>
-<td align="right">0.0031</td>
+<td align="right">0.020</td>
+<td align="right">0.008</td>
+<td align="right">0.043</td>
+<td align="right">0.013</td>
+<td align="right">0.005</td>
+<td align="right">0.013</td>
+<td align="right">0.008</td>
+<td align="right">0.005</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
 <td align="right">NA</td>
 </tr>
 </tbody>

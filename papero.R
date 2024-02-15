@@ -30,14 +30,12 @@
     mutate(nuts_name = ifelse(nuts_id=="ITC20", "Valle d'Aosta", nuts_name) )
   
   prov_int <- confini$nuts_id
-  
-  # li leggo tutti e bonanotte
-  rds.files <- list.files(path = "~/R/turismo/rds", full.names = TRUE)
-  for (f in rds.files) {
-    dfname <- tools::file_path_sans_ext(f) %>% basename() 
-    assign(paste0(dfname), readRDS(f))
-  }
-  
+
+  m_df_durata <- readRDS("~/R/turismo/rds/m_df_durata.RDS")
+  df_durata_media_lustro <- readRDS("~/R/turismo/rds/df_durata_media_lustro.RDS")
+  df_durata_lustro <- readRDS("~/R/turismo/rds/df_durata_lustro.RDS")
+  df_durata <- readRDS("~/R/turismo/rds/df_durata.RDS")
+
   theme_turismo <- function (base_size = 10, base_family = "Arial", base_line_size = 0.25, ...)  {
     half_line <- base_size/2
     small_rel <- 0.8
@@ -103,9 +101,9 @@
     filter(nuts_id %in% grep("ITF3|ITF4|ITF5|ITF6|ITG", confini$nuts_id, value = TRUE)) %>%
     select(nuts_id, nuts_name) %>% st_drop_geometry() -> prov_sud
   
-  saveRDS(prov_nord, file = "rds/prov_nord.RDS")
-  saveRDS(prov_centro, file = "rds/prov_centro.RDS")
-  saveRDS(prov_sud, file = "rds/prov_sud.RDS")
+  # saveRDS(prov_nord, file = "rds/prov_nord.RDS")
+  # saveRDS(prov_centro, file = "rds/prov_centro.RDS")
+  # saveRDS(prov_sud, file = "rds/prov_sud.RDS")
   
   # confini %>% 
   #   filter(nuts_id %in% grep("ITF3|ITF4|ITF5|ITF6|ITG", confini$nuts_id, value = TRUE)) %>%
@@ -123,7 +121,7 @@
     "ITC44", # sondrio
     "ITH33" # belluno
   )
-  saveRDS(prov_papero, file = "rds/prov_papero.RDS")
+  # saveRDS(prov_papero, file = "rds/prov_papero.RDS")
 }
 
 nome_provincia <- function(nut) {
@@ -135,41 +133,6 @@ nome_provincia <- function(nut) {
 }
 
 # https://ambientenonsolo.com/le-aree-di-alta-montagna-si-scaldano-piu-rapidamente-del-resto-del-globo/
-
-graf_mm <- function(nut) {
-  filter(confini, nuts_id == nut) %>% 
-    st_drop_geometry() %>% 
-    dplyr::select(nuts_name) %>% as.character() -> provincia
-  
-  df <- filter(m_df_machine_made, NUT == nut)
-  if(nrow(df) == 0) 
-    return("")
-
-  filter(m_df_machine_made, NUT == nut) %>% 
-    ggplot(aes(Anno, value, fill = Quota)) + 
-    geom_step() + 
-    facet_wrap(~Quota, scales = "free") +
-    geom_smooth(method = lm, se = FALSE) +
-    ylab("kg/m²") +
-    ggtitle(paste(nut, provincia, sep = " - " ))  + #theme_turismo() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") -> g0
-  
-  
-  m_df_machine_made %>% filter(NUT == nut) %>% 
-    group_by(Anno, NUT) %>% 
-    summarise(mm = mean(value)) %>%
-    ggplot(aes(Anno, mm)) + 
-    geom_step() + ylab("kg/m²") + 
-    geom_smooth(method = lm, se = FALSE) +
-    ggtitle("Totale") -> g1 # theme_turismo() -> g1
-  
-  lay <- rbind(c(1,1),
-               c(1,1),
-               c(2,2))
-  
-  gridExtra::grid.arrange(g0, g1, layout_matrix = lay)
-}
-# graf_mm("ITF11")
 
 graf_durata <- function(nut, quote) {
   provincia <- nome_provincia(nut)
@@ -219,8 +182,8 @@ graf_durata <- function(nut, quote) {
   # gridExtra::grid.arrange(g0, g1, layout_matrix = lay, 
   #                         left = "Length of season (days)" )
 }
-graf_durata("ITC44", seq(1000, 3000, by = 400))
-graf_durata("ITC13", seq(1000, 3000, by = 400))
+# graf_durata("ITC44", seq(1000, 3000, by = 400))
+# graf_durata("ITC13", seq(1000, 3000, by = 400))
 
 graf_durata_lustro <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -249,8 +212,8 @@ graf_durata_lustro <- function(nuts, quote = c()) {
     theme_turismo() +
     geom_smooth(method = "lm", formula = y ~ x, se = FALSE) 
 }
-graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC47")) %>% 
-  ggsave(filename = "immagini/durata_province.jpg", width = 15, height = 12, units = "cm", dpi = 600)
+# graf_durata_lustro(c("ITC13", "ITH10", "ITC12", "ITC11", "ITC44", "ITC47")) %>% 
+#   ggsave(filename = "immagini/durata_province.jpg", width = 15, height = 12, units = "cm", dpi = 600)
 
 graf_durata_lustro_quote <- function(nuts, quote = c()) {
   # provincia <- nome_provincia(nut)
@@ -271,8 +234,8 @@ graf_durata_lustro_quote <- function(nuts, quote = c()) {
     theme_turismo() +
     ggtitle(nome_provincia(nuts))
 }
-graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% 
-  ggsave(filename = "immagini/durata_quote_biella.jpg", width = 15, height = 12, units = "cm", dpi = 600)
+# graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% 
+#   ggsave(filename = "immagini/durata_quote_biella.jpg", width = 15, height = 12, units = "cm", dpi = 600)
 
 summ_lm_durata <- function(x, quote) {
   df_durata %>% 
@@ -330,16 +293,19 @@ summ_gam_durata <- function(x, quote) {
     }
   }
 }
-summ_gam_durata("ITC13", seq(1000, 3000, by = 100)) # biella
-summ_gam_durata("ITC12", seq(1000, 3000, by = 100)) # vercelli
-summ_gam_durata("ITC11", seq(1000, 3000, by = 100)) # torino
-summ_gam_durata("ITC20", seq(1000, 3000, by = 100)) # vdaosta
-summ_gam_durata("ITH10", seq(1000, 3000, by = 100)) # bolzano
-summ_gam_durata("ITH20", seq(1000, 3000, by = 100)) # trento
-summ_gam_durata("ITC47", seq(1000, 3000, by = 100)) # brescia
-summ_gam_durata("ITC16", seq(1000, 3000, by = 100)) # cuneo
-summ_gam_durata("ITC44", seq(1000, 3000, by = 100)) # sondrio
-summ_gam_durata("ITH33", seq(1000, 3000, by = 100)) # belluno
+# grafici durata annuale ####
+{
+  # summ_gam_durata("ITC13", seq(1000, 3000, by = 100)) # biella
+  # summ_gam_durata("ITC12", seq(1000, 3000, by = 100)) # vercelli
+  # summ_gam_durata("ITC11", seq(1000, 3000, by = 100)) # torino
+  # summ_gam_durata("ITC20", seq(1000, 3000, by = 100)) # vdaosta
+  # summ_gam_durata("ITH10", seq(1000, 3000, by = 100)) # bolzano
+  # summ_gam_durata("ITH20", seq(1000, 3000, by = 100)) # trento
+  # summ_gam_durata("ITC47", seq(1000, 3000, by = 100)) # brescia
+  # summ_gam_durata("ITC16", seq(1000, 3000, by = 100)) # cuneo
+  # summ_gam_durata("ITC44", seq(1000, 3000, by = 100)) # sondrio
+  # summ_gam_durata("ITH33", seq(1000, 3000, by = 100)) # belluno
+}
 
 summ_gam_durata_lustro <- function(x, quote) {
   df_durata_media_lustro %>% 
@@ -378,48 +344,19 @@ summ_gam_durata_lustro <- function(x, quote) {
     }
   }
 }
-summ_gam_durata_lustro("ITC13", seq(1000, 3000, by = 100)) # biella
-summ_gam_durata_lustro("ITC12", seq(1000, 3000, by = 100)) # vercelli
-summ_gam_durata_lustro("ITC11", seq(1000, 3000, by = 100)) # torino
-summ_gam_durata_lustro("ITC20", seq(1000, 3000, by = 100)) # vdaosta
-summ_gam_durata_lustro("ITH10", seq(1000, 3000, by = 100)) # bolzano
-summ_gam_durata_lustro("ITH20", seq(1000, 3000, by = 100)) # trento
-summ_gam_durata_lustro("ITC47", seq(1000, 3000, by = 100)) # brescia
-summ_gam_durata_lustro("ITC16", seq(1000, 3000, by = 100)) # cuneo
-summ_gam_durata_lustro("ITC44", seq(1000, 3000, by = 100)) # sondrio
-summ_gam_durata_lustro("ITH33", seq(1000, 3000, by = 100)) # belluno
-
-# df <- df_durata_media_lustro %>% filter(NUT == "ITC13", Quota >= 1000)
-# # df$Quota <- factor(df$Quota)
-# fit <- gam(media ~ s(Lustro, k = 3) + s(Quota, k = 3), data = df)
-# gratia::appraise(fit)
-# gratia::draw(fit)
-# summary(fit)
-
-
-# durata stimata ####
-# map(prov_int, \(p) {
-#   summ_gam_durata(p)$p.coeff
-# }) -> duratone
-# 
-# names(duratone) <- prov_int
-# 
-# duratone <- duratone[lengths(duratone) != 0]
-# 
-# v_res <- seq(1000, 3500, by = 400) # risoluzione verticale
-# 
-# app <- data.frame("quota" = v_res)
-# app$quota <- paste0("quota", app$quota)
-# 
-# map(duratone, \(d) {
-#   as.data.frame(d) %>%
-#     tibble::rownames_to_column(var = "quota") -> tmp
-# 
-#   left_join(app, tmp, by = "quota") %>% dplyr::select(d) %>% t()
-# }) -> tmp_durata
-
-# do.call(rbind.data.frame, tmp_durata) %>%
-#   set_names( paste0("mslm",  seq(1000, 3500, by = 400) ) ) %>% round(digits = 2) -> tab_durata_stagione
+# grafici durata lustro ####
+{
+  # summ_gam_durata_lustro("ITC13", seq(1000, 3000, by = 100)) # biella
+  # summ_gam_durata_lustro("ITC12", seq(1000, 3000, by = 100)) # vercelli
+  # summ_gam_durata_lustro("ITC11", seq(1000, 3000, by = 100)) # torino
+  # summ_gam_durata_lustro("ITC20", seq(1000, 3000, by = 100)) # vdaosta
+  # summ_gam_durata_lustro("ITH10", seq(1000, 3000, by = 100)) # bolzano
+  # summ_gam_durata_lustro("ITH20", seq(1000, 3000, by = 100)) # trento
+  # summ_gam_durata_lustro("ITC47", seq(1000, 3000, by = 100)) # brescia
+  # summ_gam_durata_lustro("ITC16", seq(1000, 3000, by = 100)) # cuneo
+  # summ_gam_durata_lustro("ITC44", seq(1000, 3000, by = 100)) # sondrio
+  # summ_gam_durata_lustro("ITH33", seq(1000, 3000, by = 100)) # belluno
+}
 
 
 # media sul quinquennio per provincia ####
@@ -447,12 +384,14 @@ if(!exists("df_durata_media_lustro")) {
   
   do.call(rbind, lst_durata) -> df_durata_media_lustro # durata media nel lustro
   saveRDS(df_durata_media_lustro, file = "~/R/turismo/rds/df_durata_media_lustro.RDS" )
+  
+  df_durata_media_lustro %>% 
+    filter(Quota >= 1000) %>% 
+    reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) -> m_df_durata_lustro
+  
+  saveRDS(m_df_durata_lustro, file = "~/R/turismo/rds/m_df_durata_lustro.RDS")
 }
 
-
-df_durata_media_lustro %>% 
-  filter(Quota >= 1000) %>% 
-  reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) -> m_df_durata_lustro
 
 map_durata <- function(prov_id, alts) {
   
@@ -485,159 +424,13 @@ map_durata <- function(prov_id, alts) {
       ) +
     ggtitle("Length of season") 
 }
+# map_durata(prov_nord, seq(1000, 3800, by = 400)) %>% 
+#   ggsave(filename = "immagini/durata_nord.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+# map_durata(prov_centro, seq(1000, 3800, by = 400)) %>% 
+#   ggsave(filename = "immagini/durata_centro.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+# map_durata(prov_sud, seq(1000, 3800, by = 400)) %>% 
+#   ggsave(filename = "immagini/durata_sud.jpg", width = 19, height = 6, units = "cm", dpi = 600)
 
-map_durata(prov_nord, seq(1000, 3800, by = 400)) %>% 
-  ggsave(filename = "immagini/durata_nord.jpg", width = 19, height = 6, units = "cm", dpi = 600)
-map_durata(prov_centro, seq(1000, 3800, by = 400)) %>% 
-  ggsave(filename = "immagini/durata_centro.jpg", width = 19, height = 6, units = "cm", dpi = 600)
-map_durata(prov_sud, seq(1000, 3800, by = 400)) %>% 
-  ggsave(filename = "immagini/durata_sud.jpg", width = 19, height = 6, units = "cm", dpi = 600)
-
-map_machinemade <- function(prov_id, alts) {
-  inner_join(
-    confini %>% dplyr::select(-c(the_geom)), 
-    filter(df_machine_made_lustro, Lustro %in% c(1960, 2010), Quota %in% alts),
-    join_by(nuts_id == NUT) 
-  ) -> lustro_mm_map
-  
-  lustro_mm_map <- filter(lustro_mm_map, nuts_id %in% prov_id$nuts_id)
-  confini <- filter(confini, nuts_id %in% prov_id$nuts_id)
-
-  brks <- classInt::classIntervals(lustro_mm_map$media, style = "pretty", n = 11)
-  lustro_mm_map <- lustro_mm_map %>% mutate(lustro_mm_map, Artificiale = cut(media, breaks = brks$brks, include.lowest = TRUE))
-  
-  cols <- colorRampPalette(brewer.pal(9, 'Blues'))(12)
-  
-  ggplot() + 
-    geom_sf(data = confini, color = "grey50", fill = "transparent") +
-    geom_sf(data = lustro_mm_map, aes(fill = Artificiale), na.rm = FALSE) + 
-    # scale_fill_brewer(palette = "Blues", na.value = "white") +
-    scale_fill_manual(values = cols) +
-    facet_wrap(vars(Lustro) ) + 
-    ggthemes::theme_map() + 
-    ggtitle("Artificiale Kg/m² (media quinquennio)") + 
-    facet_grid(vars(Lustro), vars(Quota)) +
-    theme(axis.text.x = element_blank(), axis.text.y = element_blank(), legend.position = "right", 
-          legend.title = element_blank())
-}
-
-# map_machinemade(prov_nord, seq(1000, 3800, by = 400))
-# map_machinemade(prov_centro, seq(1000, 3800, by = 400))
-# map_machinemade(prov_sud, seq(1000, 3800, by = 400))
-
-# mappe innevamento ####
-# filter(df_machine_made_lustro, Lustro == 1960 | Lustro == 2010) %>% 
-#   melt(id.vars = c("NUT","Quota", "Lustro", "media")) %>% head()
-
-# inner_join(
-#   filter(nuts3, cntr_code == "IT") %>% dplyr::select(-c(the_geom)), 
-#   filter(df_machine_made_lustro, Lustro == 1960 | Lustro == 2010),
-#   join_by(nuts_id == NUT) 
-# ) -> pluto
-# 
-# 
-# brks <- classInt::classIntervals(pluto$media, style = "pretty", n = 9)
-# pluto <- pluto %>% mutate(pluto, Qtà = cut(media, breaks = brks$brks, include.lowest = TRUE))
-# 
-# ggplot() + 
-#   geom_sf(data = filter(nuts3, cntr_code == "IT"), color = "grey50", fill = "transparent") +
-#   geom_sf(data = pluto, aes(fill = Qtà), na.rm = FALSE) + 
-#   scale_fill_brewer(palette = "YlOrRd", na.value = "white") +
-#   # scale_fill_gradient(guide = guide_legend(title = "xxxx"), low = "#e3d662", high = "#918836", na.value = "transparent") +
-#   facet_wrap(vars(Lustro, Quota) ) + theme_void()
-
-
-# t(tab_durata_stagione) %>%
-#   as_tibble() %>%
-#   mutate(dplyr::across(c("ITC43", "ITC42")), lag)
-
-# lag(t(tab_durata_stagione)) %>% round()
-
-
-# t(tab_durata_stagione) %>% round() %>% View()
-
-# 
-# dplyr::select(df_durata, c(anno, nut, zs, durata)) %>%
-#   set_names(c("Anno", "NUT", "Quota", "Durata")) %>%
-#   filter(Quota >= 1200, NUT %in% prov_int$nuts_id) %>%
-#   reshape2::melt(id.vars = c("Anno", "NUT", "Quota")) %>%
-#   # filter(m_df, NUT == "ITC11") %>%
-#   ggplot() +
-#   geom_col(aes(Anno, value, fill = Quota), position = "dodge") +
-#   geom_smooth(aes(Anno, value), method = "lm") +
-#   facet_wrap(~NUT)
-
-# dplyr::select(df_durata_media_lustro, c(Lustro, NUT, Quota, media)) %>%
-  # filter(Quota >= 1500, NUT %in% prov_int$nuts_id) %>%
-  # reshape2::melt(id.vars = c("Lustro", "NUT", "Quota")) %>%
-  # ggplot() +
-  # geom_col(aes(Lustro, value, fill = Quota), position = "dodge") +
-  # geom_smooth(aes(Lustro, value), method = "lm", se = FALSE) +
-  # facet_wrap(~NUT)
-
-totale_innevamento <- function(nut) {
-  nome_provincia(nut) -> provincia
-  
-  df <- dplyr::filter(m_df_machine_made, NUT == nut)
-  if(nrow(df) == 0) {
-    return()
-  }
-  
-  df %>% 
-    dplyr::mutate(Lustro = Anno - Anno %% 5) %>% 
-    dplyr::group_by(NUT, Lustro, Quota) %>% 
-    dplyr::summarise(totale = sum(value) )
-}
-
-# nut <- "ITF11"
-
-if(!exists("df_machine_made_lustro_tot")) {
-  map(prov_int, function(x) {
-    totale_innevamento(x)
-  }) -> lst_machine_made_tot
-  
-  
-  lst_machine_made_tot <- vctrs::list_drop_empty(lst_machine_made_tot) # rimuovo gli elementi vuoti
-  
-  do.call(rbind, lst_machine_made_tot) -> df_machine_made_lustro_tot # machine_made media nel lustro
-  saveRDS(df_machine_made_lustro_tot, file = "rds/df_machine_made_lustro_tot.RDS")
-}
-
-map_machinemade_tot <- function(prov_id) {
-  inner_join(
-    confini %>% dplyr::select(-c(the_geom)), 
-    filter(df_machine_made_lustro_tot, Lustro %in% c(1960, 2010), Quota %in% seq(1600, 2800, by = 400)),
-    join_by(nuts_id == NUT) 
-  ) -> lustro_mm_tot_map
-  
-  lustro_mm_tot_map <- filter(lustro_mm_tot_map, nuts_id %in% prov_id$nuts_id)
-  confini <- filter(confini, nuts_id %in% prov_id$nuts_id)
-
-  cols <- colorRampPalette(brewer.pal(9, 'Blues'))(11)
-  
-  brks <- classInt::classIntervals(lustro_mm_tot_map$totale, style = "pretty")
-  lustro_mm_tot_map <- lustro_mm_tot_map %>% 
-    mutate(lustro_mm_tot_map, 
-           Artificiale = cut(totale, breaks = brks$brks, dig.lab = 5)
-           )
-
-  # print(brks$brks)
-  # print( paste(brks$brks, brks$brks) )
-  ggplot() + 
-    geom_sf(data = confini, color = "grey50", fill = "transparent") +
-    geom_sf(data = lustro_mm_tot_map, aes(fill = Artificiale), na.rm = FALSE) + 
-    # scale_fill_brewer(palette = "Blues", na.value = "white") +
-    scale_fill_manual(values = cols) +
-    facet_wrap(vars(Lustro) ) + 
-    ggthemes::theme_map() + 
-    ggtitle("Artificiale Kg/m² (totale)") + 
-    facet_grid(vars(Lustro), vars(Quota)) +
-    theme(axis.text.x = element_blank(), axis.text.y = element_blank(), legend.position = "right", 
-          legend.title = element_blank())
-}
-# map_machinemade_tot(prov_nord)
-# map_machinemade_tot(prov_centro)
-# map_machinemade_tot(prov_sud)
 
 # Mann-Kendall ####
 if(!exists("df_mk_durata")) {
@@ -650,7 +443,7 @@ if(!exists("df_mk_durata")) {
       
       if( nrow(tmp) > 0 ) {
         # mk.test( tmp$durata )
-        mk.test( tmp$durata )$p.value %>% round(digits = 4)
+        mk.test( tmp$durata )$p.value %>% round(digits = 3)
         
       }else{
         NA
@@ -687,7 +480,7 @@ if(!exists("df_mk_durata_lustro")) {
       
       if( nrow(tmp) > 0 ) {
         # mk.test( tmp$durata )
-        mk.test( tmp$media )$p.value %>% round(digits = 4)
+        mk.test( tmp$media )$p.value %>% round(digits = 3)
       }else{
         NA
       }
@@ -708,16 +501,17 @@ if(!exists("df_mk_durata_lustro")) {
     set_names(c("nuts_id", paste0("mslm", seq(1000, 3200, by = 200)) )) %>% 
     inner_join( rbind(prov_nord, prov_centro, prov_sud) ) -> df_mk_durata_lustro
   saveRDS(df_mk_durata_lustro, "rds/df_mk_durata_lustro.RDS")
+  
+  df_mk_durata_lustro %>% 
+    filter(nuts_id %in% prov_papero) %>% 
+    select(-nuts_id) -> df_mk_durata_lustro_tab
+  
+  names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 200), "mt")
+  df_mk_durata_lustro_tab %>% select(c(nuts_name, 1:12)) -> df_mk_durata_lustro_tab
+  
+  saveRDS(df_mk_durata_lustro_tab, file = "rds/df_mk_durata_lustro_tab.RDS")
 }
 
-df_mk_durata_lustro %>% 
-  filter(nuts_id %in% prov_papero) %>% 
-  select(-nuts_id) -> df_mk_durata_lustro_tab
-
-names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 200), "mt")
-df_mk_durata_lustro_tab %>% select(c(nuts_name, 1:12)) -> df_mk_durata_lustro_tab
-
-saveRDS(df_mk_durata_lustro_tab, file = "rds/df_mk_durata_lustro_tab.RDS")
 
 # mann-kendall autocorr ####
 if(!exists("df_mmk_durata_lustro")) {

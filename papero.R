@@ -358,6 +358,23 @@ summ_gam_durata_lustro <- function(x, quote) {
   # summ_gam_durata_lustro("ITH33", seq(1000, 3000, by = 100)) # belluno
 }
 
+if(!exists("rsq_adj")) {
+map(prov_papero, \(cod) { 
+  df_durata_media_lustro %>% 
+    filter(NUT == cod, Quota %in% seq(1000, 3000, by = 100)) %>% 
+    mutate(Quota = factor(Quota) ) -> df
+  
+  tit <- nome_provincia(cod)
+  fit <- gam(media ~ Quota + s(Lustro, k = 6), data = df, method = "REML")
+  summary(fit)$r.sq %>% round(3)
+}) -> models_lustro
+names(models_lustro) <- prov_papero
+
+do.call(rbind, models_lustro) %>% 
+  as.data.frame() %>% 
+  rownames_to_column(var = "nuts_id") %>% inner_join(prov_nord) -> rsq_adj 
+  saveRDS(rsq_adj, file = "~/R/turismo/rds/rsq_adj.RDS")
+}
 
 # media sul quinquennio per provincia ####
 if(!exists("df_durata_media_lustro")) {
@@ -473,7 +490,7 @@ if(!exists("df_mk_durata")) {
 if(!exists("df_mk_durata_lustro")) {
   map(c(prov_nord$nuts_id, prov_centro$nuts_id, prov_sud$nuts_id), \(id) {
     
-    map(seq(1000, 3200, by = 200), \(z) {
+    map(seq(1000, 3200, by = 100), \(z) {
       df_durata_lustro %>% 
         filter(NUT == id, Quota == z) %>% 
         dplyr::select(c("media")) -> tmp
@@ -490,7 +507,7 @@ if(!exists("df_mk_durata_lustro")) {
   names(ktest_durata_lustro) <- c(prov_nord$nuts_id, prov_centro$nuts_id, prov_sud$nuts_id)
   
   map(c(prov_nord$nuts_id, prov_centro$nuts_id, prov_sud$nuts_id), \(k) {
-    ktest_durata_lustro[[k]] %>% set_names(seq(1000, 3200, by = 200))
+    ktest_durata_lustro[[k]] %>% set_names(seq(1000, 3200, by = 100))
   }) -> ole_lustro
   
   names(ole_lustro) <- c(prov_nord$nuts_id, prov_centro$nuts_id, prov_sud$nuts_id)
@@ -498,7 +515,7 @@ if(!exists("df_mk_durata_lustro")) {
   do.call(rbind.data.frame, ktest_durata_lustro) %>% 
     as.data.frame() %>% 
     tibble::rownames_to_column(var = "nuts_id") %>% 
-    set_names(c("nuts_id", paste0("mslm", seq(1000, 3200, by = 200)) )) %>% 
+    set_names(c("nuts_id", paste0("mslm", seq(1000, 3200, by = 100)) )) %>% 
     inner_join( rbind(prov_nord, prov_centro, prov_sud) ) -> df_mk_durata_lustro
   saveRDS(df_mk_durata_lustro, "rds/df_mk_durata_lustro.RDS")
   
@@ -506,7 +523,7 @@ if(!exists("df_mk_durata_lustro")) {
     filter(nuts_id %in% prov_papero) %>% 
     select(-nuts_id) -> df_mk_durata_lustro_tab
   
-  names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 200), "mt")
+  names(df_mk_durata_lustro_tab)[1:12] <- paste( seq(1000, 3200, by = 100), "mt")
   df_mk_durata_lustro_tab %>% select(c(nuts_name, 1:12)) -> df_mk_durata_lustro_tab
   
   saveRDS(df_mk_durata_lustro_tab, file = "rds/df_mk_durata_lustro_tab.RDS")

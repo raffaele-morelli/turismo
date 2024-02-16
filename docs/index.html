@@ -9,14 +9,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="RafGio" />
 
 
 <title>Papero sul turismo</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -96,80 +93,6 @@ pre code {
 </style>
 
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
 
 <!-- tabsets -->
 
@@ -224,69 +147,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -296,354 +156,189 @@ div.tocify {
 <div class="container-fluid main-container">
 
 
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html"></a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
 
 <div id="header">
 
 
 
 <h1 class="title toc-ignore">Papero sul turismo</h1>
+<h4 class="author">RafGio</h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#materials-and-methods" id="toc-materials-and-methods"><span class="toc-section-number">0.1</span> Materials and Methods</a></li>
+<li><a href="#models-r-squared-for-per-regions" id="toc-models-r-squared-for-per-regions"><span class="toc-section-number">0.2</span> Models R-squared for per regions</a></li>
+<li><a href="#biella" id="toc-biella"><span class="toc-section-number">0.3</span> Biella</a></li>
+<li><a href="#conclusions-for-gams" id="toc-conclusions-for-gams"><span class="toc-section-number">0.4</span> Conclusions for GAMs</a></li>
+<li><a href="#mann-kendall" id="toc-mann-kendall"><span class="toc-section-number">0.5</span> Mann-Kendall</a></li>
+<li><a href="#hypothesis-testing" id="toc-hypothesis-testing"><span class="toc-section-number">0.6</span> Hypothesis testing</a></li>
+<li><a href="#test-su-provincie-di-interesse-nord" id="toc-test-su-provincie-di-interesse-nord"><span class="toc-section-number">0.7</span> Test su provincie di interesse NORD</a></li>
+<li><a href="#biblio" id="toc-biblio"><span class="toc-section-number">0.8</span> Biblio</a></li>
+</ul>
+</div>
 
-<div id="materials" class="section level2">
-<h2>Materials</h2>
-<p>Analyses were conducted using the data made available by the
-Copernicus project (see European Union’s space programme), whose dataset
-is made up of 39 indicators relating to atmospheric and snow conditions
-of NUTS-3 regions (Nomenclature of Territorial Units for Statistics) on
-European territory.</p>
-<p>The data have a vertical resolution of 100m and the snow cover
-indicators available from the project were calculated using the Crocus
-snowpack model, a multi-layer snowpack model embedded in the land
-surface model, SURFEX (Surface Externalisée).</p>
-<p>To estimate the impact caused by climate change, the model was
-applied to four different scenarios in terms of emissions produced:</p>
+<div id="materials-and-methods" class="section level2" number="0.1">
+<h2><span class="header-section-number">0.1</span> Materials and Methods</h2>
+<p>Analyses were conducted using the data made available by the Copernicus project (see European Union’s space programme), whose dataset is made up of 39 indicators relating to atmospheric and snow conditions of NUTS-3 regions (Nomenclature of Territorial Units for Statistics) on European territory.</p>
+<p>The data have a vertical resolution of 100m and the snow cover indicators available from the project were calculated using the Crocus snowpack model, a multi-layer snowpack model embedded in the land surface model, SURFEX (Surface Externalisée).</p>
+<p>To estimate the impact caused by climate change, the model was applied to four different scenarios in terms of emissions produced:</p>
 <ul>
 <li>the current climate</li>
 <li>optimal (emissions decrease starting from 2020)</li>
 <li>optimistic (emissions will decrease starting from 2040)</li>
 <li>pessimistic (emissions continue to grow throughout the century)</li>
 </ul>
-<p>The Crocus model (<a
-href="https://www.umr-cnrm.fr/spip.php?article265&amp;lang=en"
-class="uri">https://www.umr-cnrm.fr/spip.php?article265&amp;lang=en</a>)
-allows both slope preparation and artificial snow production to be taken
-into account, adding further value for the end user by providing
-guidance on snow management requirements in future climate conditions.
-However, it is not designed to replace the higher resolution products
-available in some European regions that provide a more detailed view of
-ski conditions; for example, taking into account slope, local weather
-phenomena and local snow management practices.</p>
-<p>This dataset instead presents a homogeneous product at a pan-European
-level and therefore its main objective is to compare the main
-characteristics of past and future snow conditions across Europe or to
-compare distant destinations; for example, Scandinavia and Eastern
-Europe (for a given elevation and time horizon).</p>
-<p>In addition to the scenarios, a dataset was produced through the
-UERRA reanalysis model (UERRA: Uncertainties in Ensembles of Regional
-Reanalyses; <a href="https://www.uerra.eu"
-class="uri">https://www.uerra.eu</a>).</p>
-</div>
-<div id="methods" class="section level2">
-<h2>Methods</h2>
-<p>Data are available in NetCDF-4 and the indicators taken into account
-for this paper are related to start and end of the ski season from which
-the duration of snow season was derived for all regions overall
-Italy.</p>
-<p>According to data description for the indicators involved the
-“duration of the season” in this study is then defined as the longest
-continuous period from August 1st of year N-1 to July 31st of year N
-where the snow depth is continuously <span class="math inline">\(\geq
-30cm\)</span> using a natural snow simulation.</p>
-<p>The first date, within this continuous period, meeting the condition
-<em>“Snow depth &gt;= 30cm”</em> is the beginning of the season. The
-last date within this continuous period, meeting this condition, is the
-end of the season. In case only one date meets the condition, then
-beginning of season and end of season are attributed this value. In case
-no date meets the condition (i.e., Snow depth is lower than 30 cm for
-the entire year), no date is attributed (value of 0). The value assigned
-is interpreted as the number of days after August 1st of year N-1.</p>
-<p>This study aims at investigating yearly and five period trends, for
-the latter the mean duration has been calculated.</p>
-</div>
-<div id="generalized-additive-models-approach" class="section level2">
-<h2>Generalized Additive Models approach</h2>
-<p>GAMs (Wood, 2017) have been implemented to assess how duration of the
-season with snow depth <span class="math inline">\(\geq 30cm\)</span>
-varied in relation to predictor variables, ie. <span
-class="math inline">\(Year\)</span> and <span
-class="math inline">\(elevation\)</span>.</p>
-<p>The GAMs are useful for identifying linear and non-linear
-relationships in the data and do not require a priori knowledge of the
-shape of the response curves. GAM is a sum of smoothed functions of the
-predictor variables commonly defined as polynomials based on intervals,
-known as splines.</p>
-<p>As we see for Biella region duration in Figure @ref(fig:raw_data),
-data at various elevations show a non linear relationship which makes it
-difficult to estimate a clear trend for the overall period though it
-seems to be a decline in the lines.</p>
-<div class="figure">
-<img src="index_files/figure-html/raw_data-1.png" alt="raw_data" width="768" />
+<p>The Crocus model (<a href="https://www.umr-cnrm.fr/spip.php?article265&amp;lang=en" class="uri">https://www.umr-cnrm.fr/spip.php?article265&amp;lang=en</a>) allows both slope preparation and artificial snow production to be taken into account, adding further value for the end user by providing guidance on snow management requirements in future climate conditions. However, it is not designed to replace the higher resolution products available in some European regions that provide a more detailed view of ski conditions; for example, taking into account slope, local weather phenomena and local snow management practices.</p>
+<p>This dataset instead presents a homogeneous product at a pan-European level and therefore its main objective is to compare the main characteristics of past and future snow conditions across Europe or to compare distant destinations; for example, Scandinavia and Eastern Europe (for a given elevation and time horizon).</p>
+<p>In addition to the scenarios, a dataset was produced through the UERRA reanalysis model (UERRA: Uncertainties in Ensembles of Regional Reanalyses; <a href="https://www.uerra.eu" class="uri">https://www.uerra.eu</a>).</p>
+<p>Data are available in NetCDF-4 and the indicators taken into account for this paper are related to start and end of the ski season from which the duration of snow season was derived for all regions overall Italy.</p>
+<p>According to data description for the indicators involved the “duration of the season” in this study is then defined as the longest continuous period from August 1st of year N-1 to July 31st of year N where the snow depth is continuously <span class="math inline">\(\geq 30cm\)</span> using a natural snow simulation.</p>
+<p>The first date, within this continuous period, meeting the condition <em>“Snow depth &gt;= 30cm”</em> is the beginning of the season. The last date within this continuous period, meeting this condition, is the end of the season.
+In case only one date meets the condition, then beginning of season and end of season are attributed this value. In case no date meets the condition (i.e., Snow depth is lower than 30 cm for the entire year), no date is attributed (value of 0). The value assigned is interpreted as the number of days after August 1st of year N-1.</p>
+<p>This study aims at investigating <em>yearly</em> and <em>five years period</em> trends. For the latter the mean <em>duration of season</em> has been calculated.</p>
+<div id="generalized-additive-models-approach" class="section level3" number="0.1.1">
+<h3><span class="header-section-number">0.1.1</span> Generalized Additive Models approach</h3>
+<p>The Generalized Additive Models (<em>“Wood, S.N. Generalized Additive Models: An Introduction with R, 2nd ed.; Chapman &amp; Hall/CRC: Boca Raton, FL, USA, 2017”</em>) are useful for identifying linear and non-linear relationships in the data and do not require <em>a priori</em> knowledge of the shape of the response curves.</p>
+<p>A Generalized Additive Model (GAM) is a sum of smoothed functions of the predictor variables (covariates), commonly defined as polynomials based on intervals, known as splines.</p>
+<p>In this study GAMs have been implemented to assess how <em>duration of season</em> (longest period with <em>estimated</em> snow depth <span class="math inline">\(\geq 30cm\)</span>) varied between 1960-2014 at each <em>elevation</em> level.
+Hence <em>elevation</em> treathed as categorical variable together with <em>year</em>, <em>five years period</em> ad numerical variables.</p>
+<p>As we see for Biella region duration in Figure <a href="#fig:raw-data">1</a>, data at various elevations show a non linear relationship which makes it difficult to “see” a clear trend for the overall period.</p>
+<div class="figure"><span style="display:block;" id="fig:raw-data"></span>
+<img src="index_files/figure-html/raw-data-1.png" alt="Raw data by elevation" width="672" />
 <p class="caption">
-raw_data
+Figure 1: Raw data by elevation
 </p>
 </div>
-<p>Fitting a simple GAM model for each elevation (group) makes this
-relationship evident graphically.</p>
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
+<p>By fitting a simple GAM model for each elevation (group) the relationship is quite clear graphically (Figure <a href="#fig:models-by-elev">2</a>).</p>
+<div class="figure"><span style="display:block;" id="fig:models-by-elev"></span>
+<img src="index_files/figure-html/models-by-elev-1.png" alt="Models by elevation" width="768" />
+<p class="caption">
+Figure 2: Models by elevation
+</p>
 </div>
-<div id="theory" class="section level2">
-<h2>Theory</h2>
-<p>So in general, the structure of a GAM according to Wood could be
-estimated by Equation (1):</p>
+</div>
+<div id="theory" class="section level3" number="0.1.2">
+<h3><span class="header-section-number">0.1.2</span> Theory</h3>
+<p>In a nutshell the structure of a GAM could be estimated by Equation (1):</p>
 <p><span class="math display">\[
-y = \beta_0 + f(x_1) + f(x_2) + ... f(x_n) + \varepsilon  \quad  (1)
-\]</span> where <span class="math inline">\(\quad \varepsilon \sim N(0,
-\sigma^2)\)</span></p>
-<p><span class="math inline">\(y\)</span> is a response variable and
-<span class="math inline">\(f\)</span> is a smoothing function.</p>
-<p>In GAM it is possibile to have combinations of linear and smooth
-terms, eg. <span class="math display">\[
+g(E(Y)) = \mu = \beta_0 + f(x_1) + f(x_2) + \ldots + f(x_n) + \varepsilon  \quad  (1)
+\]</span>
+where <span class="math inline">\(\quad \varepsilon \sim N(0, \sigma^2)\)</span></p>
+<p><span class="math inline">\(Y\)</span> is the dependent variable (what we are trying to predict), the terms <span class="math inline">\(f\)</span> are smooth non parametric functions, <span class="math inline">\((E(Y))\)</span> denotes the expected value and <span class="math inline">\(g(Y)\)</span> denotes the link function that links the expected value to the predictor variables <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2, \ldots, x_n\)</span>.</p>
+<p>In GAM it is possibile to have combinations of linear and smooth terms, eg.</p>
+<p><span class="math display">\[
 y = \beta_0 + x_1\beta_1 + f(x_2) + \varepsilon \quad (2)
 \]</span></p>
 </div>
-<div id="smooth-term" class="section level2">
-<h2>Smooth term</h2>
+<div id="smooth-term" class="section level3" number="0.1.3">
+<h3><span class="header-section-number">0.1.3</span> Smooth term</h3>
 <p>A smooth term is the sum of some number of functions, eg.</p>
 <p><span class="math display">\[
-f(x) = \sum_{j=1}^kF_j(x)\beta_j
-\]</span> Above, each <span class="math inline">\(F_j\)</span> is a
-basis function that is the transformed <span
-class="math inline">\(x\)</span> depending on the type of basis
-considered, and the <span class="math inline">\(\beta\)</span> are the
-corresponding regression coefficients.</p>
-<p>As an example, for the polynomial basis we would have: <span
-class="math display">\[f(x) = b_0 + b_1\cdot x^1 \ldots +b_d\cdot
-x^d\]</span> Here <em>yearly</em> and <em>five period trends</em>
-analysis have been carried out by the mean of Generalized Additive
-Models (GAMs) for duration of season trend estimates for overall and at
-100m elevation resolution.</p>
-<p>In this study the basic formulation follows:</p>
+y = f(x) + \epsilon = \sum_{j=1}^kF_j(x)\beta_j + \epsilon
+\]</span>
+Above, each <span class="math inline">\(F_j\)</span> is a basis function that is the transformed <span class="math inline">\(x\)</span> depending on the type of basis considered, and the <span class="math inline">\(\beta\)</span> are the corresponding regression coefficients.</p>
+<p>As an example, for the polynomial basis we would have:</p>
+<p><span class="math display">\[f(x) = b_0 + b_1\cdot x^1 + \ldots + b_d\cdot x^d\]</span>
+In this study <em>yearly</em> and <em>five years period</em> trend analysis have been carried out by the mean of GAMs, with <em>duration of season</em> being the dependent variable, and for overall 50 years period at 100m elevation resolution.</p>
+<p>Smooth covariates functions here are temporal trends, eg. <em>“year”</em> or <em>“five years period”</em>, while <em>“elevation”</em> represents a factor for capturing trend changes other than overall.</p>
+<p>Hence the models for <em>“five year period”</em> and <em>“year”</em> trends could be written respectively:</p>
 <p><span class="math display">\[
-Length\ of\ season = \beta_0 + f_1(Year)+ \beta(elevation) + \epsilon
-\]</span> where <span class="math inline">\(\beta\)</span> represents
-the linear component, <span class="math inline">\(\beta_0\)</span>
-intercept and <span class="math inline">\(f_1\)</span> the smoothing
-component of the model.</p>
-<p>Smooth covariates functions here are temporal trends, eg.
-<em>“Year”</em> or <em>“Five year period”</em>, while
-<em>“elevation”</em> represents a factor for capturing trend changes
-other than overall.</p>
-<p>Hence the models for <em>“Five year period”</em> and <em>“Year”</em>
-trends could be written respectively:</p>
-<p><span class="math display">\[
-Length\ of\ season = \beta_0 + f(Five\ year\ period)  +
-\beta_1*elevation
-\]</span> <span class="math display">\[
-Length\ of\ season = \beta_0 + f(Year)  + \beta_1*elevation
+duration\ of\ season = \beta_0 + f(year)+ \beta_1(elevation) + \epsilon
 \]</span></p>
-<p>Hence GAM formulas could be written respectively:</p>
-<p><span class="math inline">\(duration \sim s(fiveyears) +
-elevation\)</span></p>
-<p><span class="math inline">\(duration \sim s(year, k = 6) +
-elevation\)</span></p>
-<p>In the smoothing term (spline) for the <em>year</em> and
-<em>fiveyears</em> covariates a <span class="math inline">\(k =
-6\)</span> hase been choosen in order to reduce wiggliness and then
-simplify interpretation.</p>
+<p>where <span class="math inline">\(\beta_1\)</span> represents the linear component, <span class="math inline">\(\beta_0\)</span> is the intercept and <span class="math inline">\(f\)</span> the smoothing component of the model.</p>
+<p>so similarly</p>
+<p><span class="math display">\[
+mean\ duration\ of\ season = \beta_0 + f(five\ years\ period)+ \beta_1(elevation) + \epsilon
+\]</span></p>
+<p>In the smoothing term (spline) for the <em>year</em> and <em>five years period</em> covariates a <span class="math inline">\(k = 6\)</span> hase been choosen in order to reduce wiggliness.</p>
 </div>
-<div id="models-r-squared-for-per-regions" class="section level2">
-<h2>Models R-squared for per regions</h2>
-<p>Basic assumptions of the statistical model for each region (ie.
-errors uncorrelated, normally distributed, zero mean, constant variance)
-were tested and verified.</p>
-<p>Table n. <em>X</em> shows R-square adjusted for main regions.</p>
-<table class="table" style="color: black; margin-left: auto; margin-right: auto;">
+</div>
+<div id="models-r-squared-for-per-regions" class="section level2" number="0.2">
+<h2><span class="header-section-number">0.2</span> Models R-squared for per regions</h2>
+<p>Basic assumptions of the statistical model for each region (ie. errors uncorrelated, normally distributed, zero mean, constant variance) were tested and verified.(<em>TODO</em> verificare la faccenda del supplemento)</p>
+<p>Table <a href="#tab:rsquares">1</a> shows R-square adjusted for main regions.</p>
+<table>
+<caption><span id="tab:rsquares">Table 1: </span>R-squared</caption>
 <thead>
-<tr>
-<th style="text-align:left;">
-nuts_id
-</th>
-<th style="text-align:right;">
-V1
-</th>
-<th style="text-align:left;">
-nuts_name
-</th>
+<tr class="header">
+<th align="left">ID</th>
+<th align="left">Region</th>
+<th align="right">R²</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-ITC13
-</td>
-<td style="text-align:right;">
-0.895
-</td>
-<td style="text-align:left;">
-Biella
-</td>
+<tr class="odd">
+<td align="left">ITC13</td>
+<td align="left">Biella</td>
+<td align="right">0.895</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITC12
-</td>
-<td style="text-align:right;">
-0.928
-</td>
-<td style="text-align:left;">
-Vercelli
-</td>
+<tr class="even">
+<td align="left">ITC12</td>
+<td align="left">Vercelli</td>
+<td align="right">0.928</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITC11
-</td>
-<td style="text-align:right;">
-0.920
-</td>
-<td style="text-align:left;">
-Torino
-</td>
+<tr class="odd">
+<td align="left">ITC11</td>
+<td align="left">Torino</td>
+<td align="right">0.920</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITC20
-</td>
-<td style="text-align:right;">
-0.879
-</td>
-<td style="text-align:left;">
-Valle d’Aosta
-</td>
+<tr class="even">
+<td align="left">ITC20</td>
+<td align="left">Valle d’Aosta</td>
+<td align="right">0.879</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITH10
-</td>
-<td style="text-align:right;">
-0.946
-</td>
-<td style="text-align:left;">
-Bolzano-Bozen
-</td>
+<tr class="odd">
+<td align="left">ITH10</td>
+<td align="left">Bolzano-Bozen</td>
+<td align="right">0.946</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITH20
-</td>
-<td style="text-align:right;">
-0.960
-</td>
-<td style="text-align:left;">
-Trento
-</td>
+<tr class="even">
+<td align="left">ITH20</td>
+<td align="left">Trento</td>
+<td align="right">0.960</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITC47
-</td>
-<td style="text-align:right;">
-0.955
-</td>
-<td style="text-align:left;">
-Brescia
-</td>
+<tr class="odd">
+<td align="left">ITC47</td>
+<td align="left">Brescia</td>
+<td align="right">0.955</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITC16
-</td>
-<td style="text-align:right;">
-0.894
-</td>
-<td style="text-align:left;">
-Cuneo
-</td>
+<tr class="even">
+<td align="left">ITC16</td>
+<td align="left">Cuneo</td>
+<td align="right">0.894</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITC44
-</td>
-<td style="text-align:right;">
-0.966
-</td>
-<td style="text-align:left;">
-Sondrio
-</td>
+<tr class="odd">
+<td align="left">ITC44</td>
+<td align="left">Sondrio</td>
+<td align="right">0.966</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-ITH33
-</td>
-<td style="text-align:right;">
-0.938
-</td>
-<td style="text-align:left;">
-Belluno
-</td>
+<tr class="even">
+<td align="left">ITH33</td>
+<td align="left">Belluno</td>
+<td align="right">0.938</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="biella" class="section level2">
-<h2>Biella</h2>
-<p><span class="math inline">\(p.table\)</span> provides information on
-the linear effects while <span class="math inline">\(s.table\)</span>
-provides information on the smooth (non-linear) effects the estimated
-trend for Biella region.</p>
-<p>The model for five years period fits really good with an
-$R^2=$0.905</p>
-<p>Model diagnosis for Biella.</p>
-<div class="figure">
-<img src="index_files/figure-html/unnamed-chunk-3-1.png" alt="Model diagnosis" width="672" />
+<div id="biella" class="section level2" number="0.3">
+<h2><span class="header-section-number">0.3</span> Biella</h2>
+<p><span class="math inline">\(p.table\)</span> provides information on the linear effects while <span class="math inline">\(s.table\)</span> provides information on the smooth (non-linear) effects the estimated trend for Biella region.</p>
+<p>The model for five years period fits really good with an $R^2=$0.905</p>
+<p>Model diagnosis Table <a href="#tab:mod-diagnosis"><strong>??</strong></a> for Biella.</p>
+<div class="figure"><span style="display:block;" id="fig:mod-diagnosis"></span>
+<img src="index_files/figure-html/mod-diagnosis-1.png" alt="Model diagnosis" width="672" />
 <p class="caption">
-Model diagnosis
+Figure 3: Model diagnosis
 </p>
 </div>
-<p>For Biella region parametric coefficents are significat at all
-<em>elevations</em> as shown in table n.<em>X</em>.</p>
-<p>Between 1960 and 2014, <em>partial effect</em> on duration of season
-for <em>elevation</em> covariate is estimated by the model in ~78 days
-at 1400 mt, ~65 days at 1600 mt and ~73 days at 1800 mt.</p>
+<p>For Biella region parametric coefficents are significat at all <em>elevations</em> as shown in table Table <a href="#tab:p-table">2</a>.</p>
+<p>Between 1960 and 2014, <em>partial effect</em> on duration of season for <em>elevation</em> covariate is estimated by the model in ~78 days at 1400 mt, ~65 days at 1600 mt and ~73 days at 1800 mt.</p>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
-p.table
+<span id="tab:p-table">Table 2: </span><span id="tab:p-table">Table 3: </span>p.table
 </caption>
 <thead>
 <tr>
@@ -785,11 +480,10 @@ Quota2200
 </tr>
 </tbody>
 </table>
-<p>Smooth covariate is also significant as shown in table
-n. <em>X</em></p>
+<p>Smooth covariate is also significant as shown in table <a href="#tab:s-table"><strong>??</strong></a></p>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
-s.table
+(#tab:s-table, fig.”s-pline”)(#tab:s-table, fig.”s-pline”)s.table
 </caption>
 <thead>
 <tr>
@@ -829,58 +523,37 @@ s(Lustro)
 </tr>
 </tbody>
 </table>
-<p>Graphically we notice that <em>duration of season</em> varies
-non-linearly across the years while a general monotonic descending trend
-can be seen (figure “Smooth term”) n. <em>X</em>. There’s a peak with
-declining levels between years 1980-1990 and smaller ascending peak
-between years 1990-2000 then again a decline towards 2014.</p>
-<div class="figure">
-<img src="index_files/figure-html/unnamed-chunk-6-1.png" alt="Smooth term" width="672" />
+<p>Graphically we notice that <em>duration of season</em> varies non-linearly across the years while a general monotonic descending trend can be seen (figure “Smooth term”) Figure <a href="#fig:smooth-terms">4</a>.
+There’s a peak with declining levels between years 1980-1990 and smaller ascending peak between years 1990-2000 then again a decline towards 2014.</p>
+<div class="figure"><span style="display:block;" id="fig:smooth-terms"></span>
+<img src="index_files/figure-html/smooth-terms-1.png" alt="Smooth term" width="672" />
 <p class="caption">
-Smooth term
+Figure 4: Smooth term
 </p>
 </div>
-<p>there is also a pronounced difference in partial contribution to
-<em>duration of season</em> between elevation levels figure
-n. <em>X</em> (“Parametric term”)</p>
-<div class="figure">
-<img src="index_files/figure-html/unnamed-chunk-7-1.png" alt="Parametric term" width="672" />
+<p>there is also a pronounced difference in partial contribution to <em>duration of season</em> between elevation levels figure<a href="#fig:parametric-term">5</a> (“Parametric term”)</p>
+<div class="figure"><span style="display:block;" id="fig:parametric-term"></span>
+<img src="index_files/figure-html/parametric-term-1.png" alt="Parametric term" width="672" />
 <p class="caption">
-Parametric term
+Figure 5: Parametric term
 </p>
 </div>
 </div>
-<div id="conclusions-for-gams" class="section level2">
-<h2>Conclusions for GAMs</h2>
-<p>Duration of season between 1960 and 2014 shows a significant
-declining trend on the time scale given the contribution at different
-elevation levels.</p>
+<div id="conclusions-for-gams" class="section level2" number="0.4">
+<h2><span class="header-section-number">0.4</span> Conclusions for GAMs</h2>
+<p>Duration of season between 1960 and 2014 shows a significant declining trend on the time scale given the contribution at different elevation levels.</p>
 </div>
-<div id="mann-kendall" class="section level2">
-<h2>Mann-Kendall</h2>
-<p>The Mann-Kendall test is used to determine whether or not there is a
-linear monotonic trend in a given time series data.The null hypothesis,
-<span class="math inline">\(H_0\)</span>, states that there is no
-monotonic trend and this is tested against one of three possible
-alternative hypotheses, <span class="math inline">\(H_a\)</span>:</p>
+<div id="mann-kendall" class="section level2" number="0.5">
+<h2><span class="header-section-number">0.5</span> Mann-Kendall</h2>
+<p>The Mann-Kendall test is used to determine whether or not there is a linear monotonic trend in a given time series data.The null hypothesis, <span class="math inline">\(H_0\)</span>, states that there is no monotonic trend and this is tested against one of three possible alternative hypotheses, <span class="math inline">\(H_a\)</span>:</p>
 <ol style="list-style-type: lower-roman">
 <li>there is an upward monotonic trend</li>
 <li>there is a downward monotonic trend</li>
-<li>there is either an upward monotonic trend or a downward monotonic
-trend.</li>
+<li>there is either an upward monotonic trend or a downward monotonic trend.</li>
 </ol>
-<p>It is a robust test for trend detection used widely in
-climatological, hydrological and environmental time series analysis (eg.
-air quality).</p>
-<p>The Mann-Kendall test does not assume the data to be distributed
-according to any particular rule (so it does not require that the data
-be normally distributed) and it is not effected by missing data
-(although it might effect the statistical significance adversely); it is
-not effected by irregular spacing of the time points of measurement and
-by the length of the time series.</p>
-<p>In this study we deal with non seasonal time series (TODO mostrare un
-esempio?) 55 years long which garantees effectiveness of Mann-Kendall
-test.</p>
+<p>It is a robust test for trend detection used widely in climatological, hydrological and environmental time series analysis (eg. air quality).</p>
+<p>The Mann-Kendall test does not assume the data to be distributed according to any particular rule (so it does not require that the data be normally distributed) and it is not effected by missing data (although it might effect the statistical significance adversely); it is not effected by irregular spacing of the time points of measurement and by the length of the time series.</p>
+<p>In this study we deal with non seasonal time series (TODO mostrare un esempio?) 55 years long which garantees effectiveness of Mann-Kendall test.</p>
 <span class="math display">\[\begin{split}sgn(x_i - x_j) &amp;=
     \begin{cases}
                     1,  &amp; x_i - x_j &gt; 0\\
@@ -888,95 +561,55 @@ test.</p>
                     -1, &amp; x_i - x_j &lt; 0
   \end{cases},
 \end{split}\]</span>
-<p>now we have and indicator which tell what happens about differences
-between time <em>i</em> and <em>j</em> ie. if positive, negative or
-zero.</p>
-<p>Next we should compute mean and variance of the above. The mean which
-is the Mann-Kendall test statistic is given by:</p>
+<p>now we have and indicator which tell what happens about differences between time <em>i</em> and <em>j</em> ie. if positive, negative or zero.</p>
+<p>Next we should compute mean and variance of the above.
+The mean which is the Mann-Kendall test statistic is given by:</p>
 <p><span class="math display">\[
 E[S] = \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} sgn(x_i - x_j),
-\]</span> and the variance is given by:</p>
+\]</span>
+and the variance is given by:</p>
 <p><span class="math display">\[
 \sigma^2 = \frac{1}{18} \Big( n(n-1)(2n+5) - \sum_{k=1}^p
 q_k(q_k-1)(2q_k+5) \Big),
-\]</span> where <span class="math inline">\(p\)</span> is the total
-number of tie groups in the data, and <span
-class="math inline">\(q_k\)</span> is the number of data points
-contained in the <span class="math inline">\(k-th\)</span> tie
-group.</p>
-<p>For example, if the time series measurements were <span
-class="math inline">\({12, 56, 23, 12, 67, 45, 56, 56, 10}\)</span>, we
-would have two tie groups for the measurements 12 and 56, i.e. <span
-class="math inline">\(p=2\)</span>, and the number of data points in
-these tie groups would <span class="math inline">\(q_1=2\)</span> for
-the tie group with <span class="math inline">\({12}\)</span>, and <span
-class="math inline">\(q_2=3\)</span> for the tie group with <span
-class="math inline">\({56}\)</span>.</p>
-<p>Using the mean <span class="math inline">\(E[S]\)</span> and the
-variance <span class="math inline">\(VAR(S)\)</span> we compute the
-Mann-Kendall test statistic, using the following transformation, which
-ensures that for large sample sizes, the test statistic <span
-class="math inline">\(Z_{MK}\)</span> is approximately normally
-distributed:</p>
+\]</span>
+where <span class="math inline">\(p\)</span> is the total number of tie groups in the data, and <span class="math inline">\(q_k\)</span> is the number of data points contained in the <span class="math inline">\(k-th\)</span> tie group.</p>
+<p>For example, if the time series measurements were <span class="math inline">\({12, 56, 23, 12, 67, 45, 56, 56, 10}\)</span>, we would have two tie groups for the measurements 12 and 56, i.e. <span class="math inline">\(p=2\)</span>, and the number of data points in these tie groups would <span class="math inline">\(q_1=2\)</span> for the tie group with <span class="math inline">\({12}\)</span>, and <span class="math inline">\(q_2=3\)</span> for the tie group with <span class="math inline">\({56}\)</span>.</p>
+<p>Using the mean <span class="math inline">\(E[S]\)</span> and the variance <span class="math inline">\(VAR(S)\)</span> we compute the Mann-Kendall test statistic, using the following transformation, which ensures that for large sample sizes, the test statistic <span class="math inline">\(Z_{MK}\)</span> is approximately normally distributed:</p>
 <span class="math display">\[\begin{split}Z_{MK} &amp;=
     \begin{cases}
-                    \frac{E[S] - 1} {\sqrt{VAR(S)}},  &amp; E[S] &gt;
-0\\
+                    \frac{E[S] - 1} {\sqrt{VAR(S)}},  &amp; E[S] &gt; 0\\
                     0,  &amp; E[S] = 0\\
-                    \frac{E[S] + 1} {\sqrt{VAR(S)}},  &amp; E[S] &lt;
-0\\
+                    \frac{E[S] + 1} {\sqrt{VAR(S)}},  &amp; E[S] &lt; 0\\
     \end{cases}
 \end{split}\]</span>
 </div>
-<div id="hypothesis-testing" class="section level2">
-<h2>Hypothesis testing</h2>
-<p>At a significance level <span class="math inline">\(\alpha\)</span>
-of the test, which is also the Type I error rate, we compute whether or
-not to accept the alternative hypothesis <span
-class="math inline">\(H_a\)</span> for each variant of <span
-class="math inline">\(H_a\)</span> separately:</p>
-<p><span class="math inline">\(H_a\)</span> : There exists an upward
-monotonic trend</p>
+<div id="hypothesis-testing" class="section level2" number="0.6">
+<h2><span class="header-section-number">0.6</span> Hypothesis testing</h2>
+<p>At a significance level <span class="math inline">\(\alpha\)</span> of the test, which is also the Type I error rate, we compute whether or not to accept the alternative hypothesis <span class="math inline">\(H_a\)</span> for each variant of <span class="math inline">\(H_a\)</span> separately:</p>
+<p><span class="math inline">\(H_a\)</span> : There exists an upward monotonic trend</p>
 <ul>
-<li>If <span class="math inline">\(Z_{MK} ≥ Z_{1−\alpha}\)</span> then
-accept <span class="math inline">\(H_a\)</span>, where the notation
-<span class="math inline">\(Z_{1−\alpha}\)</span> denotes the <span
-class="math inline">\(100(1−\alpha)\)</span>-th percentile of the
-standard normal distribution.</li>
+<li>If <span class="math inline">\(Z_{MK} ≥ Z_{1−\alpha}\)</span> then accept <span class="math inline">\(H_a\)</span>, where the notation <span class="math inline">\(Z_{1−\alpha}\)</span> denotes the <span class="math inline">\(100(1−\alpha)\)</span>-th percentile of the standard normal distribution.</li>
 </ul>
-<p><span class="math inline">\(H_a\)</span> : There exists a downward
-monotonic trend</p>
+<p><span class="math inline">\(H_a\)</span> : There exists a downward monotonic trend</p>
 <ul>
-<li>If <span class="math inline">\(Z_{MK} ≤ -Z_{1−\alpha}\)</span> then
-accept <span class="math inline">\(H_a\)</span></li>
+<li>If <span class="math inline">\(Z_{MK} ≤ -Z_{1−\alpha}\)</span> then accept <span class="math inline">\(H_a\)</span></li>
 </ul>
-<p><span class="math inline">\(H_a\)</span> : There exists either an
-upward or a downward monotonic trend</p>
+<p><span class="math inline">\(H_a\)</span> : There exists either an upward or a downward monotonic trend</p>
 <ul>
-<li>If <span class="math inline">\(|Z_{MK}|≥Z_{1−\alpha/2}\)</span> then
-accept <span class="math inline">\(H_a\)</span>, where the notation
-<span class="math inline">\(|⋅|\)</span> is used to denote the absolute
-value function.</li>
+<li>If <span class="math inline">\(|Z_{MK}|≥Z_{1−\alpha/2}\)</span> then accept <span class="math inline">\(H_a\)</span>, where the notation <span class="math inline">\(|⋅|\)</span> is used to denote the absolute value function.</li>
 </ul>
-<p>For the province of Biella in a five year period the Mann-Kendall
-test is significant at all elevations at a 5% level :</p>
+<p>For the province of Biella in a five year period the Mann-Kendall test is significant at all elevations at a 5% level :</p>
 </div>
-<div id="test-su-provincie-di-interesse-nord" class="section level2">
-<h2>Test su provincie di interesse NORD</h2>
-<p>Trend analysis of snow depth was performed on daily snow depth
-values. A non-parametric Mann–Kendall test was applied to the time
-series [7] in order to detect any parametric significant trend (at 5%
-level) over the examined period between 1985 and 2020.</p>
-<p>The advantage of this non-parametric test over other parametric tests
-is that it is more suitable for non-normally distributed data (i.e.,
-missing or extreme values) frequently encountered in snow depth time
-series and consequently in the <em>duration of snow season</em>.</p>
-<p>Statistically significant decreasing trends for <em>duration of snow
-season</em> were found for almost all the elevations and each and every
-region, with the elevation 1000 and 1200</p>
+<div id="test-su-provincie-di-interesse-nord" class="section level2" number="0.7">
+<h2><span class="header-section-number">0.7</span> Test su provincie di interesse NORD</h2>
+<p>Trend analysis of snow depth was performed on daily snow depth values. A non-parametric Mann–Kendall test was applied to the time series [7] in order to detect any parametric significant trend (at 5% level) over the examined period between 1985 and 2020.</p>
+<p>The advantage of this non-parametric test over other parametric tests is that it is more suitable
+for non-normally distributed data (i.e., missing or extreme values) frequently encountered
+in snow depth time series and consequently in the <em>duration of snow season</em>.</p>
+<p>Statistically significant decreasing trends for <em>duration of snow season</em> were found for almost all the elevations and each and every region, with the elevation 1000 and 1200</p>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
-Mann-Kendall test for duration of snow season
+<span id="tab:unnamed-chunk-1">Table 4: </span><span id="tab:unnamed-chunk-1">Table 5: </span>Mann-Kendall test for duration of snow season
 </caption>
 <thead>
 <tr>
@@ -1435,21 +1068,16 @@ Trento
 </tbody>
 </table>
 </div>
-<div id="biblio" class="section level2">
-<h2>Biblio</h2>
+<div id="biblio" class="section level2" number="0.8">
+<h2><span class="header-section-number">0.8</span> Biblio</h2>
 <ul>
-<li>Wood, S.N. Generalized Additive Models: An Introduction with R, 2nd
-ed.; Chapman &amp; Hall/CRC: Boca Raton, FL, USA, 2017.</li>
-<li>Sneyers, R. On the Statistical Analysis of Series of Observations;
-Technical Note No. 143, WMO No. 415; World Meteorological Organization:
-Geneva, Switzerland, 1990; 192p.</li>
+<li></li>
+<li>Sneyers, R. On the Statistical Analysis of Series of Observations; Technical Note No. 143, WMO No. 415; World Meteorological Organization: Geneva, Switzerland, 1990; 192p.</li>
 </ul>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -1482,35 +1110,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

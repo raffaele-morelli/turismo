@@ -31,6 +31,8 @@
   
   prov_int <- confini$nuts_id
 
+  anagrafica <- confini %>% select(nuts_id, nuts_name) %>% st_drop_geometry()
+  
   m_df_durata <- readRDS("~/R/turismo/rds/m_df_durata.RDS")
   df_durata_media_lustro <- readRDS("~/R/turismo/rds/df_durata_media_lustro.RDS")
   df_durata_lustro <- readRDS("~/R/turismo/rds/df_durata_lustro.RDS")
@@ -182,6 +184,7 @@ graf_durata <- function(nut, quote) {
   # gridExtra::grid.arrange(g0, g1, layout_matrix = lay, 
   #                         left = "Duration of snow season (days)" )
 }
+
 # graf_durata("ITC44", seq(1000, 3000, by = 400))
 # graf_durata("ITC13", seq(1000, 3000, by = 400))
 
@@ -306,6 +309,25 @@ summ_gam_durata <- function(x, quote) {
   # summ_gam_durata("ITC44", seq(1000, 3000, by = 100)) # sondrio
   # summ_gam_durata("ITH33", seq(1000, 3000, by = 100)) # belluno
 }
+
+graf_durata_noquote <- function(nuts) {
+  left_join(df_durata_lustro, anagrafica, join_by (NUT==nuts_id) ) %>%
+    filter(NUT %in% c("ITC13", "ITC12", "ITC11", "ITC20", "ITH10", "ITH20", "ITC47", "ITC16", "ITC44", "ITH33")) %>% 
+    group_by(Lustro, nuts_name) %>% mutate(Media = mean(media)) -> df
+  
+  select(df, c(Lustro, nuts_name, Media)) %>%  
+    melt(id.vars = c("Lustro", "nuts_name" )) %>% 
+    ggplot(aes(Lustro, value)) + geom_step() +
+    geom_smooth(method = "gam", formula = y ~ s(x, k = 6), se = TRUE) +
+    xlab("Five years period") + ylab("Duration of snow season (average)") +
+    scale_y_continuous(breaks = seq(50, 250, by = 25)) +
+    facet_wrap(~nuts_name, ncol = 5) + theme_turismo() -> g 
+  
+    ggsave(g, filename = "immagini/top-ten_province.jpg", width = 8, height = 8, dpi = 300)
+}
+# graf_durata_noquote(c("ITC13", "ITC12", "ITC11", "ITC20", "ITH10", "ITH20", "ITC47", "ITC16", "ITC44", "ITH33"))
+
+
 
 summ_gam_durata_lustro <- function(x, quote) {
   df_durata_media_lustro %>% 

@@ -312,7 +312,7 @@ summ_gam_durata <- function(x, quote) {
 
 graf_durata_noquote <- function(nuts) {
   left_join(df_durata_lustro, anagrafica, join_by (NUT==nuts_id) ) %>%
-    filter(NUT %in% c("ITC13", "ITC12", "ITC11", "ITC20", "ITH10", "ITH20", "ITC47", "ITC16", "ITC44", "ITH33")) %>% 
+    filter(NUT %in% nuts) %>% 
     group_by(Lustro, nuts_name) %>% mutate(Media = mean(media)) -> df
   
   select(df, c(Lustro, nuts_name, Media)) %>%  
@@ -323,9 +323,9 @@ graf_durata_noquote <- function(nuts) {
     scale_y_continuous(breaks = seq(50, 250, by = 25)) +
     facet_wrap(~nuts_name, ncol = 5) + theme_turismo() -> g 
   
-    ggsave(g, filename = "immagini/top-ten_province.jpg", width = 12, height = 8, dpi = 300)
+    ggsave(g, filename = "immagini/top-five_province.jpg", width = 12, height = 7, dpi = 300)
 }
-# graf_durata_noquote(c("ITC13", "ITC12", "ITC11", "ITC20", "ITH10", "ITH20", "ITC47", "ITC16", "ITC44", "ITH33"))
+graf_durata_noquote(c("ITC13", "ITH10", "ITC12", "ITC44", "ITC11"))
 
 
 

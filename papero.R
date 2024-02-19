@@ -164,7 +164,7 @@ graf_durata <- function(nut, quote) {
     summarise(mm = mean(value)) %>%
     ggplot(aes(Anno, mm)) +
     geom_step() + 
-    ylab("Length of season (days)") + xlab("Year") +
+    ylab("Duration of snow season (days)") + xlab("Year") +
     scale_y_continuous(breaks = seq(0, 250, by = 20)) +
     theme(
       # axis.text.x = element_blank(), 
@@ -180,7 +180,7 @@ graf_durata <- function(nut, quote) {
   #              c(2,2))
   
   # gridExtra::grid.arrange(g0, g1, layout_matrix = lay, 
-  #                         left = "Length of season (days)" )
+  #                         left = "Duration of snow season (days)" )
 }
 # graf_durata("ITC44", seq(1000, 3000, by = 400))
 # graf_durata("ITC13", seq(1000, 3000, by = 400))
@@ -208,7 +208,7 @@ graf_durata_lustro <- function(nuts, quote = c()) {
     ggplot(aes(Lustro, mm)) +
     geom_step() + 
     facet_wrap(~(nuts_name)) +
-    ylab("Length of season (days)") + xlab("Five years period") +
+    ylab("Duration of snow season (days)") + xlab("Five years period") +
     theme_turismo() +
     geom_smooth(method = "lm", formula = y ~ x, se = FALSE) 
 }
@@ -229,13 +229,13 @@ graf_durata_lustro_quote <- function(nuts, quote = c()) {
     geom_smooth(method = gam, formula = y ~ s(x, k = 3), se = TRUE) +
     facet_wrap(~Quota) + 
     scale_y_continuous(breaks = seq(0, 200, by = 20)) +
-    ylab("Length of season (days)") + xlab("Five years period") +
+    ylab("Duration of snow season (days)") + xlab("Five years period") +
     # theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") + #theme_classic() +
     theme_turismo() +
     ggtitle(nome_provincia(nuts))
 }
-# graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>% 
-#   ggsave(filename = "immagini/durata_quote_biella.jpg", width = 15, height = 12, units = "cm", dpi = 600)
+# graf_durata_lustro_quote("ITC13", seq(1400, 1900, by = 100)) %>%
+  # ggsave(filename = "immagini/durata_quote_biella.jpg", width = 15, height = 12, units = "cm", dpi = 600)
 
 summ_lm_durata <- function(x, quote) {
   df_durata %>% 
@@ -439,14 +439,14 @@ map_durata <- function(prov_id, alts) {
       axis.ticks = element_blank(),
       axis.text.x = element_blank(), axis.text.y = element_blank(), legend.position = "right"
       ) +
-    ggtitle("Length of season") 
+    ggtitle("Duration of snow season") 
 }
-# map_durata(prov_nord, seq(1000, 3800, by = 400)) %>% 
-#   ggsave(filename = "immagini/durata_nord.jpg", width = 19, height = 6, units = "cm", dpi = 600)
-# map_durata(prov_centro, seq(1000, 3800, by = 400)) %>% 
-#   ggsave(filename = "immagini/durata_centro.jpg", width = 19, height = 6, units = "cm", dpi = 600)
-# map_durata(prov_sud, seq(1000, 3800, by = 400)) %>% 
-#   ggsave(filename = "immagini/durata_sud.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+map_durata(prov_nord, seq(1000, 3800, by = 400)) %>%
+  ggsave(filename = "immagini/durata_nord.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+map_durata(prov_centro, seq(1000, 3800, by = 400)) %>%
+  ggsave(filename = "immagini/durata_centro.jpg", width = 19, height = 6, units = "cm", dpi = 600)
+map_durata(prov_sud, seq(1000, 3800, by = 400)) %>%
+  ggsave(filename = "immagini/durata_sud.jpg", width = 19, height = 6, units = "cm", dpi = 600)
 
 
 # Mann-Kendall ####
